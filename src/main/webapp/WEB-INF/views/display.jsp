@@ -8,9 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 <c:forEach var="recipe" items="${ recipelist }">
 		<div>
+			
 			<h5>${recipe.recipe.label}</h5>
 			<h5><img src="${recipe.recipe.image}"></h5>
 			<h5><a href="${recipe.recipe.url}">Go to Recipe </a></h5>

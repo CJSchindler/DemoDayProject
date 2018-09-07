@@ -26,9 +26,17 @@ public class RecipeController {
 		
 		RestTemplate restTemplate = new RestTemplate();
 		
-//		String url = "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" + name + "&apikey=2Z0zFqJrUytucwLNkdNxHkLnAXonV1PP";
+		String mainIngredient = "chicken";
+		int maxTotalTime = 20;
 		
-		String url = "https://api.edamam.com/search?q=chicken&app_id=328dd333&app_key=2925530f7873bcd09aa1376f5114f08d";
+//		String url = "&calories=591-722&health=alcohol-free"
+		String url = "https://api.edamam.com/search?q=" + mainIngredient  
+				+ "&app_id=328dd333"
+				+ "&app_key=2925530f7873bcd09aa1376f5114f08d"
+				+ "&from=0&to=10" //number of results
+				+ "&time=1-" + maxTotalTime; //total time is between 1 and maxTotalTime
+		
+//		String url = "https://api.edamam.com/search?q=chicken&app_id=328dd333&app_key=2925530f7873bcd09aa1376f5114f08d";
 		
 		ResponseEntity<Result> response = restTemplate.exchange(
 		      url, HttpMethod.GET, new HttpEntity<>(null),Result.class);
