@@ -25,17 +25,17 @@ public class MenuItemDao {
 	public void create(Favorite favorite) {
 		em.persist(favorite);
 	}
+	
+	public void delete(Integer id) {
+		// Deleting with Hibernate entity manager requires fetching a reference first.
+		Favorite favorite = em.getReference(Favorite.class, id); //just reference, not pulling from DB
+		em.remove(favorite);
+	}
+	
+	public Favorite findByLabel(String label) {
+		// HQL queries can have named parameters, such as :regex here.
+		return em.createQuery("FROM Favorite WHERE label = :label", Favorite.class)
+				.setParameter("label", label)
+				.getSingleResult();
 }
-//////	
-//////	public void delete(Integer id) {
-//////		// Deleting with Hibernate entity manager requires fetching a reference first.
-//////		Item item = em.getReference(Item.class, id); //just reference, not pulling from DB
-//////		em.remove(item);
-//////	}
-//////	
-//////	public List<Item> findByKeyword(String keyword) {
-//////		// HQL queries can have named parameters, such as :regex here.
-//////		return em.createQuery("FROM items WHERE LOWER(name) LIKE :regex", Item.class)
-//////				.setParameter("regex", "%" + keyword.toLowerCase() + "%")
-//////				.getResultList();
-////}
+}

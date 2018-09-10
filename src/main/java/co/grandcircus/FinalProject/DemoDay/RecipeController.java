@@ -1,7 +1,10 @@
 package co.grandcircus.FinalProject.DemoDay;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,7 +20,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import co.grandcircus.FinalProject.DemoDay.dao.MenuItemDao;
 import co.grandcircus.FinalProject.DemoDay.dao.UserDao;
 import co.grandcircus.FinalProject.DemoDay.entity.Favorite;
-import co.grandcircus.FinalProject.DemoDay.entity.Recipe;
 import co.grandcircus.FinalProject.DemoDay.entity.Result;
 import co.grandcircus.FinalProject.DemoDay.entity.User;
 
@@ -79,37 +80,55 @@ public class RecipeController {
 	}
 
 	//shows empty search box
-	@RequestMapping("/display")
-	public ModelAndView showSearch() {
+	@RequestMapping("/display/{searchType}")
+	public ModelAndView showSearch(@PathVariable("searchType") String searchType) {
+		
 		ModelAndView mav = new ModelAndView("display");
+		mav.addObject("searchType", searchType);
 		return mav;
 	}
 	
 	// calls API to search using user's keyword and time availability
-	@RequestMapping("/display/search")
-	public ModelAndView showList(@RequestParam(value = "keyword", required = false) String keyword) {
+	@RequestMapping("/display/search/{searchType}")
+	public ModelAndView showList(@RequestParam(value = "keyword", required = false) String keyword, 
+			@PathVariable("searchType") String searchType) {
+		
 		ModelAndView mav = new ModelAndView("display");
-
-		RestTemplate restTemplate = new RestTemplate();
-
+		mav.addObject("searchType", searchType);
+		if (keyword != null) {
+			mav.addObject("keyword", keyword);
+		}
+ 		RestTemplate restTemplate = new RestTemplate();
 		int maxTotalTime = 10;
+		
+		if (searchType.equals("favorites")) {
+			List<Favorite> favorites = menuItemDao.findAll();
+			mav.addObject("favorites", favorites);
+			return mav;
+		}
+		
+		else {
 
-		String url = "https://api.edamam.com/search?q=" + keyword + "&app_id=328dd333"
-				+ "&app_key=2925530f7873bcd09aa1376f5114f08d"
-				+ "&from=0&to=10" // optional: limits number of results
-				+ "&time=1-" + maxTotalTime; // total time is between 1 and maxTotalTime
+			String url = "https://api.edamam.com/search?q=" + keyword + "&app_id=328dd333"
+					+ "&app_key=2925530f7873bcd09aa1376f5114f08d"
+					+ "&from=0&to=10" // optional: limits number of results
+					+ "&time=1-" + maxTotalTime; // total time is between 1 and maxTotalTime
 
-		// call to API
-		ResponseEntity<Result> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(null),
-				Result.class);
+			// call to API
+			ResponseEntity<Result> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(null),
+					Result.class);
 
-		// extract results from API response
-		Result result = response.getBody();
+			// extract results from API response
+			Result result = response.getBody();
 
-		// extract recipes from results, label as "recipelist" for use in jsp
-		mav.addObject("recipelist", result.getHits());
+			// extract recipes from results, label as "recipelist" for use in jsp
+			mav.addObject("recipelist", result.getHits());
+			return mav;
+		}
 
-		return mav;
+		
+
+		
 	}
 
 	@RequestMapping("/calendar")
@@ -117,6 +136,8 @@ public class RecipeController {
 		ModelAndView mav = new ModelAndView("calendar");
 		return mav;
 	}
+
+
 
 	// user adds recipe to database
 	@PostMapping("/add-to-menu")
@@ -173,4 +194,6 @@ public class RecipeController {
 		redir.addFlashAttribute("message", "Logged out.");
 		return new ModelAndView("redirect:/");
 	}
+	
+	
 }
