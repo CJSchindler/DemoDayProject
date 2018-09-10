@@ -5,18 +5,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Log-in Form</title>
-<link href="https://bootswatch.com/4/minty/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
+<link href="https://bootswatch.com/4/minty/bootstrap.min.css" rel="stylesheet">
 <body id="LoginForm">
 <main class="container">
-
-<div class="container">
-
-<button><a href="/">Back</a></button>
-
+<br>
+<button type="button" class="btn btn-outline-primary" href="/"><a href="/">Back</a></button>
+<br>
 <h1 class="form-heading">Member Login</h1>
 <div class="login-form">
 <div class="main-div">
@@ -45,19 +41,18 @@
         </div>
         
         <!-- Perhaps add this functionality later! Just create another jsp that will 
-        updates password for the user matching the email address?
+        update password for the user matching the email address?
         -->
         <div class="forgot">
         <a href="/reset">Forgot password?</a>
-</div>
+		</div>
         <button type="submit" class="btn btn-primary">Login</button>
         <!--  Gives option to register if not a member -->
-		<button type="submit" class="btn btn-secondary"><a href="/registration">Not a Member? Register></a></button>
-    	
-    </form>
-    </div>
-</div></div>
-
+        </form action="/register">
+        <br>
+        <form>
+        <a href="/register" type="button" class="btn btn-secondary btn-sm" href="/register">Not a member? Register</a>
+		</form>
 </main>
 </body>
 </html>
