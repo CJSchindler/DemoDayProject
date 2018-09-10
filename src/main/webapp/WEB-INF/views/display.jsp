@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Monday</title>
 </head>
+<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css" rel="stylesheet">
 <body>
 	<main class="container">
 		<h1>Monday</h1>

@@ -8,6 +8,7 @@
 </head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css">
 <body>
+<main class="container">
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href="#">Meal Prep</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,9 +19,20 @@
     <ul class="navbar-nav mr-auto">
   </div>
 </nav>
-Welcome to MEAL PREP PLANNER!
+<div class="jumbotron">
+  <h1 class="display-4">Let's get ready to PREP!</h1>
+  <p class="lead">We know you are busy. Let us help you prepare so you can eat healthy and and save money.</p>
+  <hr class="my-4">
+  <p>Already a member? Log in here:</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="/login" role="button">Log in</a>
+  </p>
+  <p>New user? Register here:</p>
+  <p class="lead">
+    <a class="btn btn-secondary btn-lg" href="/register" role="button">Register</a>
+  </p>
+</div>
 
-<button><a href="/login">Already a member? Log in here</a></button>
-<button><a href="/register">Register</a></button>
 </body>
+</main>
 </html>
