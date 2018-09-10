@@ -128,7 +128,7 @@ public class RecipeController {
 		favorite.setLabel(label);
 		// FIXME: put more variables here
 		menuItemDao.create(favorite);
-		ModelAndView mav = new ModelAndView("display");
+		ModelAndView mav = new ModelAndView("redirect:/display");
 		mav.addObject("favorite", favorite);
 		
 		
