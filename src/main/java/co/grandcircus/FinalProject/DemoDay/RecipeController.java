@@ -1,20 +1,29 @@
 package co.grandcircus.FinalProject.DemoDay;
 
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import co.grandcircus.FinalProject.DemoDay.Dao.UserDao;
 //import co.grandcircus.FinalProject.DemoDay.dao.MenuItemDao;
 //import co.grandcircus.FinalProject.DemoDay.dao.MenuItemDao;
 import co.grandcircus.FinalProject.DemoDay.entity.Recipe;
 import co.grandcircus.FinalProject.DemoDay.entity.Result;
+import co.grandcircus.FinalProject.DemoDay.entity.User;
+
+
+
 
 @Controller
 public class RecipeController {
@@ -23,6 +32,9 @@ public class RecipeController {
 //	private MenuItemDao menuItemDao;
 
 	// display the initial page that allows users to enter time availability
+	@Autowired
+	private UserDao userDao;
+	
 	@RequestMapping("/")
 	public ModelAndView showIndex() {
 		ModelAndView mav = new ModelAndView("index");
@@ -30,6 +42,42 @@ public class RecipeController {
 	}
 	
 	//display the search page before user enters keyword
+	@RequestMapping("/register")
+	public ModelAndView showRegistration() {
+		ModelAndView mav = new ModelAndView("register");
+		return mav;
+	}
+	
+	// `/madlib-story` matches the URL in the browser
+		@PostMapping("/register")
+		public ModelAndView showRegistration(@RequestParam("first_name") String first_name, 
+				@RequestParam("last_name") String last_name,@RequestParam("password") String password, 
+				@RequestParam("email") String email) {
+
+			// Construct a user from the url params
+			User user = new User();
+			user.setFirst_name(first_name);
+			user.setLast_name(last_name);
+			user.setPassword(password);
+			user.setEmail(email);
+			System.out.println(first_name);
+			System.out.println(last_name);
+			System.out.println(password);
+			System.out.println(email);
+			
+			userDao.create(user);
+			System.out.println(first_name);
+			System.out.println(last_name);
+			System.out.println(password);
+			System.out.println(email);
+			
+			ModelAndView mav = new ModelAndView("display");
+			mav.addObject("user", user);
+
+			return mav;
+
+		}
+	
 	@RequestMapping("/display")
 	public ModelAndView showSearch() {
 		ModelAndView mav = new ModelAndView("display");
