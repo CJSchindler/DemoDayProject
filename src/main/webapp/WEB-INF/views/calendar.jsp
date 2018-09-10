@@ -52,7 +52,7 @@
 
 
 <!-- Dropdown to add for time selection, will add to each day...but may change layout of days -->
-<form action="/hotels" method="post">
+<form action="/???????" method="post">
 <div class="input-group">
   <select name="city" class="custom-select" id="inputGroupSelect04">
     <option selected>Choose...</option>
@@ -68,10 +68,16 @@
     <option value="out">I'm eating out</option>
   </select>
   <div class="input-group-append">
-    <button class="btn btn-outline-secondary" type="submit"></button>
+    <button class="btn btn-outline-secondary" type="submit">Submit</button>
   </div>
 </div>
 
+</form>
+
+<form action="/display" method="post">
+<label></label><input type="radio" name="searchType" value="favorites"> Search Favorites</label>
+<label></label><input type="radio" name="searchType" value="new">Search new recipes</label>
+<button type="submit">Submit</button>
 </form>
 
 

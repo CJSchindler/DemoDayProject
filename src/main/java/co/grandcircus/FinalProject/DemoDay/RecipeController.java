@@ -80,8 +80,8 @@ public class RecipeController {
 	}
 
 	//shows empty search box
-	@RequestMapping("/display/{searchType}")
-	public ModelAndView showSearch(@PathVariable("searchType") String searchType) {
+	@RequestMapping("/display")
+	public ModelAndView showSearch(@RequestParam("searchType") String searchType) {
 		
 		ModelAndView mav = new ModelAndView("display");
 		mav.addObject("searchType", searchType);
