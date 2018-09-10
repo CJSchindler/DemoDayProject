@@ -48,20 +48,34 @@ public class RecipeController {
 	@PostMapping("/register")
 	public ModelAndView showRegistration(@RequestParam("first_name") String first_name,
 			@RequestParam("last_name") String last_name, @RequestParam("password") String password,
-			@RequestParam("email") String email) {
-
-		// Construct a user from the url params
-		User user = new User();
-		user.setFirst_name(first_name);
-		user.setLast_name(last_name);
-		user.setPassword(password);
-		user.setEmail(email);
-
-		userDao.create(user);
-
-		ModelAndView mav = new ModelAndView("display");
-		mav.addObject("user", user);
-		return mav;
+			@RequestParam("email") String email, @RequestParam("password2") String password2) {
+	
+		String passwordTest;
+        
+        if (password.matches(password2)) {
+            
+            passwordTest = "";
+            
+            User user = new User();
+    		user.setFirst_name(first_name);
+    		user.setLast_name(last_name);
+    		user.setPassword(password);
+    		user.setEmail(email);
+            
+            userDao.create(user);
+            return new ModelAndView("redirect:/login");
+            
+        }
+        
+        else {
+            passwordTest = "Passwords entered do not match. Please try again.";
+            ModelAndView mav = new ModelAndView("register");
+            mav.addObject("email", email);
+            mav.addObject("first_name", first_name);
+            mav.addObject("last_name", last_name);
+            mav.addObject("passwordTest", passwordTest);
+            return mav;
+        }
 	}
 
 	//shows empty search box

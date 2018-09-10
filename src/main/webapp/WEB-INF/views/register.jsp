@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,20 +25,28 @@
 			      <div>
 			     <h1> Register 
 			      </h1>
+			      </div>
 			 
 		<div> 	    
 		<p> First name: <input name="first_name" minlength="2" required/> </p>
 		<p> Last name: <input name="last_name" required/> </p>
 		<p> Email: <input type= "email" name="email" required/> </p>
-		<p> Password: <input type= "password" name="password" required/> </p>
+		
+		 <c:if test="${not empty passwordTest }">
+		<div class="test" style="color: red;">
+		${passwordTest }
 		</div>
-		<p>
+		</c:if>
+		<p> Password: <input type= "password" name="password" required/> </p>
+		<p> Re-enter your password: <input type= "password" name="password2" required/> </p>
+		</div>
+   
 			<!-- Clicking a button will submit the form. -->
 			<button type="submit" class="btn-btn-primary mb-2"> Register!</button>
 			<!-- <button type="clear" class="btn-btn-secondary mb-2"> clear</button> -->
 			
 		</p>
-		
+	</form>	
 <!-- Bootstrap -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
 integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
