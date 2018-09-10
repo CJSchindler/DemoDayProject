@@ -1,3 +1,6 @@
+application.properties
+pom.xml
+
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 
