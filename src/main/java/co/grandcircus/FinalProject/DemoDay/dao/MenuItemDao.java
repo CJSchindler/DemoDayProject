@@ -1,24 +1,31 @@
-//package co.grandcircus.FinalProject.DemoDay.dao;
-//
-//import javax.persistence.EntityManager;
-//import javax.persistence.PersistenceContext;
-//import javax.transaction.Transactional;
-//
-//import org.springframework.stereotype.Repository;
-//
-//@Repository
-//@Transactional
-//public class MenuItemDao {
-//	
-//
-//	@PersistenceContext
-//	private EntityManager em;
-//
-//}
-////	
-////	public void create(Recipe recipe) {
-////		em.persist(recipe);
-////	}
+package co.grandcircus.FinalProject.DemoDay.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Repository;
+
+import co.grandcircus.FinalProject.DemoDay.entity.Favorite;
+import co.grandcircus.FinalProject.DemoDay.entity.User;
+
+@Repository
+@Transactional
+public class MenuItemDao {
+	
+	@PersistenceContext
+	private EntityManager em;
+	
+	public List<Favorite> findAll() {
+		return em.createQuery("FROM Favorite", Favorite.class).getResultList();
+	}
+	
+	public void create(Favorite favorite) {
+		em.persist(favorite);
+	}
+}
 //////	
 //////	public void delete(Integer id) {
 //////		// Deleting with Hibernate entity manager requires fetching a reference first.

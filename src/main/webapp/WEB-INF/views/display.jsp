@@ -30,7 +30,7 @@
 				<tbody>
 					<c:forEach var="recipe" items="${ recipelist }">
 					<tr>
-						<td><input type="checkbox" name="${recipe.recipe.label}" value="${recipe.recipe.label}"></td>
+						<td><input type="checkbox" name="label" value="${recipe.recipe.label}"></td>
 						<td><img src="${recipe.recipe.image}" width=60%></td>
 						<td><a href="${recipe.recipe.url}">${recipe.recipe.label}</a></td>
 						<td>
