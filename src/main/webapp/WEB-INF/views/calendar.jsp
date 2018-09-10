@@ -6,153 +6,68 @@
 <title>Insert title here</title>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css" rel="stylesheet">
     <link href="/style.css" rel="stylesheet">
 </head>
 <body>
-<div class="demo3">
-            <div class="container">
-                <h4 style="padding-top:10px">Weekly Meal Planner</h4>
-                
-                <div class="row">
-                    <div class="col-md-4 col-sm-6">
-                        <div class="pricingTable3">
-                            <h3 class="title">Sunday</h3>
-                            <div class="price-value">
-                                <span class="currency">$</span>
-                                <span class="amount">10.00</span>
-                                <span class="month">/month</span>
-                            </div>
-                            <ul class="pricing-content">
-                                <li><b>50GB</b> Disk Space</li>
-                                <li><b>50</b> Email Accounts</li>
-                                <li><b>50GB</b> Bandwidth</li>
-                                <li><b>10</b> Subdomains</li>
-                                <li><b>15</b> Domains</li>
-                            </ul>
-                            <a href="#" class="pricingTable-signup">Order Now</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="pricingTable3 pink">
-                            <h3 class="title">Monday</h3>
-                            <div class="price-value">
-                                <span class="currency">$</span>
-                                <span class="amount">20.00</span>
-                                <span class="month">/month</span>
-                            </div>
-                            <ul class="pricing-content">
-                                <li><b>60GB</b> Disk Space</li>
-                                <li><b>60</b> Email Accounts</li>
-                                <li><b>60GB</b> Bandwidth</li>
-                                <li><b>15</b> Subdomains</li>
-                                <li><b>20</b> Domains</li>
-                            </ul>
-                            <a href="#" class="pricingTable-signup">Order Now</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="pricingTable3 blue">
-                            <h3 class="title">Tuesday</h3>
-                            <div class="price-value">
-                                <span class="currency">$</span>
-                                <span class="amount">30.00</span>
-                                <span class="month">/month</span>
-                            </div>
-                            <ul class="pricing-content">
-                                <li><b>70GB</b> Disk Space</li>
-                                <li><b>70</b> Email Accounts</li>
-                                <li><b>70GB</b> Bandwidth</li>
-                                <li><b>20</b> Subdomains</li>
-                                <li><b>25</b> Domains</li>
-                            </ul>
-                            <a href="#" class="pricingTable-signup">Submit</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Just added -->
-                    <div class="col-md-4 col-sm-6">
-                        <div class="pricingTable3">
-                            <h3 class="title">Wednesday</h3>
-                            <div class="price-value">
-                                <span class="currency">$</span>
-                                <span class="amount">10.00</span>
-                                <span class="month">/month</span>
-                            </div>
-                            <ul class="pricing-content">
-                                <li><b>50GB</b> Disk Space</li>
-                                <li><b>50</b> Email Accounts</li>
-                                <li><b>50GB</b> Bandwidth</li>
-                                <li><b>10</b> Subdomains</li>
-                                <li><b>15</b> Domains</li>
-                            </ul>
-                            <a href="#" class="pricingTable-signup">Order Now</a>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-4 col-sm-6">
-                        <div class="pricingTable3 pink">
-                            <h3 class="title">Thursday</h3>
-                            <div class="price-value">
-                                <span class="currency">$</span>
-                                <span class="amount">10.00</span>
-                                <span class="month">/month</span>
-                            </div>
-                            <ul class="pricing-content">
-                                <li><b>50GB</b> Disk Space</li>
-                                <li><b>50</b> Email Accounts</li>
-                                <li><b>50GB</b> Bandwidth</li>
-                                <li><b>10</b> Subdomains</li>
-                                <li><b>15</b> Domains</li>
-                            </ul>
-                            <a href="#" class="pricingTable-signup">Order Now</a>
-                        </div>
-                    </div>
-                    
-                    
-                    <div class="col-md-4 col-sm-6">
-                        <div class="pricingTable3 blue">
-                            <h3 class="title">Friday</h3>
-                            <div class="price-value">
-                                <span class="currency">$</span>
-                                <span class="amount">10.00</span>
-                                <span class="month">/month</span>
-                            </div>
-                            <ul class="pricing-content">
-                                <li><b>50GB</b> Disk Space</li>
-                                <li><b>50</b> Email Accounts</li>
-                                <li><b>50GB</b> Bandwidth</li>
-                                <li><b>10</b> Subdomains</li>
-                                <li><b>15</b> Domains</li>
-                            </ul>
-                            <a href="#" class="pricingTable-signup">Order Now</a>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-4 col-sm-6">
-                        <div class="pricingTable3">
-                            <h3 class="title">Saturday</h3>
-                            <div class="price-value">
-                                <span class="currency">$</span>
-                                <span class="amount">10.00</span>
-                                <span class="month">/month</span>
-                            </div>
-                            <ul class="pricing-content">
-                                <li><b>50GB</b> Disk Space</li>
-                                <li><b>50</b> Email Accounts</li>
-                                <li><b>50GB</b> Bandwidth</li>
-                                <li><b>10</b> Subdomains</li>
-                                <li><b>15</b> Domains</li>
-                            </ul>
-                            <a href="#" class="pricingTable-signup">Order Now</a>
-                        </div>
-                    </div>
-                    <!-- End of added -->
-                </div>
-            </div>
-        </div>
-        <hr>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search">
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+    <th scope="col">Sunday</th>
+      <th scope="col">Monday</th>
+      <th scope="col">Tuesday</th>
+      <th scope="col">Wednesday</th>
+      <th scope="col">Thursday</th>
+      <th scope="col">Friday</th>
+      <th scope="col">Saturday</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="table-primary">
+      <th scope="row">Active</th>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+    <tr class="table-primary">
+      <th scope="row">Primary</th>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+    </tbody>
+    </table>
+
+
 
 <!-- Dropdown to add for time selection, will add to each day...but may change layout of days -->
 <form action="/hotels" method="post">
@@ -171,7 +86,7 @@
     <option value="out">I'm eating out</option>
   </select>
   <div class="input-group-append">
-    <button class="btn btn-outline-secondary" type="submit">Find Hotels</button>
+    <button class="btn btn-outline-secondary" type="submit"></button>
   </div>
 </div>
 
