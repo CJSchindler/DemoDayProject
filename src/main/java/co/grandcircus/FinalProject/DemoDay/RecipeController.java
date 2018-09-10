@@ -120,7 +120,7 @@ public class RecipeController {
 
 	// user adds recipe to database
 	@PostMapping("/add-to-menu")
-	public ModelAndView addRecipeToMenu(@RequestParam("label") String label) {
+	public ModelAndView addRecipeToMenu(@RequestParam("label") String label, RedirectAttributes redir) {
 
 		System.out.println(label);
 		// construct a new favorite from the URL params
@@ -130,7 +130,10 @@ public class RecipeController {
 		menuItemDao.create(favorite);
 		ModelAndView mav = new ModelAndView("display");
 		mav.addObject("favorite", favorite);
-		return mav;
+		
+		
+		redir.addFlashAttribute("message", "Item added to favorites!");
+		return new ModelAndView("redirect:/calendar");
 	}
 
 	@RequestMapping("/login")
