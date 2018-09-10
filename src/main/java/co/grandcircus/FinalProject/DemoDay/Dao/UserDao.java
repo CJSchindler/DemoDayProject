@@ -1,4 +1,4 @@
-package co.grandcircus.FinalProject.DemoDay.Dao;
+package co.grandcircus.FinalProject.DemoDay.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

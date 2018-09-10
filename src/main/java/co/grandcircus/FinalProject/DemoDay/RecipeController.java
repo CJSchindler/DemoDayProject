@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
-import co.grandcircus.FinalProject.DemoDay.Dao.UserDao;
+import co.grandcircus.FinalProject.DemoDay.dao.UserDao;
 //import co.grandcircus.FinalProject.DemoDay.dao.MenuItemDao;
 //import co.grandcircus.FinalProject.DemoDay.dao.MenuItemDao;
 import co.grandcircus.FinalProject.DemoDay.entity.Recipe;
