@@ -1,5 +1,8 @@
 package co.grandcircus.FinalProject.DemoDay;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -31,7 +34,9 @@ public class RecipeController {
 
 	@Autowired
 	private UserDao userDao;
-
+	
+	private LocalDate date;
+	
 	@RequestMapping("/")
 	public ModelAndView showIndex() {
 		ModelAndView mav = new ModelAndView("index");
@@ -134,8 +139,23 @@ public class RecipeController {
 	@RequestMapping("/calendar")
 	public ModelAndView showCalendar() {
 		ModelAndView mav = new ModelAndView("calendar");
+		
+		date = LocalDate.now();
+		System.out.println(date);
+		
+		DayOfWeek currentDay = date.getDayOfWeek();
+		
+//		switch(currentDay) {
+//		case SUNDAY:
+//			LocalDate sunday = 
+//		
+//		}
+		
+		
+		
 		return mav;
 	}
+	
 
 
 
@@ -181,7 +201,7 @@ public class RecipeController {
 		// A flash message will only show on the very next page. Then it will go away.
 		// It is useful with redirects since you can't add attributes to the mav.
 		redir.addFlashAttribute("message", "Logged in.");
-		return new ModelAndView("redirect:/display");
+		return new ModelAndView("redirect:/calendar");
 	}
 
 	@RequestMapping("/logout")
