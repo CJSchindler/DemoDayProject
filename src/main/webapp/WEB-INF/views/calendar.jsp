@@ -26,13 +26,13 @@
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th scope="col">Sunday</th>
-				<th scope="col">Monday</th>
-				<th scope="col">Tuesday</th>
-				<th scope="col">Wednesday</th>
-				<th scope="col">Thursday</th>
-				<th scope="col">Friday</th>
-				<th scope="col">Saturday</th>
+				<th scope="col">Sunday <br /> ${sunday}</th>
+				<th scope="col">Monday<br /> ${monday}</th>
+				<th scope="col">Tuesday<br /> ${tuesday}</th>
+				<th scope="col">Wednesday<br /> ${wednesday}</th>
+				<th scope="col">Thursday<br /> ${thursday}</th>
+				<th scope="col">Friday<br /> ${friday}</th>
+				<th scope="col">Saturday<br /> ${saturday}</th>
 
 			</tr>
 		</thead>

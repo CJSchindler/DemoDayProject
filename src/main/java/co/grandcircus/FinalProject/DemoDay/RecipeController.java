@@ -2,6 +2,7 @@ package co.grandcircus.FinalProject.DemoDay;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.List;
 
@@ -141,16 +142,92 @@ public class RecipeController {
 		ModelAndView mav = new ModelAndView("calendar");
 		
 		date = LocalDate.now();
-		System.out.println(date);
 		
 		DayOfWeek currentDay = date.getDayOfWeek();
 		
-//		switch(currentDay) {
-//		case SUNDAY:
-//			LocalDate sunday = 
-//		
-//		}
+		LocalDate sunday = null;
+		LocalDate monday = null;
+		LocalDate tuesday = null;
+		LocalDate wednesday = null;
+		LocalDate thursday = null;
+		LocalDate friday = null;
+		LocalDate saturday = null;
 		
+		switch(currentDay) {
+		case SUNDAY:
+			sunday = date;
+			monday = date.plusDays(1);
+			tuesday = date.plusDays(2);
+			wednesday = date.plusDays(3);
+			thursday = date.plusDays(4);
+			friday = date.plusDays(5);
+			saturday = date.plusDays(6);
+			break;
+		case MONDAY:
+			sunday = date.plusDays(6);
+			monday = date.plusDays(7);
+			tuesday = date.plusDays(8);
+			wednesday = date.plusDays(9);
+			thursday = date.plusDays(10);
+			friday = date.plusDays(11);
+			saturday = date.plusDays(12);
+			break;
+		case TUESDAY:
+			sunday = date.plusDays(5);
+			monday = date.plusDays(6);
+			tuesday = date.plusDays(7);
+			wednesday = date.plusDays(8);
+			thursday = date.plusDays(9);
+			friday = date.plusDays(10);
+			saturday = date.plusDays(11);
+			break;
+		case WEDNESDAY:
+			sunday = date.plusDays(4);
+			monday = date.plusDays(5);
+			tuesday = date.plusDays(6);
+			wednesday = date.plusDays(7);
+			thursday = date.plusDays(8);
+			friday = date.plusDays(9);
+			saturday = date.plusDays(10);
+			break;
+		case THURSDAY:
+			sunday = date.plusDays(3);
+			monday = date.plusDays(4);
+			tuesday = date.plusDays(5);
+			wednesday = date.plusDays(6);
+			thursday = date.plusDays(7);
+			friday = date.plusDays(8);
+			saturday = date.plusDays(9);
+			break;
+		case FRIDAY:
+			sunday = date.plusDays(2);
+			monday = date.plusDays(3);
+			tuesday = date.plusDays(4);
+			wednesday = date.plusDays(5);
+			thursday = date.plusDays(6);
+			friday = date.plusDays(7);
+			saturday = date.plusDays(8);
+			break;
+		case SATURDAY:
+			sunday = date.plusDays(1);
+			monday = date.plusDays(2);
+			tuesday = date.plusDays(3);
+			wednesday = date.plusDays(4);
+			thursday = date.plusDays(5);
+			friday = date.plusDays(6);
+			saturday = date.plusDays(7);
+			break;
+		default:
+			break;
+		}
+		
+		mav.addObject("sunday", sunday.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
+		mav.addObject("monday", monday.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
+		mav.addObject("tuesday", tuesday.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
+		mav.addObject("wednesday", wednesday.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
+		mav.addObject("thursday", thursday.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
+		mav.addObject("friday", friday.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
+		mav.addObject("saturday", saturday.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
 		
 		
 		return mav;
