@@ -10,9 +10,18 @@
 <link href="https://bootswatch.com/4/minty/bootstrap.min.css" rel="stylesheet">
 <body id="LoginForm">
 <main class="container">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  		<a class="navbar-brand" href="#">Meal Prep</a>
+  		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    		<span class="navbar-toggler-icon"></span>
+  		</button>
+
+  	<div class="collapse navbar-collapse" id="navbarColor01">
+    	<ul class="navbar-nav mr-auto"></ul>
+  	</div>
+	</nav>
 <br>
-<button type="button" class="btn btn-outline-primary" href="/"><a href="/">Back</a></button>
-<br>
+<!--  <button type="button" class="btn btn-outline-primary" href="/"><a href="/">Back</a></button> -->
 <h1 class="form-heading">Member Login</h1>
 <div class="login-form">
 <div class="main-div">
