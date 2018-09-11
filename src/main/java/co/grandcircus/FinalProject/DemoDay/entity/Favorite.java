@@ -13,7 +13,7 @@ public class Favorite {
 	private String label;
 	private String url;
 	private String rating;
-	private String date_added;
+	private String meal_date;
 	private String image;
 	
 	
@@ -22,13 +22,13 @@ public class Favorite {
 	}
 
 
-	public Favorite(Long id, String label, String url, String rating, String date_added, String image) {
+	public Favorite(Long id, String label, String url, String rating, String meal_date, String image) {
 		super();
 		this.id = id;
 		this.label = label;
 		this.url = url;
 		this.rating = rating;
-		this.date_added = date_added;
+		this.meal_date = meal_date;
 		this.image = image;
 	}
 
@@ -73,13 +73,13 @@ public class Favorite {
 	}
 
 
-	public String getDate_added() {
-		return date_added;
+	public String getMeal_date() {
+		return meal_date;
 	}
 
 
-	public void setDate_added(String date_added) {
-		this.date_added = date_added;
+	public void setMeal_date(String meal_date) {
+		this.meal_date = meal_date;
 	}
 
 
