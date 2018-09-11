@@ -241,13 +241,20 @@ public class RecipeController {
 
 	// user adds recipe to database
 	@PostMapping("/add-to-menu")
-	public ModelAndView addRecipeToMenu(@RequestParam("label") String label, RedirectAttributes redir) {
+	public ModelAndView addRecipeToMenu(@RequestParam("label") String label, @RequestParam("date_added") String date_added,
+			@RequestParam("image") String image, @RequestParam("url") String url, @RequestParam("rating") String rating,
+			RedirectAttributes redir) {
 
 		System.out.println(label);
 		// construct a new favorite from the URL params
 		Favorite favorite = new Favorite();
 		favorite.setLabel(label);
+		favorite.setDate_added(date_added);
+		favorite.setImage(image);
+		favorite.setUrl(url);
+		favorite.setRating(rating);
 		// FIXME: put more variables here
+		
 		menuItemDao.create(favorite);
 		ModelAndView mav = new ModelAndView("redirect:/display");
 		mav.addObject("favorite", favorite);

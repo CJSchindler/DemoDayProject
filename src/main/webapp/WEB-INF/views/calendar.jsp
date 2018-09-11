@@ -138,6 +138,8 @@
 						</button>
 					</form></td>
 			</tr>
+			
+			<!-- add tags for things in favorites class-->
 		</tbody>
 	</table>
 
