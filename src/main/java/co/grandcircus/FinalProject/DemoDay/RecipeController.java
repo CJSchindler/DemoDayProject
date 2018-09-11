@@ -99,9 +99,9 @@ public class RecipeController {
 	}
 	
 	// calls API to search using user's keyword and time availability
-	@RequestMapping("/display/search/{searchType}/{time}")
+	@RequestMapping("/display/{searchType}/{time}/{date}")
 	public ModelAndView showList(@RequestParam(value = "keyword", required = false) String keyword, 
-			@PathVariable("searchType") String searchType, @PathVariable("time") int time) {
+			@PathVariable("searchType") String searchType, @PathVariable("time") int time, @PathVariable("date") String date) {
 		
 		ModelAndView mav = new ModelAndView("display");
 		mav.addObject("searchType", searchType);
@@ -113,7 +113,7 @@ public class RecipeController {
 		if (searchType.equals("favorites")) {
 			List<Favorite> favorites = menuItemDao.findAll();
 			mav.addObject("favorites", favorites);
-			return mav;
+			mav.addObject("date", date);
 		}
 		
 		else {
@@ -132,10 +132,10 @@ public class RecipeController {
 
 			// extract recipes from results, label as "recipelist" for use in jsp
 			mav.addObject("recipelist", result.getHits());
-			return mav;
+			mav.addObject("date", date);
 		}
 
-		
+		return mav;
 
 		
 	}
@@ -232,6 +232,10 @@ public class RecipeController {
 		mav.addObject("friday", friday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu")));
 		mav.addObject("saturday", saturday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu")));
 		
+		if (menuItemDao.findByDate(sunday) != null) {
+			mav.addObject("sundayMeal", menuItemDao.findByDate(sunday));
+		}
+		
 		
 		return mav;
 	}
@@ -240,30 +244,38 @@ public class RecipeController {
 
 
 	// user adds recipe to database
-	@PostMapping("/add-to-menu")
-	public ModelAndView addRecipeToMenu(@RequestParam("label") String label, 
-			@RequestParam("meal_date") String meal_date,
-			@RequestParam("image") String image,
-			@RequestParam("url") String url, @RequestParam("rating") String rating,
+	@PostMapping("/add-to-menu/{date}")
+	public ModelAndView addRecipeToMenu(@RequestParam("label") String label, @PathVariable("date") String date,
 			RedirectAttributes redir) {
+		
+		RestTemplate restTemplate = new RestTemplate();
+		String url = "https://api.edamam.com/search?q=" + label + "&app_id=328dd333"
+				+ "&app_key=2925530f7873bcd09aa1376f5114f08d"
+				+ "&from=0&to=10"; // optional: limits number of results
 
-		System.out.println(label);
-		// construct a new favorite from the URL params
+		// call to API
+		ResponseEntity<Result> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(null),
+				Result.class);
+
+		// extract results from API response
+		Result result = response.getBody();
+
+		
+
 		Favorite favorite = new Favorite();
 		favorite.setLabel(label);
-		favorite.setMeal_date(meal_date);;
-		favorite.setImage(image);
-		favorite.setUrl(url);
-		favorite.setRating(rating);
-		// FIXME: put more variables here
-		
+		favorite.setMealDate(date);
 		menuItemDao.create(favorite);
-		ModelAndView mav = new ModelAndView("redirect:/display");
-		mav.addObject("favorite", favorite);
 		
 		
+		
+		ModelAndView mav = new ModelAndView("redirect:/calendar");
 		redir.addFlashAttribute("message", "Item added to favorites!");
-		return new ModelAndView("redirect:/calendar");
+		redir.addAttribute("favorite", favorite);
+		// extract recipes from results, label as "recipelist" for use in jsp
+				redir.addAttribute("recipelist", result.getHits());
+		
+		return mav;
 	}
 
 	@RequestMapping("/login")

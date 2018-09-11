@@ -140,6 +140,7 @@
 			</tr>
 			
 			<!-- add tags for things in favorites class-->
+			
 		</tbody>
 	</table>
 

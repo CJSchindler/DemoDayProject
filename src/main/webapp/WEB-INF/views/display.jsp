@@ -16,13 +16,13 @@
 		<p>What main ingredient would you like to have on this day?</p>
 		<p>Enter a keyword to begin your search: </p>
 		
-		<form class="search" action="/display/search/${searchType }/${time}">
+		<form class="search" action="/display/${searchType }/${time}/${date}">
 		  <input type="text" placeholder="Chicken, vegetarian..." name="keyword">
 		  <button type="submit">Submit</button>
 		</form>
 		
 		<c:if test="${not empty keyword}">
-		<form action="/add-to-menu" method="post">
+		<form action="/add-to-menu/${date }" method="post">
 		<table class="table">
 			<thead>
 				<tr>

@@ -1,5 +1,6 @@
 package co.grandcircus.FinalProject.DemoDay.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,7 +10,6 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import co.grandcircus.FinalProject.DemoDay.entity.Favorite;
-import co.grandcircus.FinalProject.DemoDay.entity.User;
 
 @Repository
 @Transactional
@@ -37,5 +37,14 @@ public class MenuItemDao {
 		return em.createQuery("FROM Favorite WHERE label = :label", Favorite.class)
 				.setParameter("label", label)
 				.getSingleResult();
-}
+	}
+	
+	public Favorite findByDate(LocalDate date) {
+		// HQL queries can have named parameters, such as :regex here.
+		return em.createQuery("FROM Favorite WHERE mealDate = :date", Favorite.class)
+				.setParameter("date", date)
+				.getSingleResult();
+	}
+	
+	
 }
