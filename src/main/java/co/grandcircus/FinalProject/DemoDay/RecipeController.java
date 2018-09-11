@@ -36,7 +36,7 @@ public class RecipeController {
 	@Autowired
 	private UserDao userDao;
 	
-	private LocalDate date;
+	private LocalDate dateToday;
 	
 	@RequestMapping("/")
 	public ModelAndView showIndex() {
@@ -86,18 +86,22 @@ public class RecipeController {
 	}
 
 	//shows empty search box
-	@RequestMapping("/display")
-	public ModelAndView showSearch(@RequestParam("searchType") String searchType) {
+	@RequestMapping("/display/{date}")
+	public ModelAndView showSearch(@PathVariable("date") String date, @RequestParam("time") int time, @RequestParam("searchType") String searchType) {
 		
+		LocalDate searchDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("MM-dd-uuuu"));
+		DayOfWeek day = searchDate.getDayOfWeek();
 		ModelAndView mav = new ModelAndView("display");
+		mav.addObject("time", time);
+		mav.addObject("day", day);
 		mav.addObject("searchType", searchType);
 		return mav;
 	}
 	
 	// calls API to search using user's keyword and time availability
-	@RequestMapping("/display/search/{searchType}")
+	@RequestMapping("/display/search/{searchType}/{time}")
 	public ModelAndView showList(@RequestParam(value = "keyword", required = false) String keyword, 
-			@PathVariable("searchType") String searchType) {
+			@PathVariable("searchType") String searchType, @PathVariable("time") int time) {
 		
 		ModelAndView mav = new ModelAndView("display");
 		mav.addObject("searchType", searchType);
@@ -105,7 +109,6 @@ public class RecipeController {
 			mav.addObject("keyword", keyword);
 		}
  		RestTemplate restTemplate = new RestTemplate();
-		int maxTotalTime = 10;
 		
 		if (searchType.equals("favorites")) {
 			List<Favorite> favorites = menuItemDao.findAll();
@@ -118,7 +121,7 @@ public class RecipeController {
 			String url = "https://api.edamam.com/search?q=" + keyword + "&app_id=328dd333"
 					+ "&app_key=2925530f7873bcd09aa1376f5114f08d"
 					+ "&from=0&to=10" // optional: limits number of results
-					+ "&time=1-" + maxTotalTime; // total time is between 1 and maxTotalTime
+					+ "&time=1-" + time; // total time is between 1 and maxTotalTime
 
 			// call to API
 			ResponseEntity<Result> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(null),
@@ -141,9 +144,9 @@ public class RecipeController {
 	public ModelAndView showCalendar() {
 		ModelAndView mav = new ModelAndView("calendar");
 		
-		date = LocalDate.now();
+		dateToday = LocalDate.now();
 		
-		DayOfWeek currentDay = date.getDayOfWeek();
+		DayOfWeek currentDay = dateToday.getDayOfWeek();
 		
 		LocalDate sunday = null;
 		LocalDate monday = null;
@@ -155,79 +158,79 @@ public class RecipeController {
 		
 		switch(currentDay) {
 		case SUNDAY:
-			sunday = date;
-			monday = date.plusDays(1);
-			tuesday = date.plusDays(2);
-			wednesday = date.plusDays(3);
-			thursday = date.plusDays(4);
-			friday = date.plusDays(5);
-			saturday = date.plusDays(6);
+			sunday = dateToday;
+			monday = dateToday.plusDays(1);
+			tuesday = dateToday.plusDays(2);
+			wednesday = dateToday.plusDays(3);
+			thursday = dateToday.plusDays(4);
+			friday = dateToday.plusDays(5);
+			saturday = dateToday.plusDays(6);
 			break;
 		case MONDAY:
-			sunday = date.plusDays(6);
-			monday = date.plusDays(7);
-			tuesday = date.plusDays(8);
-			wednesday = date.plusDays(9);
-			thursday = date.plusDays(10);
-			friday = date.plusDays(11);
-			saturday = date.plusDays(12);
+			sunday = dateToday.plusDays(6);
+			monday = dateToday.plusDays(7);
+			tuesday = dateToday.plusDays(8);
+			wednesday = dateToday.plusDays(9);
+			thursday = dateToday.plusDays(10);
+			friday = dateToday.plusDays(11);
+			saturday = dateToday.plusDays(12);
 			break;
 		case TUESDAY:
-			sunday = date.plusDays(5);
-			monday = date.plusDays(6);
-			tuesday = date.plusDays(7);
-			wednesday = date.plusDays(8);
-			thursday = date.plusDays(9);
-			friday = date.plusDays(10);
-			saturday = date.plusDays(11);
+			sunday = dateToday.plusDays(5);
+			monday = dateToday.plusDays(6);
+			tuesday = dateToday.plusDays(7);
+			wednesday = dateToday.plusDays(8);
+			thursday = dateToday.plusDays(9);
+			friday = dateToday.plusDays(10);
+			saturday = dateToday.plusDays(11);
 			break;
 		case WEDNESDAY:
-			sunday = date.plusDays(4);
-			monday = date.plusDays(5);
-			tuesday = date.plusDays(6);
-			wednesday = date.plusDays(7);
-			thursday = date.plusDays(8);
-			friday = date.plusDays(9);
-			saturday = date.plusDays(10);
+			sunday = dateToday.plusDays(4);
+			monday = dateToday.plusDays(5);
+			tuesday = dateToday.plusDays(6);
+			wednesday = dateToday.plusDays(7);
+			thursday = dateToday.plusDays(8);
+			friday = dateToday.plusDays(9);
+			saturday = dateToday.plusDays(10);
 			break;
 		case THURSDAY:
-			sunday = date.plusDays(3);
-			monday = date.plusDays(4);
-			tuesday = date.plusDays(5);
-			wednesday = date.plusDays(6);
-			thursday = date.plusDays(7);
-			friday = date.plusDays(8);
-			saturday = date.plusDays(9);
+			sunday = dateToday.plusDays(3);
+			monday = dateToday.plusDays(4);
+			tuesday = dateToday.plusDays(5);
+			wednesday = dateToday.plusDays(6);
+			thursday = dateToday.plusDays(7);
+			friday = dateToday.plusDays(8);
+			saturday = dateToday.plusDays(9);
 			break;
 		case FRIDAY:
-			sunday = date.plusDays(2);
-			monday = date.plusDays(3);
-			tuesday = date.plusDays(4);
-			wednesday = date.plusDays(5);
-			thursday = date.plusDays(6);
-			friday = date.plusDays(7);
-			saturday = date.plusDays(8);
+			sunday = dateToday.plusDays(2);
+			monday = dateToday.plusDays(3);
+			tuesday = dateToday.plusDays(4);
+			wednesday = dateToday.plusDays(5);
+			thursday = dateToday.plusDays(6);
+			friday = dateToday.plusDays(7);
+			saturday = dateToday.plusDays(8);
 			break;
 		case SATURDAY:
-			sunday = date.plusDays(1);
-			monday = date.plusDays(2);
-			tuesday = date.plusDays(3);
-			wednesday = date.plusDays(4);
-			thursday = date.plusDays(5);
-			friday = date.plusDays(6);
-			saturday = date.plusDays(7);
+			sunday = dateToday.plusDays(1);
+			monday = dateToday.plusDays(2);
+			tuesday = dateToday.plusDays(3);
+			wednesday = dateToday.plusDays(4);
+			thursday = dateToday.plusDays(5);
+			friday = dateToday.plusDays(6);
+			saturday = dateToday.plusDays(7);
 			break;
 		default:
 			break;
 		}
 		
-		mav.addObject("sunday", sunday.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
-		mav.addObject("monday", monday.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
-		mav.addObject("tuesday", tuesday.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
-		mav.addObject("wednesday", wednesday.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
-		mav.addObject("thursday", thursday.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
-		mav.addObject("friday", friday.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
-		mav.addObject("saturday", saturday.format(DateTimeFormatter.ofPattern("MM/dd/uuuu")));
+		mav.addObject("sunday", sunday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu")));
+		mav.addObject("monday", monday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu")));
+		mav.addObject("tuesday", tuesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu")));
+		mav.addObject("wednesday", wednesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu")));
+		mav.addObject("thursday", thursday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu")));
+		mav.addObject("friday", friday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu")));
+		mav.addObject("saturday", saturday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu")));
 		
 		
 		return mav;

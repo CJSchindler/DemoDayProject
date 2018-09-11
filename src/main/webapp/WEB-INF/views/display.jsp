@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Monday</title>
+<title>${day }</title>
 </head>
 <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css" rel="stylesheet">
 <body>
@@ -16,7 +16,7 @@
 		<p>What main ingredient would you like to have on this day?</p>
 		<p>Enter a keyword to begin your search: </p>
 		
-		<form class="search" action="/display/search/${searchType }">
+		<form class="search" action="/display/search/${searchType }/${time}">
 		  <input type="text" placeholder="Chicken, vegetarian..." name="keyword">
 		  <button type="submit">Submit</button>
 		</form>

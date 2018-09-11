@@ -1,5 +1,3 @@
-
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" pageEncoding="ISO-8859-1"%>
 
@@ -22,6 +20,7 @@
 </head>
 <body>
 	<%@ include file="navbar.jsp"%>
+	
 
 	<c:if test="${not empty message }">
 		<div class="test" style="color: pink;">${message }</div>
@@ -49,158 +48,11 @@
 		</thead>
 
 		<tbody>
+			
 			<tr class="table-primary">
-				<!-- Sunday -->
-				<td><form action="/hotels" method="post">
-						<div class="input-group">
-							<select name="city" class="custom-select" id="inputGroupSelect04">
-								<option selected>Choose...</option>
-								<option value="5">5 minutes</option>
-								<option value="10">10 minutes</option>
-								<option value="15">15 minutes</option>
-								<option value="20">20 minutes</option>
-								<option value="25">25 minutes</option>
-								<option value="30">30 minutes</option>
-								<option value="35">35 minutes</option>
-								<option value="40">40 minutes</option>
-								<option value="leftovers">I'm having Left-overs</option>
-								<option value="out">I'm eating out</option>
-							</select>
-							<div class="input-group-append">
-								<button class="btn btn-outline-secondary" type="submit"></button>
-							</div>
-						</div>
-					</form></td>
-				<!-- Monday -->
-				<td><form action="/hotels" method="post">
-						<div class="input-group">
-							<select name="city" class="custom-select" id="inputGroupSelect04">
-								<option selected>Choose...</option>
-								<option value="5">5 minutes</option>
-								<option value="10">10 minutes</option>
-								<option value="15">15 minutes</option>
-								<option value="20">20 minutes</option>
-								<option value="25">25 minutes</option>
-								<option value="30">30 minutes</option>
-								<option value="35">35 minutes</option>
-								<option value="40">40 minutes</option>
-								<option value="leftovers">I'm having Left-overs</option>
-								<option value="out">I'm eating out</option>
-							</select>
-							<div class="input-group-append">
-								<button class="btn btn-outline-secondary" type="submit"></button>
-							</div>
-						</div>
-					</form></td>
-				<!-- Tuesday -->
-				<td><form action="/hotels" method="post">
-						<div class="input-group">
-							<select name="city" class="custom-select" id="inputGroupSelect04">
-								<option selected>Choose...</option>
-								<option value="5">5 minutes</option>
-								<option value="10">10 minutes</option>
-								<option value="15">15 minutes</option>
-								<option value="20">20 minutes</option>
-								<option value="25">25 minutes</option>
-								<option value="30">30 minutes</option>
-								<option value="35">35 minutes</option>
-								<option value="40">40 minutes</option>
-								<option value="leftovers">I'm having Left-overs</option>
-								<option value="out">I'm eating out</option>
-							</select>
-							<div class="input-group-append">
-								<button class="btn btn-outline-secondary" type="submit"></button>
-							</div>
-						</div>
-					</form></td>
-				<!-- Wednesday -->
-				<td><form action="/hotels" method="post">
-						<div class="input-group">
-							<select name="city" class="custom-select" id="inputGroupSelect04">
-								<option selected>Choose...</option>
-								<option value="5">5 minutes</option>
-								<option value="10">10 minutes</option>
-								<option value="15">15 minutes</option>
-								<option value="20">20 minutes</option>
-								<option value="25">25 minutes</option>
-								<option value="30">30 minutes</option>
-								<option value="35">35 minutes</option>
-								<option value="40">40 minutes</option>
-								<option value="leftovers">I'm having Left-overs</option>
-								<option value="out">I'm eating out</option>
-							</select>
-							<div class="input-group-append">
-								<button class="btn btn-outline-secondary" type="submit"></button>
-							</div>
-						</div>
-					</form></td>
-				<!-- Thursday -->
-				<td><form action="/hotels" method="post">
-						<div class="input-group">
-							<select name="city" class="custom-select" id="inputGroupSelect04">
-								<option selected>Choose...</option>
-								<option value="5">5 minutes</option>
-								<option value="10">10 minutes</option>
-								<option value="15">15 minutes</option>
-								<option value="20">20 minutes</option>
-								<option value="25">25 minutes</option>
-								<option value="30">30 minutes</option>
-								<option value="35">35 minutes</option>
-								<option value="40">40 minutes</option>
-								<option value="leftovers">I'm having Left-overs</option>
-								<option value="out">I'm eating out</option>
-							</select>
-							<div class="input-group-append">
-								<button class="btn btn-outline-secondary" type="submit"></button>
-							</div>
-						</div>
-					</form></td>
-				<!-- Friday -->
-				<td><form action="/hotels" method="post">
-						<div class="input-group">
-							<select name="city" class="custom-select" id="inputGroupSelect04">
-								<option selected>Choose...</option>
-								<option value="5">5 minutes</option>
-								<option value="10">10 minutes</option>
-								<option value="15">15 minutes</option>
-								<option value="20">20 minutes</option>
-								<option value="25">25 minutes</option>
-								<option value="30">30 minutes</option>
-								<option value="35">35 minutes</option>
-								<option value="40">40 minutes</option>
-								<option value="leftovers">I'm having Left-overs</option>
-								<option value="out">I'm eating out</option>
-							</select>
-							<div class="input-group-append">
-								<button class="btn btn-outline-secondary" type="submit"></button>
-							</div>
-						</div>
-					</form></td>
-				<!-- Saturday -->
-				<td><form action="/hotels" method="post">
-						<div class="input-group">
-							<select name="city" class="custom-select" id="inputGroupSelect04">
-								<option selected>Choose...</option>
-								<option value="5">5 minutes</option>
-								<option value="10">10 minutes</option>
-								<option value="15">15 minutes</option>
-								<option value="20">20 minutes</option>
-								<option value="25">25 minutes</option>
-								<option value="30">30 minutes</option>
-								<option value="35">35 minutes</option>
-								<option value="40">40 minutes</option>
-								<option value="leftovers">I'm having Left-overs</option>
-								<option value="out">I'm eating out</option>
-							</select>
-							<div class="input-group-append">
-								<button class="btn btn-outline-secondary" type="submit"></button>
-							</div>
-						</div>
-					</form></td>
-			</tr>
-
-			<tr class="table-primary">
-				<td rowspan="3"><form action="/display" method="post">
+				<td rowspan="3">
+				<form action="/display/${sunday }" method="post">
+				<%@ include file="dropdown.jsp"%>
 						<label><input type="radio" name="searchType"
 							value="favorites"> Search Favorites</label> 
 							<label><input
@@ -211,7 +63,9 @@
 						</button>
 					</form></td>
 
-				<td rowspan="3"><form action="/display" method="post">
+				<td rowspan="3">
+				<form action="/display/${monday }" method="post">
+				<%@ include file="dropdown.jsp"%>
 						<label><input type="radio" name="searchType"
 							value="favorites"> Search Favorites</label> 
 							<label><input
@@ -222,7 +76,9 @@
 						</button>
 					</form></td>
 
-				<td rowspan="3"><form action="/display" method="post">
+				<td rowspan="3">
+				<form action="/display/${tuesday }" method="post">
+				<%@ include file="dropdown.jsp"%>
 						<label><input type="radio" name="searchType"
 							value="favorites"> Search Favorites</label> 
 							<label><input
@@ -233,7 +89,9 @@
 						</button>
 					</form></td>
 
-				<td rowspan="3"><form action="/display" method="post">
+				<td rowspan="3">
+				<form action="/display/${wednesday }" method="post">
+				<%@ include file="dropdown.jsp"%>
 						<label><input type="radio" name="searchType"
 							value="favorites"> Search Favorites</label> 
 							<label><input
@@ -244,7 +102,8 @@
 						</button>
 					</form></td>
 
-				<td rowspan="3"><form action="/display" method="post">
+				<td rowspan="3"><form action="/display/${thursday }" method="post">
+				<%@ include file="dropdown.jsp"%>
 						<label><input type="radio" name="searchType"
 							value="favorites"> Search Favorites</label> 
 							<label><input
@@ -255,7 +114,8 @@
 						</button>
 					</form></td>
 
-				<td rowspan="3"><form action="/display" method="post">
+				<td rowspan="3"><form action="/display/${friday }" method="post">
+				<%@ include file="dropdown.jsp"%>
 						<label><input type="radio" name="searchType"
 							value="favorites"> Search Favorites</label> 
 							<label><input
@@ -266,7 +126,8 @@
 						</button>
 					</form></td>
 
-				<td rowspan="3"><form action="/display" method="post">
+				<td rowspan="3"><form action="/display/${saturday }" method="post">
+				<%@ include file="dropdown.jsp"%>
 						<label><input type="radio" name="searchType"
 							value="favorites"> Search Favorites</label> 
 							<label><input
