@@ -39,7 +39,7 @@ public class MenuItemDao {
 				.getSingleResult();
 	}
 	
-	public Favorite findByDate(LocalDate date) {
+	public Favorite findByDate(String date) {
 		// HQL queries can have named parameters, such as :regex here.
 		return em.createQuery("FROM Favorite WHERE mealDate = :date", Favorite.class)
 				.setParameter("date", date)

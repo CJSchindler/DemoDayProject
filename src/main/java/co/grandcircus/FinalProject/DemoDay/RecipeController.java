@@ -232,8 +232,8 @@ public class RecipeController {
 		mav.addObject("friday", friday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu")));
 		mav.addObject("saturday", saturday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu")));
 		
-		if (menuItemDao.findByDate(sunday) != null) {
-			mav.addObject("sundayMeal", menuItemDao.findByDate(sunday));
+		if (menuItemDao.findByDate((String) sunday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))) != null) {
+			mav.addObject("sundayMeal", menuItemDao.findByDate((String) sunday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
 		}
 		
 		
