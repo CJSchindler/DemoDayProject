@@ -6,7 +6,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css">
+
 <body>
 <main class="container">
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -33,6 +35,9 @@
   </p>
 </div>
 
+<a href="#" class="btn btn-primary btn-lg">
+          <span class="glyphicon glyphicon-plus"></span> Add 
+        </a>
 </body>
 </main>
 </html>
