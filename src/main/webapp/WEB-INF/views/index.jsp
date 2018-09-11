@@ -35,9 +35,7 @@
   </p>
 </div>
 
-<a href="#" class="btn btn-primary btn-lg">
-          <span class="glyphicon glyphicon-plus"></span> Add 
-        </a>
+
 </body>
 </main>
 </html>
