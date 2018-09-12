@@ -61,7 +61,21 @@
 						<button type="submit" class="btn btn-primary btn-lg">
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
-					</form></td>
+					</form>
+					<br />
+					
+			<c:if test="${not empty sundayMeal }">
+			<div class="container">
+			<img src="${sundayMeal.image }" alt="${sundayMeal.label}" class="image" style="width:100%; ">
+			<div class="middle">
+			<div class="text"><a href="/" >Edit Item</a></div>
+			</div>
+			</div>
+			${sundayMeal.label }
+			</c:if>
+			
+					</td>
+				
 
 				<td rowspan="3">
 				<form action="/display/${monday }" method="post">
@@ -74,7 +88,15 @@
 						<button type="submit" class="btn btn-primary btn-lg">
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
-					</form></td>
+					</form>
+					<br />
+					
+			<c:if test="${not empty mondayMeal }">
+			<img src="${mondayMeal.image }">
+			${mondayMeal.label }
+			
+			</c:if>
+					</td>
 
 				<td rowspan="3">
 				<form action="/display/${tuesday }" method="post">
@@ -87,7 +109,15 @@
 						<button type="submit" class="btn btn-primary btn-lg">
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
-					</form></td>
+					</form>
+						<br />
+					
+			<c:if test="${not empty tuesdayMeal }">
+			<img src="${tuesdayMeal.image }">
+			${tuesdayMeal.label }
+			
+			</c:if>
+					</td>
 
 				<td rowspan="3">
 				<form action="/display/${wednesday }" method="post">
@@ -100,7 +130,15 @@
 						<button type="submit" class="btn btn-primary btn-lg">
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
-					</form></td>
+					</form>
+						<br />
+					
+			<c:if test="${not empty wednesdayMeal }">
+			<img src="${wednesdayMeal.image }">
+			${wednesdayMeal.label }
+			
+			</c:if>
+					</td>
 
 				<td rowspan="3"><form action="/display/${thursday }" method="post">
 				<%@ include file="dropdown.jsp"%>
@@ -112,7 +150,15 @@
 						<button type="submit" class="btn btn-primary btn-lg">
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
-					</form></td>
+					</form>
+						<br />
+					
+			<c:if test="${not empty thursdayMeal }">
+			<img src="${thursdayMeal.image }">
+			${thursdayMeal.label }
+			
+			</c:if>
+					</td>
 
 				<td rowspan="3"><form action="/display/${friday }" method="post">
 				<%@ include file="dropdown.jsp"%>
@@ -124,7 +170,15 @@
 						<button type="submit" class="btn btn-primary btn-lg">
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
-					</form></td>
+					</form>
+						<br />
+					
+			<c:if test="${not empty fridayMeal }">
+			<img src="${fridayMeal.image }">
+			${fridayMeal.label }
+			
+			</c:if>
+					</td>
 
 				<td rowspan="3"><form action="/display/${saturday }" method="post">
 				<%@ include file="dropdown.jsp"%>
@@ -136,26 +190,20 @@
 						<button type="submit" class="btn btn-primary btn-lg">
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
-					</form></td>
-			</tr>
+					</form>
+					<br />
+					
+			<c:if test="${not empty saturdayMeal }">
+			<img src="${saturdayMeal.image }">
+			${saturdayMeal.label }
 			
-			<tr>
-				<td>
-				<!-- add tags for things in favorites class-->
-					<c:if test="${not empty sundayMeal }">
-							${sundayMeal.image }
-							${sundayMeal.label }
-							${sundayMeal.mealDate }
-			
-					</c:if>
-			
-			</td>
-			</tr>
+			</c:if>
+					</td>
 			
 		</tbody>
 	</table>
 
-<a href="/shoppingcart">What's in my car?</a>
+<a href="/shoppingcart">What's in my cart?</a>
 
 </body>
 </html>
