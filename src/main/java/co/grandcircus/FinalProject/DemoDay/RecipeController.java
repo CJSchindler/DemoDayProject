@@ -316,5 +316,11 @@ public class RecipeController {
 		return new ModelAndView("redirect:/");
 	}
 	
+	@RequestMapping("/shoppingcart")
+	public ModelAndView showCart() {
+		ModelAndView mav = new ModelAndView("shoppingcart");
+		return mav;
+	}
+	
 	
 }

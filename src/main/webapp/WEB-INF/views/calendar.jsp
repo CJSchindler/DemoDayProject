@@ -155,7 +155,7 @@
 		</tbody>
 	</table>
 
-
+<a href="/shoppingcart">What's in my car?</a>
 
 </body>
 </html>

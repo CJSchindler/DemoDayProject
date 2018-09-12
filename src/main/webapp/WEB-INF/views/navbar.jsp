@@ -16,7 +16,7 @@
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/calendar">Calendar <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Something else</a>
@@ -27,6 +27,9 @@
       <li class="nav-item">
         <a class="nav-link" href="#">About</a>
       </li>
+       <!-- <li class="nav-item">
+        <a class="nav-link" href="/shoppingcart">Shopping Cart</a>
+      </li> -->
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Search">
