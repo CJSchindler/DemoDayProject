@@ -237,6 +237,29 @@ public class RecipeController {
 			mav.addObject("sundayMeal", menuItemDao.findByDate(sunday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
 		}
 		
+		if (menuItemDao.findByDate(monday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))) != null) {
+			mav.addObject("mondayMeal", menuItemDao.findByDate(monday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
+		}
+		
+		if (menuItemDao.findByDate(tuesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))) != null) {
+			mav.addObject("tuesdayMeal", menuItemDao.findByDate(tuesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
+		}
+		
+		if (menuItemDao.findByDate(wednesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))) != null) {
+			mav.addObject("wednesdayMeal", menuItemDao.findByDate(wednesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
+		}
+		
+		if (menuItemDao.findByDate(thursday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))) != null) {
+			mav.addObject("thursdayMeal", menuItemDao.findByDate(thursday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
+		}
+		
+		if (menuItemDao.findByDate(friday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))) != null) {
+			mav.addObject("fridayMeal", menuItemDao.findByDate(friday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
+		}
+		
+		if (menuItemDao.findByDate(saturday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))) != null) {
+			mav.addObject("saturdayMeal", menuItemDao.findByDate(saturday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
+		}
 		
 		return mav;
 	}
@@ -249,12 +272,14 @@ public class RecipeController {
 			@RequestParam("url") String url,
 			@PathVariable("date") String date,
 			RedirectAttributes redir) {
-		
+
 		Favorite favorite = new Favorite();
 		favorite.setLabel(label);
 		favorite.setMealDate(date);
-		favorite.setImage(image);
-		favorite.setUrl(url);
+		String[] imageArray = image.split(",");
+		favorite.setImage(imageArray[0]);
+		String[] urlArray = url.split(",");
+		favorite.setUrl(urlArray[0]);
 		menuItemDao.create(favorite);
 		
 		ModelAndView mav = new ModelAndView("redirect:/calendar");

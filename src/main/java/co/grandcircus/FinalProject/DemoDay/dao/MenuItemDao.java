@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
@@ -24,7 +25,6 @@ public class MenuItemDao {
 	
 	public void create(Favorite favorite) {
 		em.persist(favorite);
-		System.out.println("Hey!" + favorite);
 	}
 	
 	public void delete(Integer id) {
@@ -42,9 +42,14 @@ public class MenuItemDao {
 	
 	public Favorite findByDate(String date) {
 		// HQL queries can have named parameters, such as :regex here.
+		try {
 		return em.createQuery("FROM Favorite WHERE mealDate = :date", Favorite.class)
 				.setParameter("date", date)
 				.getSingleResult();
+		} catch (NoResultException ex) {
+			return null;
+		}
+	
 	}
 	
 	
