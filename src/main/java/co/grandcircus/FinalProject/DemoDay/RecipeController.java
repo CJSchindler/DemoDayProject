@@ -246,6 +246,7 @@ public class RecipeController {
 	public ModelAndView addRecipeToMenu(
 			@RequestParam("label") String label,
 			@RequestParam("image") String image,
+			@RequestParam("url") String url,
 			@PathVariable("date") String date,
 			RedirectAttributes redir) {
 		
@@ -253,6 +254,7 @@ public class RecipeController {
 		favorite.setLabel(label);
 		favorite.setMealDate(date);
 		favorite.setImage(image);
+		favorite.setUrl(url);
 		menuItemDao.create(favorite);
 		
 		ModelAndView mav = new ModelAndView("redirect:/calendar");
