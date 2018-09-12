@@ -92,9 +92,13 @@
 					<br />
 					
 			<c:if test="${not empty mondayMeal }">
-			<img src="${mondayMeal.image }">
+			<div class="container">
+			<img src="${mondayMeal.image }" alt="${mondayMeal.label}" class="image" style="width:100%;">
+			<div class="middle">
+			<div class="text"><a href="/" >Edit Item</a></div>
+			</div>
+			</div>
 			${mondayMeal.label }
-			
 			</c:if>
 					</td>
 
@@ -112,10 +116,16 @@
 					</form>
 						<br />
 					
+				<br />
+					
 			<c:if test="${not empty tuesdayMeal }">
-			<img src="${tuesdayMeal.image }">
+			<div class="container">
+			<img src="${tuesdayMeal.image }" alt="${tuesdayMeal.label}" class="image" style="width:100%; ">
+			<div class="middle">
+			<div class="text"><a href="/" >Edit Item</a></div>
+			</div>
+			</div>
 			${tuesdayMeal.label }
-			
 			</c:if>
 					</td>
 
@@ -134,9 +144,13 @@
 						<br />
 					
 			<c:if test="${not empty wednesdayMeal }">
-			<img src="${wednesdayMeal.image }">
+			<div class="container">
+			<img src="${wednesdayMeal.image }" alt="${wednesdayMeal.label}" class="image" style="width:100%; ">
+			<div class="middle">
+			<div class="text"><a href="/" >Edit Item</a></div>
+			</div>
+			</div>
 			${wednesdayMeal.label }
-			
 			</c:if>
 					</td>
 
@@ -151,12 +165,16 @@
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
 					</form>
-						<br />
+							<br />
 					
 			<c:if test="${not empty thursdayMeal }">
-			<img src="${thursdayMeal.image }">
+			<div class="container">
+			<img src="${thursdayMeal.image }" alt="${thursdayMeal.label}" class="image" style="width:100%; ">
+			<div class="middle">
+			<div class="text"><a href="/" >Edit Item</a></div>
+			</div>
+			</div>
 			${thursdayMeal.label }
-			
 			</c:if>
 					</td>
 
@@ -171,12 +189,16 @@
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
 					</form>
-						<br />
+							<br />
 					
 			<c:if test="${not empty fridayMeal }">
-			<img src="${fridayMeal.image }">
+			<div class="container">
+			<img src="${fridayMeal.image }" alt="${fridayMeal.label}" class="image" style="width:100%; ">
+			<div class="middle">
+			<div class="text"><a href="/" >Edit Item</a></div>
+			</div>
+			</div>
 			${fridayMeal.label }
-			
 			</c:if>
 					</td>
 
@@ -194,9 +216,13 @@
 					<br />
 					
 			<c:if test="${not empty saturdayMeal }">
-			<img src="${saturdayMeal.image }">
+			<div class="container">
+			<img src="${saturdayMeal.image }" alt="${saturdayMeal.label}" class="image" style="width:100%; ">
+			<div class="middle">
+			<div class="text"><a href="/" >Edit Item</a></div>
+			</div>
+			</div>
 			${saturdayMeal.label }
-			
 			</c:if>
 					</td>
 			
