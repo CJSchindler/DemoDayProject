@@ -51,7 +51,7 @@ public class RecipeController {
 		return mav;
 	}
 
-	// After user enters information
+	// Adds user information to database
 	@PostMapping("/register")
 	public ModelAndView showRegistration(@RequestParam("first_name") String first_name,
 			@RequestParam("last_name") String last_name, @RequestParam("password") String password,
@@ -85,7 +85,7 @@ public class RecipeController {
         }
 	}
 
-	//shows empty search box
+	//shows empty search box with day and time availability
 	@RequestMapping("/display/{date}")
 	public ModelAndView showSearch(@PathVariable("date") String date, @RequestParam("time") int time, @RequestParam("searchType") String searchType) {
 		
@@ -98,7 +98,8 @@ public class RecipeController {
 		return mav;
 	}
 	
-	// calls API to search using user's keyword and time availability
+	// calls API to search using user's keyword and time availability 
+	//("/display/{searchType}/{time}/{date}")
 	@RequestMapping("/display/{searchType}/{time}/{date}")
 	public ModelAndView showList(@RequestParam(value = "keyword", required = false) String keyword, 
 			@PathVariable("searchType") String searchType, @PathVariable("time") int time, @PathVariable("date") String date) {
@@ -140,6 +141,7 @@ public class RecipeController {
 		
 	}
 
+	// show calendar beginning on following Sunday, includes meals added
 	@RequestMapping("/calendar")
 	public ModelAndView showCalendar() {
 		ModelAndView mav = new ModelAndView("calendar");
@@ -240,40 +242,22 @@ public class RecipeController {
 		return mav;
 	}
 	
-
-
-
-	// user adds recipe to database
+	// user adds recipe to database from API search
 	@PostMapping("/add-to-menu/{date}")
-	public ModelAndView addRecipeToMenu(@RequestParam("label") String label, @PathVariable("date") String date,
+	public ModelAndView addRecipeToMenu(
+			@RequestParam("label") String label,
+			@RequestParam("image") String image,
+			@PathVariable("date") String date,
 			RedirectAttributes redir) {
 		
-		RestTemplate restTemplate = new RestTemplate();
-		String url = "https://api.edamam.com/search?q=" + label + "&app_id=328dd333"
-				+ "&app_key=2925530f7873bcd09aa1376f5114f08d"
-				+ "&from=0&to=10"; // optional: limits number of results
-
-		// call to API
-		ResponseEntity<Result> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(null),
-				Result.class);
-
-		// extract results from API response
-		Result result = response.getBody();
-
-		
-
 		Favorite favorite = new Favorite();
 		favorite.setLabel(label);
 		favorite.setMealDate(date);
+		favorite.setImage(image);
 		menuItemDao.create(favorite);
-		
-		
 		
 		ModelAndView mav = new ModelAndView("redirect:/calendar");
 		redir.addFlashAttribute("message", "Item added to favorites!");
-		redir.addAttribute("favorite", favorite);
-		// extract recipes from results, label as "recipelist" for use in jsp
-				redir.addAttribute("recipelist", result.getHits());
 		
 		return mav;
 	}

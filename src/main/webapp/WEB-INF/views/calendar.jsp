@@ -140,14 +140,14 @@
 			</tr>
 			
 			<tr>
-			<td>
-			<!-- add tags for things in favorites class-->
-			<c:if test="${not empty sundayMeal }">
-			${sundayMeal.image }
-			${sundayMeal.label }
-			${sundayMeal.mealDate }
+				<td>
+				<!-- add tags for things in favorites class-->
+					<c:if test="${not empty sundayMeal }">
+							${sundayMeal.image }
+							${sundayMeal.label }
+							${sundayMeal.mealDate }
 			
-			</c:if>
+					</c:if>
 			
 			</td>
 			</tr>

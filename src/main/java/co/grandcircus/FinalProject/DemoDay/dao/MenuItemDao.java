@@ -24,6 +24,7 @@ public class MenuItemDao {
 	
 	public void create(Favorite favorite) {
 		em.persist(favorite);
+		System.out.println("Hey!" + favorite);
 	}
 	
 	public void delete(Integer id) {

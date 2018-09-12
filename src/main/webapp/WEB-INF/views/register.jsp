@@ -27,16 +27,15 @@
 		</div>
 	<form action="/register" method= "post">
 	
-		<div class="form-group">
- 			 <p><input type="text" class="form-control" placeholder="First Name" id="first_name"></p>
- 			 <p><input type="text" class="form-control" placeholder="Last Name" id="last_name"></p>
- 			 <p><input type="email" class="form-control" placeholder="Email" id="email"></p>
- 			 
-		</div>			 
+		<!-- <div class="form-group"> -->
+ 			 <p><input type="text" class="form-control" placeholder="First Name" name="first_name"></p>
+ 			 <p><input type="text" class="form-control" placeholder="Last Name" name="last_name"></p>
+ 			 <p><input type="email" class="form-control" placeholder="Email" name="email"></p>
+		<!-- </div>	 -->		 
 		<div> 	    
-			<p> First name: <input name="first_name" minlength="2" required/> </p>
+			<!-- <p> First name: <input name="first_name" minlength="2" required/> </p>
 			<p> Last name: <input name="last_name" required/> </p>
-			<p> Email: <input type= "email" name="email" required/> </p>
+			<p> Email: <input type= "email" name="email" required/> </p> -->
 		
 		 	<c:if test="${ not empty passwordTest }">
 				<div class="test" style="color: red;">
@@ -47,11 +46,11 @@
 			<p> Password: <input type= "password" name="password" required/> </p>
 			<p> Re-enter your password: <input type= "password" name="password2" required/> </p>
 		</div>
-   
-			<button type="button" class="btn btn-secondary">Register</button>
-			<a href="/register" type="button" class="btn btn-info">Clear</a>
+		<button type="submit" class="btn btn-secondary">Register</button>
+		<a href="/register" type="button" class="btn btn-info">Clear</a>
+		
 	</form>	
-			
+						
 </main>
 </body>
 </html>
