@@ -25,13 +25,6 @@ public class UserDao {
 		return em.find(User.class, id);
 	}
 
-	// This works, but the below way is better
-//	public User findByEmail(String email) {
-//		return em.createQuery("FROM User WHERE email LIKE :email", User.class)
-//				.setParameter("email", "%" + email + "%")
-//				.getSingleResult();
-//	}
-
 	public User findByEmail(String email) {
 		try {
 			return em.createQuery("FROM User WHERE email = :email", User.class).setParameter("email", email)

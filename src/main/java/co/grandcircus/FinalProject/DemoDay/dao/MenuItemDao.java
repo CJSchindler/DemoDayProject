@@ -28,6 +28,13 @@ public class MenuItemDao {
 				.setParameter("user", user)
 				.getResultList();
 	}
+	
+	public List<Favorite> findByUserByDate(User user, String meal_date) {
+		return em.createQuery("FROM Favorite WHERE user = :user AND meal_date = :meal_date", Favorite.class)
+				.setParameter("user", user)
+				.setParameter("meal_date", meal_date)
+				.getResultList();
+	}
 	public void create(Favorite favorite) {
 		em.persist(favorite);
 	}

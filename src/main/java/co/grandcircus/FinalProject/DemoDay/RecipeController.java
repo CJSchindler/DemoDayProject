@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -99,7 +100,8 @@ public class RecipeController {
 
 	// shows empty search box with day and time availability
 	@RequestMapping("/display/{date}")
-	public ModelAndView showSearch(@PathVariable("date") String date, @RequestParam("time") int time,
+	public ModelAndView showSearch(@SessionAttribute("user") User user, 
+			@PathVariable("date") String date, @RequestParam("time") int time,
 			@RequestParam("searchType") String searchType) {
 
 		LocalDate searchDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("MM-dd-uuuu"));
@@ -114,7 +116,8 @@ public class RecipeController {
 	// calls API to search using user's keyword and time availability
 	// ("/display/{searchType}/{time}/{date}")
 	@RequestMapping("/display/{searchType}/{time}/{date}")
-	public ModelAndView showList(@RequestParam(value = "keyword", required = false) String keyword,
+	public ModelAndView showList(@SessionAttribute("user") User user, 
+			@RequestParam(value = "keyword", required = false) String keyword,
 			@PathVariable("searchType") String searchType, @PathVariable("time") int time,
 			@PathVariable("date") String date) {
 
@@ -126,7 +129,7 @@ public class RecipeController {
 		RestTemplate restTemplate = new RestTemplate();
 
 		if (searchType.equals("favorites")) {
-			List<Favorite> favorites = menuItemDao.findAll();
+			List<Favorite> favorites = menuItemDao.findByUser(user);
 			mav.addObject("favorites", favorites);
 			mav.addObject("date", date);
 		}
@@ -156,7 +159,7 @@ public class RecipeController {
 
 	// show calendar beginning on following Sunday, includes meals added
 	@RequestMapping("/calendar")
-	public ModelAndView showCalendar() {
+	public ModelAndView showCalendar(@SessionAttribute("user") User user) {
 		ModelAndView mav = new ModelAndView("calendar");
 
 		dateToday = LocalDate.now();
@@ -238,48 +241,56 @@ public class RecipeController {
 		default:
 			break;
 		}
+		
+		String sundayString = sunday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
+		String mondayString = monday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
+		String tuesdayString = tuesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
+		String wednesdayString = wednesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
+		String thursdayString = thursday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
+		String fridayString = friday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
+		String saturdayString = saturday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
+		
+		mav.addObject("sunday", sundayString);
+		mav.addObject("monday", mondayString);
+		mav.addObject("tuesday", tuesdayString);
+		mav.addObject("wednesday", wednesdayString);
+		mav.addObject("thursday", thursdayString);
+		mav.addObject("friday", fridayString);
+		mav.addObject("saturday", saturdayString);
 
-		mav.addObject("sunday", sunday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu")));
-		mav.addObject("monday", monday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu")));
-		mav.addObject("tuesday", tuesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu")));
-		mav.addObject("wednesday", wednesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu")));
-		mav.addObject("thursday", thursday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu")));
-		mav.addObject("friday", friday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu")));
-		mav.addObject("saturday", saturday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu")));
-
-		if (menuItemDao.findByDate(sunday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))) != null) {
+		if (menuItemDao.findByDate(sundayString) != null) {
 			mav.addObject("sundayMeal",
-					menuItemDao.findByDate(sunday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
+					menuItemDao.findByDate(sundayString));
 		}
 
-		if (menuItemDao.findByDate(monday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))) != null) {
+		if (menuItemDao.findByDate(mondayString) != null) {
 			mav.addObject("mondayMeal",
-					menuItemDao.findByDate(monday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
+					menuItemDao.findByDate(mondayString));
 		}
 
-		if (menuItemDao.findByDate(tuesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))) != null) {
+		if (menuItemDao.findByDate(tuesdayString) != null) {
 			mav.addObject("tuesdayMeal",
-					menuItemDao.findByDate(tuesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
+					menuItemDao.findByDate(tuesdayString));
 		}
 
-		if (menuItemDao.findByDate(wednesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))) != null) {
+		if (menuItemDao.findByDate(wednesdayString) != null) {
 			mav.addObject("wednesdayMeal",
-					menuItemDao.findByDate(wednesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
+					menuItemDao.findByDate(wednesdayString));
 		}
 
-		if (menuItemDao.findByDate(thursday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))) != null) {
+		if (menuItemDao.findByDate(thursdayString) != null) {
 			mav.addObject("thursdayMeal",
-					menuItemDao.findByDate(thursday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
+					menuItemDao.findByDate(thursdayString));
 		}
 
-		if (menuItemDao.findByDate(friday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))) != null) {
+		if (menuItemDao.findByDate(fridayString) != null) {
 			mav.addObject("fridayMeal",
-					menuItemDao.findByDate(friday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
+					menuItemDao.findByDate(fridayString));
 		}
 
-		if (menuItemDao.findByDate(saturday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))) != null) {
+		if (menuItemDao.findByDate(saturdayString) != null) {
 			mav.addObject("saturdayMeal",
-					menuItemDao.findByDate(saturday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
+					menuItemDao.findByDate(saturdayString));
 		}
 
 		return mav;
@@ -287,7 +298,7 @@ public class RecipeController {
 
 	// user adds recipe to database from API search
 	@PostMapping("/add-to-menu/{date}")
-	public ModelAndView addRecipeToMenu(
+	public ModelAndView addRecipeToMenu(@SessionAttribute("user") User user,
 			@RequestParam("label") String label, 
 			@RequestParam("image") String image,
 			@RequestParam("url") String url,
@@ -350,7 +361,7 @@ public class RecipeController {
 	}
 
 	@RequestMapping("/shoppingcart")
-	public ModelAndView showCart() {
+	public ModelAndView showCart(@SessionAttribute("user") User user) {
 		ModelAndView mav = new ModelAndView("shoppingcart");
 		return mav;
 	}
