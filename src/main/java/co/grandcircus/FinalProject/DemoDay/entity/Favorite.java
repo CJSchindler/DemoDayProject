@@ -22,6 +22,7 @@ public class Favorite {
 	private String rating;
 	private String mealDate;
 	private String image;
+	private String ingredientLines;
 	
 	
 	public Favorite() {
@@ -93,6 +94,14 @@ public class Favorite {
 		return image;
 	}
 
+
+	public String getIngredientLines() {
+		return ingredientLines;
+	}
+
+	public void setIngredientLines(String ingredientLines) {
+		this.ingredientLines = ingredientLines;
+	}
 
 	public void setImage(String image) {
 		this.image = image;

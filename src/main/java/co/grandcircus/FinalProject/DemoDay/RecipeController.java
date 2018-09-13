@@ -3,6 +3,7 @@ package co.grandcircus.FinalProject.DemoDay;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -37,6 +38,7 @@ public class RecipeController {
 
 	private LocalDate dateToday;
 
+	// shows login page
 	@RequestMapping("/")
 	public ModelAndView showIndex() {
 		ModelAndView mav = new ModelAndView("index");
@@ -285,8 +287,12 @@ public class RecipeController {
 
 	// user adds recipe to database from API search
 	@PostMapping("/add-to-menu/{date}")
-	public ModelAndView addRecipeToMenu(@RequestParam("label") String label, @RequestParam("image") String image,
-			@RequestParam("url") String url, @PathVariable("date") String date, RedirectAttributes redir) {
+	public ModelAndView addRecipeToMenu(
+			@RequestParam("label") String label, 
+			@RequestParam("image") String image,
+			@RequestParam("url") String url,
+			@RequestParam("ingredientLines") String [] ingredientLines,
+			@PathVariable("date") String date, RedirectAttributes redir) {
 
 		Favorite favorite = new Favorite();
 		favorite.setLabel(label);
@@ -295,6 +301,8 @@ public class RecipeController {
 		favorite.setImage(imageArray[0]);
 		String[] urlArray = url.split(",");
 		favorite.setUrl(urlArray[0]);
+		String ingr = Arrays.toString(ingredientLines);
+		favorite.setIngredientLines(ingr);
 		menuItemDao.create(favorite);
 
 		ModelAndView mav = new ModelAndView("redirect:/calendar");
