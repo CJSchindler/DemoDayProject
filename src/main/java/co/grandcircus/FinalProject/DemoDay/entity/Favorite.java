@@ -112,6 +112,13 @@ public class Favorite {
 		this.image = image;
 	}
 
+	@Override
+	public String toString() {
+		return "Favorite [user=" + user + ", id=" + id + ", label=" + label + ", url=" + url + ", rating=" + rating
+				+ ", mealDate=" + mealDate + ", image=" + image + ", ingredientLines=" + ingredientLines
+				+ ", ingredient=" + ingredient + "]";
+	}
+
 	
 	
 	

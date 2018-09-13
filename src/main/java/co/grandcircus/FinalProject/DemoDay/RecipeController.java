@@ -120,7 +120,8 @@ public class RecipeController {
 			@RequestParam(value = "keyword", required = false) String keyword,
 			@PathVariable("searchType") String searchType, @PathVariable("time") int time,
 			@PathVariable("date") String date) {
-
+		
+		
 		ModelAndView mav = new ModelAndView("display");
 		mav.addObject("searchType", searchType);
 		if (keyword != null) {
@@ -130,8 +131,14 @@ public class RecipeController {
 
 		if (searchType.equals("favorites")) {
 			List<Favorite> favorites = menuItemDao.findByUser(user);
+			
+//			System.out.println("Let's hope that we get here at least!");
+			System.out.println(favorites);
+//			System.out.println("Is this thing on??");
+			
 			mav.addObject("favorites", favorites);
 			mav.addObject("date", date);
+			System.out.println(favorites);
 		}
 
 		else {

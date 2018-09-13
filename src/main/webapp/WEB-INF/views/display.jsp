@@ -41,13 +41,8 @@
 		 				
 						<td><img src="${recipe.image}" width=60%></td>
 						<td><a href="${recipe.url}">${recipe.label}</a></td>
-						<td>
-							<c:forEach var="ingredient" items="${recipe.ingredientLines}">
-							<p>${ingredient}</p>
-							</c:forEach>
-						</td>
-						<td>${recipe.totalTime} minutes</td>
-						<td>${recipe.yield}</td>
+						
+						<td>${recipe.url}</td>
 					</tr>
 					</c:forEach>
 				</c:when>
