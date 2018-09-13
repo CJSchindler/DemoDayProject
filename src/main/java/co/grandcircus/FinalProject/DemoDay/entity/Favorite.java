@@ -1,10 +1,13 @@
 package co.grandcircus.FinalProject.DemoDay.entity;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -23,6 +26,8 @@ public class Favorite {
 	private String mealDate;
 	private String image;
 	private String ingredientLines;
+	@OneToMany(mappedBy="favorite")
+	private Set <Ingredient> ingredient;
 	
 	
 	public Favorite() {

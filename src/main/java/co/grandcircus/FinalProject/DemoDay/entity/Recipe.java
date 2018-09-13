@@ -2,23 +2,15 @@ package co.grandcircus.FinalProject.DemoDay.entity;
 
 import java.util.List;
 
-//import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
-//import javax.persistence.Id;
-//import javax.persistence.Table;
-
-//@Entity
-//@Table(name="user_recipe")
 public class Recipe {
 
-//	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String label;
 	private String image;
 	private String url;
 	private int yield;
-	List <String> ingredientLines;
+	private List <String> ingredientLines;
+	private List <Ingredient> ingredients;
 	private int totalTime;
 
 	public Recipe() {
@@ -106,6 +98,16 @@ public class Recipe {
 
 	public void setTotalTime(int totalTime) {
 		this.totalTime = totalTime;
+	}
+
+
+	public List <Ingredient> getIngredients() {
+		return ingredients;
+	}
+
+
+	public void setIngredients(List <Ingredient> ingredients) {
+		this.ingredients = ingredients;
 	}
 
 	

@@ -116,9 +116,16 @@ public class RecipeController {
 	// calls API to search using user's keyword and time availability
 	// ("/display/{searchType}/{time}/{date}")
 	@RequestMapping("/display/{searchType}/{time}/{date}")
+<<<<<<< Updated upstream
 	public ModelAndView showList(@SessionAttribute("user") User user, 
 			@RequestParam(value = "keyword", required = false) String keyword,
 			@PathVariable("searchType") String searchType, @PathVariable("time") int time,
+=======
+	public ModelAndView showList(
+			@RequestParam(value = "keyword", required = false) String keyword,
+			@PathVariable("searchType") String searchType, 
+			@PathVariable("time") int time,
+>>>>>>> Stashed changes
 			@PathVariable("date") String date) {
 
 		ModelAndView mav = new ModelAndView("display");
@@ -315,7 +322,7 @@ public class RecipeController {
 		String ingr = Arrays.toString(ingredientLines);
 		favorite.setIngredientLines(ingr);
 		menuItemDao.create(favorite);
-
+		
 		ModelAndView mav = new ModelAndView("redirect:/calendar");
 		redir.addFlashAttribute("message", "Item added to favorites!");
 

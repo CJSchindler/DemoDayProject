@@ -59,6 +59,7 @@
 						<input type="hidden" name="image" value="${recipe.recipe.image}">
 						<input type="hidden" name="url" value="${recipe.recipe.url}">
 						<input type="hidden" name="ingredientLines" value="${recipe.recipe.ingredientLines}">
+						<input type="hidden" name="ingredients" value="${recipe.recipe.ingredients}">
 						</td>
 						<td><img src="${recipe.recipe.image}" width=60%></td>
 						<td><a href="${recipe.recipe.url}">${recipe.recipe.label}</a></td>
