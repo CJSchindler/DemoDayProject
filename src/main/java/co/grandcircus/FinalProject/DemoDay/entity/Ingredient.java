@@ -17,6 +17,11 @@ public class Ingredient {
 
 	public Ingredient () { }
 	
+	public Ingredient (String text, Favorite favorite) {
+		this.text = text;
+		this.favorite = favorite;
+	}
+	
 	
 	public Ingredient(Long id, String text) {
 		super();

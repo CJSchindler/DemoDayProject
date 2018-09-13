@@ -23,6 +23,7 @@ public class MenuItemDao {
 	public List<Favorite> findAll() {
 		return em.createQuery("FROM Favorite", Favorite.class).getResultList();
 	}
+	
 	public List<Favorite> findByUser(User user) {
 		return em.createQuery("FROM Favorite WHERE user = :user", Favorite.class)
 				.setParameter("user", user)

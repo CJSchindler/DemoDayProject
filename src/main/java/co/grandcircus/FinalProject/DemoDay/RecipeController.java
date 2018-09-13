@@ -22,9 +22,11 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import co.grandcircus.FinalProject.DemoDay.dao.IngredientDao;
 import co.grandcircus.FinalProject.DemoDay.dao.MenuItemDao;
 import co.grandcircus.FinalProject.DemoDay.dao.UserDao;
 import co.grandcircus.FinalProject.DemoDay.entity.Favorite;
+import co.grandcircus.FinalProject.DemoDay.entity.Ingredient;
 import co.grandcircus.FinalProject.DemoDay.entity.Result;
 import co.grandcircus.FinalProject.DemoDay.entity.User;
 
@@ -36,6 +38,9 @@ public class RecipeController {
 
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private IngredientDao ingredientDao;
 
 	private LocalDate dateToday;
 
@@ -310,6 +315,7 @@ public class RecipeController {
 			@RequestParam("image") String image,
 			@RequestParam("url") String url,
 			@RequestParam("ingredientLines") String [] ingredientLines,
+//			@RequestParam("ingredients") Ingredient [] ingredients,
 			@PathVariable("date") String date, RedirectAttributes redir) {
 
 		Favorite favorite = new Favorite();
@@ -321,7 +327,16 @@ public class RecipeController {
 		favorite.setUrl(urlArray[0]);
 		String ingr = Arrays.toString(ingredientLines);
 		favorite.setIngredientLines(ingr);
+
+		System.out.println(ingredientLines[0]);
+		String ingredients = ingredientLines[0];
+		String [] splitIngr = ingredients.split(",");
+		
 		menuItemDao.create(favorite);
+
+		for (String line : splitIngr) {
+				ingredientDao.create(new Ingredient(line, favorite));
+		}
 		
 		ModelAndView mav = new ModelAndView("redirect:/calendar");
 		redir.addFlashAttribute("message", "Item added to favorites!");
