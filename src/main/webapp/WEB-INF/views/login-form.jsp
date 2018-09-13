@@ -28,8 +28,9 @@
     <div class="panel">
     
    <p>Please enter your email and password </p>
-   <c:if test="${not empty fail }">
-   <div class="test"> ${fail } </div>
+   
+   <c:if test="${not empty message }">
+   <div class="test"> ${message } </div>
    </c:if>
    </div>
    
@@ -39,13 +40,13 @@
 
         <div class="form-group">
 
-            <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" value= "${email }" >
+            <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" value= "${email }" required>
 
         </div>
 
         <div class="form-group">
 
-            <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
 
         </div>
         

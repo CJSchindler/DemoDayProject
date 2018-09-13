@@ -28,9 +28,15 @@
 	<form action="/register" method= "post">
 	
 		<!-- <div class="form-group"> -->
- 			 <p><input type="text" class="form-control" placeholder="First Name" name="first_name"></p>
- 			 <p><input type="text" class="form-control" placeholder="Last Name" name="last_name"></p>
- 			 <p><input type="email" class="form-control" placeholder="Email" name="email"></p>
+ 			 <p><input type="text" class="form-control" placeholder="First Name" value= "${first_name}" name="first_name"></p>
+ 			 <p><input type="text" class="form-control" placeholder="Last Name" value= "${last_name }" name="last_name"></p>
+ 			 
+ 			 <c:if test="${ not empty duplicateEmail }">
+				<div class="test" style="color: red;">
+				${ duplicateEmail }
+				</div>
+			</c:if>
+ 			 <p><input type="email" class="form-control" placeholder="Email" value= "${email}" name="email"></p>
 		<!-- </div>	 -->		 
 		<div> 	    
 			<!-- <p> First name: <input name="first_name" minlength="2" required/> </p>

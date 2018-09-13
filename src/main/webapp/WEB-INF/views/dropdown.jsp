@@ -9,8 +9,8 @@
 <body>
 
 	<div class="input-group">
-		<select name="time" class="custom-select" id="inputGroupSelect04">
-			<option selected>Choose...</option>
+		<select name="time" class="custom-select" id="inputGroupSelect04" required>
+			<option value="" disabled selected>Choose...</option>
 			<option value="5">5 minutes</option>
 			<option value="10">10 minutes</option>
 			<option value="15">15 minutes</option>

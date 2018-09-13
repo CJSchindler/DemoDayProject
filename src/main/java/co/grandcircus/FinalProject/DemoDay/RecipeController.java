@@ -34,9 +34,9 @@ public class RecipeController {
 
 	@Autowired
 	private UserDao userDao;
-	
+
 	private LocalDate dateToday;
-	
+
 	@RequestMapping("/")
 	public ModelAndView showIndex() {
 		ModelAndView mav = new ModelAndView("index");
@@ -54,40 +54,52 @@ public class RecipeController {
 	@PostMapping("/register")
 	public ModelAndView showRegistration(@RequestParam("first_name") String first_name,
 			@RequestParam("last_name") String last_name, @RequestParam("password") String password,
-			@RequestParam("email") String email, @RequestParam("password2") String password2) {
-	
+			@RequestParam("email") String email, @RequestParam("password2") String password2, RedirectAttributes redir) {
+
 		String passwordTest;
-        
-        if (password.matches(password2)) {
-            
-            passwordTest = "";
-            
-            User user = new User();
-    		user.setFirst_name(first_name);
-    		user.setLast_name(last_name);
-    		user.setPassword(password);
-    		user.setEmail(email);
-            
-            userDao.create(user);
-            return new ModelAndView("redirect:/login");
-            
-        }
-        
-        else {
-            passwordTest = "Passwords entered do not match. Please try again.";
-            ModelAndView mav = new ModelAndView("register");
-            mav.addObject("email", email);
-            mav.addObject("first_name", first_name);
-            mav.addObject("last_name", last_name);
-            mav.addObject("passwordTest", passwordTest);
-            return mav;
-        }
+		String duplicateEmail;
+
+		if (userDao.findByEmail(email) != null) {
+			duplicateEmail = "This email already exist, please enter a valid email.";
+			ModelAndView mav = new ModelAndView("register");
+			mav.addObject("first_name", first_name);
+			mav.addObject("last_name", last_name);
+			mav.addObject("duplicateEmail", duplicateEmail);
+			return mav;
+		} else {
+
+			if (password.matches(password2)) {
+
+				passwordTest = "";
+
+				User user = new User();
+				user.setFirst_name(first_name);
+				user.setLast_name(last_name);
+				user.setPassword(password);
+				user.setEmail(email);
+
+				userDao.create(user);
+				return new ModelAndView("redirect:/login");
+
+			}
+
+			else {
+				passwordTest = "Passwords entered do not match. Please try again.";
+				ModelAndView mav = new ModelAndView("register");
+				mav.addObject("email", email);
+				mav.addObject("first_name", first_name);
+				mav.addObject("last_name", last_name);
+				mav.addObject("passwordTest", passwordTest);
+				return mav;
+			}
+		}
 	}
 
-	//shows empty search box with day and time availability
+	// shows empty search box with day and time availability
 	@RequestMapping("/display/{date}")
-	public ModelAndView showSearch(@PathVariable("date") String date, @RequestParam("time") int time, @RequestParam("searchType") String searchType) {
-		
+	public ModelAndView showSearch(@PathVariable("date") String date, @RequestParam("time") int time,
+			@RequestParam("searchType") String searchType) {
+
 		LocalDate searchDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("MM-dd-uuuu"));
 		DayOfWeek day = searchDate.getDayOfWeek();
 		ModelAndView mav = new ModelAndView("display");
@@ -96,31 +108,32 @@ public class RecipeController {
 		mav.addObject("searchType", searchType);
 		return mav;
 	}
-	
-	// calls API to search using user's keyword and time availability 
-	//("/display/{searchType}/{time}/{date}")
+
+	// calls API to search using user's keyword and time availability
+	// ("/display/{searchType}/{time}/{date}")
 	@RequestMapping("/display/{searchType}/{time}/{date}")
-	public ModelAndView showList(@RequestParam(value = "keyword", required = false) String keyword, 
-			@PathVariable("searchType") String searchType, @PathVariable("time") int time, @PathVariable("date") String date) {
-		
+	public ModelAndView showList(@RequestParam(value = "keyword", required = false) String keyword,
+			@PathVariable("searchType") String searchType, @PathVariable("time") int time,
+			@PathVariable("date") String date) {
+
 		ModelAndView mav = new ModelAndView("display");
 		mav.addObject("searchType", searchType);
 		if (keyword != null) {
 			mav.addObject("keyword", keyword);
 		}
- 		RestTemplate restTemplate = new RestTemplate();
-		
+		RestTemplate restTemplate = new RestTemplate();
+
 		if (searchType.equals("favorites")) {
 			List<Favorite> favorites = menuItemDao.findAll();
 			mav.addObject("favorites", favorites);
 			mav.addObject("date", date);
 		}
-		
+
 		else {
 
 			String url = "https://api.edamam.com/search?q=" + keyword + "&app_id=328dd333"
-					+ "&app_key=2925530f7873bcd09aa1376f5114f08d"
-					+ "&from=0&to=10" // optional: limits number of results
+					+ "&app_key=2925530f7873bcd09aa1376f5114f08d" + "&from=0&to=10" // optional: limits number of
+																					// results
 					+ "&time=1-" + time; // total time is between 1 and maxTotalTime
 
 			// call to API
@@ -137,18 +150,17 @@ public class RecipeController {
 
 		return mav;
 
-		
 	}
 
 	// show calendar beginning on following Sunday, includes meals added
 	@RequestMapping("/calendar")
 	public ModelAndView showCalendar() {
 		ModelAndView mav = new ModelAndView("calendar");
-		
+
 		dateToday = LocalDate.now();
-		
+
 		DayOfWeek currentDay = dateToday.getDayOfWeek();
-		
+
 		LocalDate sunday = null;
 		LocalDate monday = null;
 		LocalDate tuesday = null;
@@ -156,8 +168,8 @@ public class RecipeController {
 		LocalDate thursday = null;
 		LocalDate friday = null;
 		LocalDate saturday = null;
-		
-		switch(currentDay) {
+
+		switch (currentDay) {
 		case SUNDAY:
 			sunday = dateToday;
 			monday = dateToday.plusDays(1);
@@ -224,7 +236,7 @@ public class RecipeController {
 		default:
 			break;
 		}
-		
+
 		mav.addObject("sunday", sunday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu")));
 		mav.addObject("monday", monday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu")));
 		mav.addObject("tuesday", tuesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu")));
@@ -232,46 +244,49 @@ public class RecipeController {
 		mav.addObject("thursday", thursday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu")));
 		mav.addObject("friday", friday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu")));
 		mav.addObject("saturday", saturday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu")));
-		
+
 		if (menuItemDao.findByDate(sunday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))) != null) {
-			mav.addObject("sundayMeal", menuItemDao.findByDate(sunday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
+			mav.addObject("sundayMeal",
+					menuItemDao.findByDate(sunday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
 		}
-		
+
 		if (menuItemDao.findByDate(monday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))) != null) {
-			mav.addObject("mondayMeal", menuItemDao.findByDate(monday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
+			mav.addObject("mondayMeal",
+					menuItemDao.findByDate(monday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
 		}
-		
+
 		if (menuItemDao.findByDate(tuesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))) != null) {
-			mav.addObject("tuesdayMeal", menuItemDao.findByDate(tuesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
+			mav.addObject("tuesdayMeal",
+					menuItemDao.findByDate(tuesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
 		}
-		
+
 		if (menuItemDao.findByDate(wednesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))) != null) {
-			mav.addObject("wednesdayMeal", menuItemDao.findByDate(wednesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
+			mav.addObject("wednesdayMeal",
+					menuItemDao.findByDate(wednesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
 		}
-		
+
 		if (menuItemDao.findByDate(thursday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))) != null) {
-			mav.addObject("thursdayMeal", menuItemDao.findByDate(thursday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
+			mav.addObject("thursdayMeal",
+					menuItemDao.findByDate(thursday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
 		}
-		
+
 		if (menuItemDao.findByDate(friday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))) != null) {
-			mav.addObject("fridayMeal", menuItemDao.findByDate(friday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
+			mav.addObject("fridayMeal",
+					menuItemDao.findByDate(friday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
 		}
-		
+
 		if (menuItemDao.findByDate(saturday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))) != null) {
-			mav.addObject("saturdayMeal", menuItemDao.findByDate(saturday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
+			mav.addObject("saturdayMeal",
+					menuItemDao.findByDate(saturday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"))));
 		}
-		
+
 		return mav;
 	}
-	
+
 	// user adds recipe to database from API search
 	@PostMapping("/add-to-menu/{date}")
-	public ModelAndView addRecipeToMenu(
-			@RequestParam("label") String label,
-			@RequestParam("image") String image,
-			@RequestParam("url") String url,
-			@PathVariable("date") String date,
-			RedirectAttributes redir) {
+	public ModelAndView addRecipeToMenu(@RequestParam("label") String label, @RequestParam("image") String image,
+			@RequestParam("url") String url, @PathVariable("date") String date, RedirectAttributes redir) {
 
 		Favorite favorite = new Favorite();
 		favorite.setLabel(label);
@@ -281,10 +296,10 @@ public class RecipeController {
 		String[] urlArray = url.split(",");
 		favorite.setUrl(urlArray[0]);
 		menuItemDao.create(favorite);
-		
+
 		ModelAndView mav = new ModelAndView("redirect:/calendar");
 		redir.addFlashAttribute("message", "Item added to favorites!");
-		
+
 		return mav;
 	}
 
@@ -301,7 +316,7 @@ public class RecipeController {
 		User user = userDao.findByEmail(email);
 		if (user == null || !password.equals(user.getPassword())) {
 			// If the user or password don't match, display an error message.
-			ModelAndView mav = new ModelAndView("login");
+			ModelAndView mav = new ModelAndView("login-form");
 			mav.addObject("message", "Incorrect username or password.");
 			return mav;
 		}
@@ -325,12 +340,11 @@ public class RecipeController {
 		redir.addFlashAttribute("message", "Logged out.");
 		return new ModelAndView("redirect:/");
 	}
-	
+
 	@RequestMapping("/shoppingcart")
 	public ModelAndView showCart() {
 		ModelAndView mav = new ModelAndView("shoppingcart");
 		return mav;
 	}
-	
-	
+
 }

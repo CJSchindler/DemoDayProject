@@ -46,7 +46,7 @@ public class MenuItemDao {
 		return em.createQuery("FROM Favorite WHERE mealDate = :date", Favorite.class)
 				.setParameter("date", date)
 				.getSingleResult();
-		} catch (NoResultException ex) {
+		} catch (Exception ex) {
 			return null;
 		}
 	
