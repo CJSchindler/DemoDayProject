@@ -1,16 +1,17 @@
 package co.grandcircus.FinalProject.DemoDay.dao;
 
-import java.time.LocalDate;
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
+
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
 import co.grandcircus.FinalProject.DemoDay.entity.Favorite;
+import co.grandcircus.FinalProject.DemoDay.entity.User;
 
 @Repository
 @Transactional
@@ -22,7 +23,11 @@ public class MenuItemDao {
 	public List<Favorite> findAll() {
 		return em.createQuery("FROM Favorite", Favorite.class).getResultList();
 	}
-	
+	public List<Favorite> findByUser(User user) {
+		return em.createQuery("FROM Favorite WHERE user = :user", Favorite.class)
+				.setParameter("user", user)
+				.getResultList();
+	}
 	public void create(Favorite favorite) {
 		em.persist(favorite);
 	}
