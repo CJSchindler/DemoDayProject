@@ -315,7 +315,6 @@ public class RecipeController {
 			@RequestParam("image") String image,
 			@RequestParam("url") String url,
 			@RequestParam("ingredientLines") String [] ingredientLines,
-//			@RequestParam("ingredients") Ingredient [] ingredients,
 			@PathVariable("date") String date, RedirectAttributes redir) {
 
 		Favorite favorite = new Favorite();
@@ -330,7 +329,7 @@ public class RecipeController {
 
 		System.out.println(ingredientLines[0]);
 		String ingredients = ingredientLines[0];
-		String [] splitIngr = ingredients.split(",");
+		String [] splitIngr = ingredients.split(",[^\\s]");
 		
 		menuItemDao.create(favorite);
 
@@ -384,8 +383,16 @@ public class RecipeController {
 
 	@RequestMapping("/shoppingcart")
 	public ModelAndView showCart(@SessionAttribute("user") User user) {
-		ModelAndView mav = new ModelAndView("shoppingcart");
+		List<Ingredient> shoppingList = ingredientDao.findAll();
+		ModelAndView mav = new ModelAndView("shoppingcart", "shoppingList", shoppingList);
 		return mav;
 	}
-
+	
+	@RequestMapping("/shoppingcart/{id}/delete")
+	public ModelAndView delete(@PathVariable("id") Long id) {
+		ingredientDao.delete(id);
+		return new ModelAndView("redirect:/shoppingcart");
+	}
+	
+	
 }

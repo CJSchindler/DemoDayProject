@@ -36,7 +36,7 @@
 				
 					<c:forEach var="recipe" items="${ favorites }">
 					<tr>
-						<td><input type="checkbox" name="label" value="${recipe.label}">
+						<td><input type="radio" name="label" value="${recipe.label}">
 		 					<input type="hidden" name="image" value="${recipe.image}"></td>
 		 				
 						<td><img src="${recipe.image}" width=60%></td>
@@ -49,7 +49,7 @@
 				<c:when test="${searchType eq 'new' }">
 					<c:forEach var="recipe" items="${ recipelist }">
 					<tr>
-						<td><input type="checkbox" name="label" value="${recipe.recipe.label}">
+						<td><input type="radio" name="label" value="${recipe.recipe.label}">
 						<input type="hidden" name="image" value="${recipe.recipe.image}">
 						<input type="hidden" name="url" value="${recipe.recipe.url}">
 						<input type="hidden" name="ingredientLines" value="${recipe.recipe.ingredientLines}">

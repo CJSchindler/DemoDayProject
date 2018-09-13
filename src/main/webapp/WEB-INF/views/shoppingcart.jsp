@@ -5,22 +5,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Shopping List</title>
 </head>
 <body>
+<div class="container">
 	<h1>SHOPPING CART!</h1>
 
-	<!-- DISPLAY SHOPPING LIST HEAR -->
-	<c:if test="${not empty sundayMeal }">
-	
-			${sundayMeal.ingredientLines }
-			
-		<c:forEach var="ingredient" items="${recipe.recipe.ingredientLines}">
-		
-			<p>${ingredient}</p>
-			
-		</c:forEach>
-		
-	</c:if>
+	<table class="table">
+			<thead>
+				<tr>
+					<th>Item</th><th>Y/N</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="ingredient" items="${shoppingList}">
+				<tr>
+					<td>${ingredient.text}</td>
+					<td><a href="/shoppingcart/${ingredient.id}/delete" class="btn btn-light btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+					</td>
+				</tr>	
+				</c:forEach>
+			</tbody>
+	</table>
+</div>			
 </body>
 </html>
