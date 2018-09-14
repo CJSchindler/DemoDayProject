@@ -320,16 +320,19 @@ public class RecipeController {
 		Favorite favorite = new Favorite();
 		favorite.setLabel(label);
 		favorite.setMealDate(date);
+		
 		String[] imageArray = image.split(",");
 		favorite.setImage(imageArray[0]);
+		
 		String[] urlArray = url.split(",");
 		favorite.setUrl(urlArray[0]);
+		
 		String ingr = Arrays.toString(ingredientLines);
 		favorite.setIngredientLines(ingr);
 
 		System.out.println(ingredientLines[0]);
 		String ingredients = ingredientLines[0];
-		String [] splitIngr = ingredients.split(",[^\\s]");
+		String [] splitIngr = ingredients.split(",(?=\\S)");
 		
 		menuItemDao.create(favorite);
 

@@ -11,7 +11,7 @@
 <body>
 	<main class="container">
 	
-		<h1> Meal for ${day } from ${searchType } </h1>
+		<h1> Meal for ${day } from ${searchType } recipes</h1>
 		<p>You said you have ${time } minutes to make your meal.</p>
 		<p>What main ingredient would you like to have on this day?</p>
 		<p>Enter a keyword to begin your search: </p>
@@ -71,6 +71,7 @@
 				</tbody>
 		</table>
 		<button type="submit">Add to menu</button>
+		<br><br><br>
 		</form>
 		</c:if>
 	</main>
