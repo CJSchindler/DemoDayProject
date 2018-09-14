@@ -26,7 +26,6 @@
 		</form>
 		
 		<c:if test="${not empty keyword}">
-		<form action="/add-to-menu/${date }" method="post">
 		<table class="table">
 			<thead>
 				<tr>
@@ -38,11 +37,18 @@
 		
 		<c:forEach var="recipe" items="${ recipelist }">
 					<tr>
-						<td><input type="radio" name="label" value="${recipe.recipe.label}">
+						<td>
+						<form action="/add-to-menu/${date }" method="post">
+						<input type="hidden" name="label" value="${recipe.recipe.label}">
 						<input type="hidden" name="image" value="${recipe.recipe.image}">
 						<input type="hidden" name="url" value="${recipe.recipe.url}">
 						<input type="hidden" name="ingredientLines" value="${recipe.recipe.ingredientLines}">
+						
+						
+                    		<button  type="submit" class="btn btn-outline-success">Add</button>
+                		</form>
 						</td>
+						
 						<td><img src="${recipe.recipe.image}" width=60%></td>
 						<td><a href="${recipe.recipe.url}">${recipe.recipe.label}</a></td>
 						<td>
@@ -57,9 +63,7 @@
 		
 			</tbody>
 		</table>
-		<button type="submit">Add to menu</button>
 		<br><br><br>
-		</form>
 		</c:if>
 		
 		</c:when>
