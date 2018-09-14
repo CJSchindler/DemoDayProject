@@ -84,11 +84,18 @@
 				
 					<c:forEach var="recipe" items="${ favorites }">
 					<tr>
-						<td><input type="radio" name="label" value="${recipe.label}">
-		 					<input type="hidden" name="image" value="${recipe.image}">
-		 					<input type="hidden" name="searchType" value="${searchType }">
-		 					</td>
-		 				
+						<td>
+							<form action="/add-to-menu/favorites/${date }" method="post">
+							<input type="hidden" name="label" value="${recipe.label}">
+							<input type="hidden" name="image" value="${recipe.image}">
+							<input type="hidden" name="url" value="${recipe.url}">
+							<input type="hidden" name="searchType" value="${searchType }">
+							<input type="hidden" name="ingredientLines" value="${recipe.ingredientLines}">
+						
+                    		<button  type="submit" class="btn btn-outline-success">Add</button>
+                		</form>
+						</td>
+						
 						<td><img src="${recipe.image}" width=60%></td>
 						<td><a href="${recipe.url}">${recipe.label}</a></td>
 						<td>${recipe.url}</td>

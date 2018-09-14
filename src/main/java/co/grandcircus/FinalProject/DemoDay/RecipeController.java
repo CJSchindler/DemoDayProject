@@ -170,7 +170,7 @@ public class RecipeController {
 	}
 	
 	@RequestMapping("/display/favorites/{time}/{date}")
-	public ModelAndView showFaorites(@SessionAttribute("user") User user, 
+	public ModelAndView showFavorites(@SessionAttribute("user") User user, 
 			@PathVariable("time") int time, @RequestParam("searchType") String searchType,
 			@PathVariable("date") String date) {
 		
@@ -336,6 +336,43 @@ public class RecipeController {
 	// user adds recipe to database from API search
 	@PostMapping("/add-to-menu/{date}")
 	public ModelAndView addRecipeToMenu(@SessionAttribute("user") User user,
+			@RequestParam("label") String label, 
+			@RequestParam("image") String image,
+			@RequestParam("url") String url,
+			@RequestParam("ingredientLines") String [] ingredientLines,
+			@PathVariable("date") String date, RedirectAttributes redir) {
+
+		Favorite favorite = new Favorite();
+		favorite.setUser(user);
+		favorite.setLabel(label);
+		favorite.setMealDate(date);
+		
+		String[] imageArray = image.split(",");
+		favorite.setImage(imageArray[0]);
+		
+		String[] urlArray = url.split(",");
+		favorite.setUrl(urlArray[0]);
+		
+		String ingr = Arrays.toString(ingredientLines);
+		favorite.setIngredientLines(ingr);
+
+//		String ingredients = ingredientLines[0];
+//		String [] splitIngr = ingredients.split(",(?=.{1}\\d)");
+		
+		menuItemDao.create(favorite);
+
+		for (String line : ingredientLines) {
+				ingredientDao.create(new Ingredient(line, favorite));
+		}
+		
+		ModelAndView mav = new ModelAndView("redirect:/calendar");
+		redir.addFlashAttribute("message", "Item added to favorites!");
+
+		return mav;
+	}
+	
+	@PostMapping("/add-to-menu/favorites/{date}")
+	public ModelAndView addFavoriteToMenu(@SessionAttribute("user") User user,
 			@RequestParam("label") String label, 
 			@RequestParam("image") String image,
 			@RequestParam("url") String url,
