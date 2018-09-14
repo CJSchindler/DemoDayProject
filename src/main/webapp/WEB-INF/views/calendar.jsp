@@ -66,7 +66,7 @@
 					
 			<c:if test="${not empty sundayMeal }">
 			<div class="container">
-			<img src="${sundayMeal.image }" alt="${sundayMeal.label}" class="image" style="width:100%; ">
+			<img src="${sundayMeal.image }" alt="${sundayMeal.label}" class="image" style="width:100%">
 			<div class="middle">
 			<div class="text"><a href="/" >Delete Item</a></div>
 			</div>

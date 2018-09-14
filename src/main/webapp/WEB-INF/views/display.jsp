@@ -21,6 +21,7 @@
 		
 		<form class="search" action="/display/${searchType }/${time}/${date}">
 		  <input type="text" placeholder="Chicken, vegetarian..." name="keyword">
+		  <input type="hidden" name="searchType" value="${searchType }">
 		  <button type="submit">Submit</button>
 		</form>
 		
