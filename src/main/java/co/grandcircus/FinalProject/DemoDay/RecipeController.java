@@ -356,13 +356,12 @@ public class RecipeController {
 		String ingr = Arrays.toString(ingredientLines);
 		favorite.setIngredientLines(ingr);
 
-		System.out.println(ingredientLines[0]);
-		String ingredients = ingredientLines[0];
-		String [] splitIngr = ingredients.split(",(?=.{1}\\d)");
+//		String ingredients = ingredientLines[0];
+//		String [] splitIngr = ingredients.split(",(?=.{1}\\d)");
 		
 		menuItemDao.create(favorite);
 
-		for (String line : splitIngr) {
+		for (String line : ingredientLines) {
 				ingredientDao.create(new Ingredient(line, favorite));
 		}
 		
