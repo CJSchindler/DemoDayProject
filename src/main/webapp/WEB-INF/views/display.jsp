@@ -13,6 +13,9 @@
 	
 		<h1> Meal for ${day } from ${searchType } recipes</h1>
 		<p>You said you have ${time } minutes to make your meal.</p>
+		
+		<c:choose>
+		<c:when test="${searchType eq 'new' }">
 		<p>What main ingredient would you like to have on this day?</p>
 		<p>Enter a keyword to begin your search: </p>
 		
@@ -31,23 +34,8 @@
 			</thead>
 
 				<tbody>
-				<c:choose>
-				<c:when test="${searchType eq 'favorites'}">
-				
-					<c:forEach var="recipe" items="${ favorites }">
-					<tr>
-						<td><input type="radio" name="label" value="${recipe.label}">
-		 					<input type="hidden" name="image" value="${recipe.image}"></td>
-		 				
-						<td><img src="${recipe.image}" width=60%></td>
-						<td><a href="${recipe.url}">${recipe.label}</a></td>
-						<td>${recipe.url}</td>
-					</tr>
-					</c:forEach>
-				</c:when>
-				
-				<c:when test="${searchType eq 'new' }">
-					<c:forEach var="recipe" items="${ recipelist }">
+		
+		<c:forEach var="recipe" items="${ recipelist }">
 					<tr>
 						<td><input type="radio" name="label" value="${recipe.recipe.label}">
 						<input type="hidden" name="image" value="${recipe.recipe.image}">
@@ -65,15 +53,50 @@
 						<td>${recipe.recipe.yield}</td>
 					</tr>
 					</c:forEach>
-					
-					</c:when>
-					</c:choose>
-				</tbody>
+		
+			</tbody>
 		</table>
 		<button type="submit">Add to menu</button>
 		<br><br><br>
 		</form>
 		</c:if>
+		
+		</c:when>
+		
+		<c:otherwise>
+		
+		
+		<form action="/add-to-menu/${date }" method="post">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>    </th><th>Image</th><th>Recipe</th><th>Ingredients</th><th>Total Time</th><th>Yield</th>
+				</tr>
+			</thead>
+
+				<tbody>
+				
+				
+					<c:forEach var="recipe" items="${ favorites }">
+					<tr>
+						<td><input type="radio" name="label" value="${recipe.label}">
+		 					<input type="hidden" name="image" value="${recipe.image}">
+		 					<input type="hidden" name="searchType" value="${searchType }">
+		 					</td>
+		 				
+						<td><img src="${recipe.image}" width=60%></td>
+						<td><a href="${recipe.url}">${recipe.label}</a></td>
+						<td>${recipe.url}</td>
+					</tr>
+					</c:forEach>
+				</tbody>
+		</table>
+		<button type="submit">Add to menu</button>
+		<br><br><br>
+		</form>
+		
+		</c:otherwise>
+		</c:choose>
 	</main>
 </body>
 </html>

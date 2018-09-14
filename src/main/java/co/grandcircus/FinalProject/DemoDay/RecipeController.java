@@ -107,23 +107,36 @@ public class RecipeController {
 	@RequestMapping("/display/{date}")
 	public ModelAndView showSearch(@SessionAttribute("user") User user, 
 			@PathVariable("date") String date, @RequestParam("time") int time,
-			@RequestParam("searchType") String searchType) {
+			@RequestParam("searchType") String searchType, RedirectAttributes redir) {
 
 		LocalDate searchDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("MM-dd-uuuu"));
 		DayOfWeek day = searchDate.getDayOfWeek();
-		ModelAndView mav = new ModelAndView("display");
-		mav.addObject("time", time);
-		mav.addObject("day", day);
-		mav.addObject("searchType", searchType);
+		
+		ModelAndView mav;
+		
+		if (searchType.equals("favorites")) {
+			mav = new ModelAndView("redirect:/display/favorites/" + time + "/" + date + "");
+			redir.addAttribute("time", time);
+			redir.addAttribute("day", day);
+			redir.addAttribute("searchType", searchType);
+		}
+		
+		else {
+			mav = new ModelAndView("display");
+			mav.addObject("time", time);
+			mav.addObject("day", day);
+			mav.addObject("searchType", searchType);
+		}
+		
 		return mav;
 	}
 
 	// calls API to search using user's keyword and time availability
 	// ("/display/{searchType}/{time}/{date}")
-	@RequestMapping("/display/{searchType}/{time}/{date}")
+	@RequestMapping("/display/new/{time}/{date}")
 	public ModelAndView showList(@SessionAttribute("user") User user, 
 			@RequestParam(value = "keyword", required = false) String keyword,
-			@PathVariable("searchType") String searchType, @PathVariable("time") int time,
+			@RequestParam("searchType") String searchType, @PathVariable("time") int time,
 			@PathVariable("date") String date) {
 		
 		
@@ -134,19 +147,7 @@ public class RecipeController {
 		}
 		RestTemplate restTemplate = new RestTemplate();
 
-		if (searchType.equals("favorites")) {
-			List<Favorite> favorites = menuItemDao.findByUser(user);
-			
-//			System.out.println("Let's hope that we get here at least!");
-			System.out.println(favorites);
-//			System.out.println("Is this thing on??");
-			
-			mav.addObject("favorites", favorites);
-			mav.addObject("date", date);
-			System.out.println(favorites);
-		}
-
-		else {
+		
 
 			String url = "https://api.edamam.com/search?q=" + keyword + "&app_id=328dd333"
 					+ "&app_key=2925530f7873bcd09aa1376f5114f08d" + "&from=0&to=10" // optional: limits number of
@@ -163,7 +164,31 @@ public class RecipeController {
 			// extract recipes from results, label as "recipelist" for use in jsp
 			mav.addObject("recipelist", result.getHits());
 			mav.addObject("date", date);
-		}
+
+		return mav;
+
+	}
+	
+	@RequestMapping("/display/favorites/{time}/{date}")
+	public ModelAndView showFaorites(@SessionAttribute("user") User user, 
+			@PathVariable("time") int time, @RequestParam("searchType") String searchType,
+			@PathVariable("date") String date) {
+		
+		
+		ModelAndView mav = new ModelAndView("display");
+		mav.addObject("searchType", searchType);
+
+			List<Favorite> favorites = menuItemDao.findByUser(user);
+			
+//			System.out.println("Let's hope that we get here at least!");
+			System.out.println(favorites);
+//			System.out.println("Is this thing on??");
+			
+			mav.addObject("favorites", favorites);
+			mav.addObject("date", date);
+			System.out.println(favorites);
+
+		
 
 		return mav;
 

@@ -68,7 +68,7 @@
 			<div class="container">
 			<img src="${sundayMeal.image }" alt="${sundayMeal.label}" class="image" style="width:100%; ">
 			<div class="middle">
-			<div class="text"><a href="/" >Edit Item</a></div>
+			<div class="text"><a href="/" >Delete Item</a></div>
 			</div>
 			</div>
 			${sundayMeal.label }
@@ -95,7 +95,7 @@
 			<div class="container">
 			<img src="${mondayMeal.image }" alt="${mondayMeal.label}" class="image" style="width:100%;">
 			<div class="middle">
-			<div class="text"><a href="/" >Edit Item</a></div>
+			<div class="text"><a href="/" >Delete Item</a></div>
 			</div>
 			</div>
 			${mondayMeal.label }
@@ -122,7 +122,7 @@
 			<div class="container">
 			<img src="${tuesdayMeal.image }" alt="${tuesdayMeal.label}" class="image" style="width:100%; ">
 			<div class="middle">
-			<div class="text"><a href="/" >Edit Item</a></div>
+			<div class="text"><a href="/" >Delete Item</a></div>
 			</div>
 			</div>
 			${tuesdayMeal.label }
@@ -147,7 +147,7 @@
 			<div class="container">
 			<img src="${wednesdayMeal.image }" alt="${wednesdayMeal.label}" class="image" style="width:100%; ">
 			<div class="middle">
-			<div class="text"><a href="/" >Edit Item</a></div>
+			<div class="text"><a href="/" >Delete Item</a></div>
 			</div>
 			</div>
 			${wednesdayMeal.label }
@@ -171,7 +171,7 @@
 			<div class="container">
 			<img src="${thursdayMeal.image }" alt="${thursdayMeal.label}" class="image" style="width:100%; ">
 			<div class="middle">
-			<div class="text"><a href="/" >Edit Item</a></div>
+			<div class="text"><a href="/" >Delete Item</a></div>
 			</div>
 			</div>
 			${thursdayMeal.label }
@@ -195,7 +195,7 @@
 			<div class="container">
 			<img src="${fridayMeal.image }" alt="${fridayMeal.label}" class="image" style="width:100%; ">
 			<div class="middle">
-			<div class="text"><a href="/" >Edit Item</a></div>
+			<div class="text"><a href="/" >Delete Item</a></div>
 			</div>
 			</div>
 			${fridayMeal.label }
@@ -219,7 +219,7 @@
 			<div class="container">
 			<img src="${saturdayMeal.image }" alt="${saturdayMeal.label}" class="image" style="width:100%; ">
 			<div class="middle">
-			<div class="text"><a href="/" >Edit Item</a></div>
+			<div class="text"><a href="/" >Delete Item</a></div>
 			</div>
 			</div>
 			${saturdayMeal.label }
