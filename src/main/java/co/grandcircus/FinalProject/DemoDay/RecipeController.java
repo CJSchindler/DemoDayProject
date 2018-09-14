@@ -318,6 +318,7 @@ public class RecipeController {
 			@PathVariable("date") String date, RedirectAttributes redir) {
 
 		Favorite favorite = new Favorite();
+		favorite.setUser(user);
 		favorite.setLabel(label);
 		favorite.setMealDate(date);
 		

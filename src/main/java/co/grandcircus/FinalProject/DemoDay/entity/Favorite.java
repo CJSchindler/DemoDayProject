@@ -17,7 +17,8 @@ public class Favorite {
 
 	
 	@ManyToOne
-	User user;
+	private User user;
+	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String label;
@@ -117,6 +118,22 @@ public class Favorite {
 		return "Favorite [user=" + user + ", id=" + id + ", label=" + label + ", url=" + url + ", rating=" + rating
 				+ ", mealDate=" + mealDate + ", image=" + image + ", ingredientLines=" + ingredientLines
 				+ ", ingredient=" + ingredient + "]";
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Set<Ingredient> getIngredient() {
+		return ingredient;
+	}
+
+	public void setIngredient(Set<Ingredient> ingredient) {
+		this.ingredient = ingredient;
+	}
+
+	public User getUser() {
+		return user;
 	}
 
 	
