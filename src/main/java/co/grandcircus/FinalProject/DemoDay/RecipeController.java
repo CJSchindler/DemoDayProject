@@ -295,39 +295,39 @@ public class RecipeController {
 		mav.addObject("friday", fridayString);
 		mav.addObject("saturday", saturdayString);
 
-		if (menuItemDao.findByDate(sundayString) != null) {
+		if (menuItemDao.findByUserByDate(user, sundayString) != null) {
 			mav.addObject("sundayMeal",
-					menuItemDao.findByDate(sundayString));
+					menuItemDao.findByUserByDate(user, sundayString));
 		}
 
-		if (menuItemDao.findByDate(mondayString) != null) {
+		if (menuItemDao.findByUserByDate(user, mondayString) != null) {
 			mav.addObject("mondayMeal",
-					menuItemDao.findByDate(mondayString));
+					menuItemDao.findByUserByDate(user, mondayString));
 		}
 
-		if (menuItemDao.findByDate(tuesdayString) != null) {
+		if (menuItemDao.findByUserByDate(user, tuesdayString) != null) {
 			mav.addObject("tuesdayMeal",
-					menuItemDao.findByDate(tuesdayString));
+					menuItemDao.findByUserByDate(user, tuesdayString));
 		}
 
-		if (menuItemDao.findByDate(wednesdayString) != null) {
+		if (menuItemDao.findByUserByDate(user, wednesdayString) != null) {
 			mav.addObject("wednesdayMeal",
-					menuItemDao.findByDate(wednesdayString));
+					menuItemDao.findByUserByDate(user, wednesdayString));
 		}
 
-		if (menuItemDao.findByDate(thursdayString) != null) {
+		if (menuItemDao.findByUserByDate(user, thursdayString) != null) {
 			mav.addObject("thursdayMeal",
-					menuItemDao.findByDate(thursdayString));
+					menuItemDao.findByUserByDate(user, thursdayString));
 		}
 
-		if (menuItemDao.findByDate(fridayString) != null) {
+		if (menuItemDao.findByUserByDate(user, fridayString) != null) {
 			mav.addObject("fridayMeal",
-					menuItemDao.findByDate(fridayString));
+					menuItemDao.findByUserByDate(user, fridayString));
 		}
 
-		if (menuItemDao.findByDate(saturdayString) != null) {
+		if (menuItemDao.findByUserByDate(user, saturdayString) != null) {
 			mav.addObject("saturdayMeal",
-					menuItemDao.findByDate(saturdayString));
+					menuItemDao.findByUserByDate(user, saturdayString));
 		}
 
 		return mav;
@@ -423,5 +423,10 @@ public class RecipeController {
 		return new ModelAndView("redirect:/shoppingcart");
 	}
 	
+	@RequestMapping("/deleteFavorite/{date}")
+	public ModelAndView deleteFavorite(@SessionAttribute("user") User user, @PathVariable("date") String date) {
+		menuItemDao.delete(menuItemDao.findByUserByDate(user, date).getId());
+		return new ModelAndView("redirect:/calendar");
+	}
 	
 }

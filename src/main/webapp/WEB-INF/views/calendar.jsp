@@ -51,6 +51,7 @@
 			
 			<tr class="table-primary">
 				<td rowspan="3">
+				<c:if test="${empty sundayMeal }">
 				<form action="/display/${sunday }" method="post">
 				<%@ include file="dropdown.jsp"%>
 						<label><input type="radio" name="searchType"
@@ -63,12 +64,13 @@
 						</button>
 					</form>
 					<br />
+					</c:if>
 					
 			<c:if test="${not empty sundayMeal }">
 			<div class="container">
 			<img src="${sundayMeal.image }" alt="${sundayMeal.label}" class="image" style="width:100%">
 			<div class="middle">
-			<div class="text"><a href="/" >Delete Item</a></div>
+			<div class="text"><a href="/deleteFavorite/${sunday}" >Delete Item</a></div>
 			</div>
 			</div>
 			${sundayMeal.label }
@@ -78,6 +80,7 @@
 				
 
 				<td rowspan="3">
+				<c:if test="${empty mondayMeal }">
 				<form action="/display/${monday }" method="post">
 				<%@ include file="dropdown.jsp"%>
 						<label><input type="radio" name="searchType"
@@ -90,6 +93,7 @@
 						</button>
 					</form>
 					<br />
+					</c:if>
 					
 			<c:if test="${not empty mondayMeal }">
 			<div class="container">
@@ -103,6 +107,7 @@
 					</td>
 
 				<td rowspan="3">
+				<c:if test="${empty tuesdayMeal }">
 				<form action="/display/${tuesday }" method="post">
 				<%@ include file="dropdown.jsp"%>
 						<label><input type="radio" name="searchType"
@@ -115,8 +120,8 @@
 						</button>
 					</form>
 						<br />
+						</c:if>
 					
-				<br />
 					
 			<c:if test="${not empty tuesdayMeal }">
 			<div class="container">
@@ -130,6 +135,7 @@
 					</td>
 
 				<td rowspan="3">
+				<c:if test="${empty wednesdayMeal }">
 				<form action="/display/${wednesday }" method="post">
 				<%@ include file="dropdown.jsp"%>
 						<label><input type="radio" name="searchType"
@@ -142,6 +148,7 @@
 						</button>
 					</form>
 						<br />
+						</c:if>
 					
 			<c:if test="${not empty wednesdayMeal }">
 			<div class="container">
@@ -154,7 +161,9 @@
 			</c:if>
 					</td>
 
-				<td rowspan="3"><form action="/display/${thursday }" method="post">
+				<td rowspan="3">
+				<c:if test="${empty thursdayMeal }">
+				<form action="/display/${thursday }" method="post">
 				<%@ include file="dropdown.jsp"%>
 						<label><input type="radio" name="searchType"
 							value="favorites"> Search Favorites</label> 
@@ -166,6 +175,7 @@
 						</button>
 					</form>
 							<br />
+							</c:if>
 					
 			<c:if test="${not empty thursdayMeal }">
 			<div class="container">
@@ -178,7 +188,9 @@
 			</c:if>
 					</td>
 
-				<td rowspan="3"><form action="/display/${friday }" method="post">
+				<td rowspan="3">
+				<c:if test="${empty fridayMeal }">
+				<form action="/display/${friday }" method="post">
 				<%@ include file="dropdown.jsp"%>
 						<label><input type="radio" name="searchType"
 							value="favorites"> Search Favorites</label> 
@@ -190,6 +202,7 @@
 						</button>
 					</form>
 							<br />
+							</c:if>
 					
 			<c:if test="${not empty fridayMeal }">
 			<div class="container">
@@ -202,7 +215,9 @@
 			</c:if>
 					</td>
 
-				<td rowspan="3"><form action="/display/${saturday }" method="post">
+				<td rowspan="3">
+				<c:if test="${empty saturdayMeal }">
+				<form action="/display/${saturday }" method="post">
 				<%@ include file="dropdown.jsp"%>
 						<label><input type="radio" name="searchType"
 							value="favorites"> Search Favorites</label> 
@@ -214,6 +229,7 @@
 						</button>
 					</form>
 					<br />
+					</c:if>
 					
 			<c:if test="${not empty saturdayMeal }">
 			<div class="container">

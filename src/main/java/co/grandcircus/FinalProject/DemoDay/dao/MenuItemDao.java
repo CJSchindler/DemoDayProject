@@ -30,17 +30,21 @@ public class MenuItemDao {
 				.getResultList();
 	}
 	
-	public List<Favorite> findByUserByDate(User user, String meal_date) {
+	public Favorite findByUserByDate(User user, String meal_date) {
+		try {
 		return em.createQuery("FROM Favorite WHERE user = :user AND meal_date = :meal_date", Favorite.class)
 				.setParameter("user", user)
 				.setParameter("meal_date", meal_date)
-				.getResultList();
+				.getSingleResult();
+		} catch(Exception ex) {
+			return null;
+		}
 	}
 	public void create(Favorite favorite) {
 		em.persist(favorite);
 	}
 	
-	public void delete(Integer id) {
+	public void delete(Long id) {
 		// Deleting with Hibernate entity manager requires fetching a reference first.
 		Favorite favorite = em.getReference(Favorite.class, id); //just reference, not pulling from DB
 		em.remove(favorite);
