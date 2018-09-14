@@ -74,6 +74,7 @@
 			</div>
 			</div>
 			${sundayMeal.label }
+			<p>${sundayMeal.totalTime } </p>
 			</c:if>
 			
 					</td>

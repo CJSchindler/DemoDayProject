@@ -339,6 +339,7 @@ public class RecipeController {
 			@RequestParam("label") String label, 
 			@RequestParam("image") String image,
 			@RequestParam("url") String url,
+			@RequestParam("totalTime") String totalTime,
 			@RequestParam("ingredientLines") String [] ingredientLines,
 			@PathVariable("date") String date, RedirectAttributes redir) {
 
@@ -346,6 +347,7 @@ public class RecipeController {
 		favorite.setUser(user);
 		favorite.setLabel(label);
 		favorite.setMealDate(date);
+		favorite.setTotalTime(totalTime);
 		
 		String[] imageArray = image.split(",");
 		favorite.setImage(imageArray[0]);
@@ -376,6 +378,7 @@ public class RecipeController {
 			@RequestParam("label") String label, 
 			@RequestParam("image") String image,
 			@RequestParam("url") String url,
+			@RequestParam("totalTime") String totalTime,
 			@RequestParam("ingredientLines") String [] ingredientLines,
 			@PathVariable("date") String date, RedirectAttributes redir) {
 
@@ -383,6 +386,7 @@ public class RecipeController {
 		favorite.setUser(user);
 		favorite.setLabel(label);
 		favorite.setMealDate(date);
+		favorite.setTotalTime(totalTime);
 		
 		String[] imageArray = image.split(",");
 		favorite.setImage(imageArray[0]);

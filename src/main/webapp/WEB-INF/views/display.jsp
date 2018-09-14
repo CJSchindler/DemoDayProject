@@ -42,6 +42,7 @@
 						<input type="hidden" name="label" value="${recipe.recipe.label}">
 						<input type="hidden" name="image" value="${recipe.recipe.image}">
 						<input type="hidden" name="url" value="${recipe.recipe.url}">
+						<input type="hidden" name="totalTime" value="${recipe.recipe.totalTime}">
 						<input type="hidden" name="ingredientLines" value="${recipe.recipe.ingredientLines}">
 						
 						
@@ -89,6 +90,7 @@
 							<input type="hidden" name="label" value="${recipe.label}">
 							<input type="hidden" name="image" value="${recipe.image}">
 							<input type="hidden" name="url" value="${recipe.url}">
+							<input type="hidden" name="totalTime" value="${recipe.totalTime}">
 							<input type="hidden" name="searchType" value="${searchType }">
 							<input type="hidden" name="ingredientLines" value="${recipe.ingredientLines}">
 						

@@ -28,6 +28,7 @@ public class Favorite {
 	private String mealDate;
 	private String image; 
 	private String ingredientLines;
+	private String totalTime;
 	@OneToMany(mappedBy="favorite", cascade=CascadeType.REMOVE)
 	private Set <Ingredient> ingredient;
 	
@@ -135,6 +136,14 @@ public class Favorite {
 
 	public User getUser() {
 		return user;
+	}
+
+	public String getTotalTime() {
+		return totalTime;
+	}
+
+	public void setTotalTime(String totalTime) {
+		this.totalTime = totalTime;
 	}
 
 	
