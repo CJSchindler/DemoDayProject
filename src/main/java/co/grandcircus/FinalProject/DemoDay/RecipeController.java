@@ -358,7 +358,7 @@ public class RecipeController {
 
 		System.out.println(ingredientLines[0]);
 		String ingredients = ingredientLines[0];
-		String [] splitIngr = ingredients.split(",(?=\\S)");
+		String [] splitIngr = ingredients.split(",(?=.{1}\\d)");
 		
 		menuItemDao.create(favorite);
 
