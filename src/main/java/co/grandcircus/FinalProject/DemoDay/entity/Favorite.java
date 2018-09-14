@@ -25,7 +25,7 @@ public class Favorite {
 	private String url;
 	private String rating;
 	private String mealDate;
-	private String image;
+	private String image; 
 	private String ingredientLines;
 	@OneToMany(mappedBy="favorite")
 	private Set <Ingredient> ingredient;

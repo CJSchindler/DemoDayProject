@@ -31,6 +31,8 @@
 				</c:forEach>
 			</tbody>
 	</table>
-</div>			
+</div>	
+
+<a href="/calendar">Back to Calendar!</a>		
 </body>
 </html>
