@@ -15,6 +15,7 @@
 	<h2>Shopping List for this week</h2>
 	<p><h4>Delete any items you already have on hand...</h4></p>
 
+	<form action="/merge">
 	<table class="table">
 			<thead>
 				<tr>
@@ -22,8 +23,11 @@
 				</tr>
 			</thead>
 			<tbody>
+			
 				<c:forEach var="ingredient" items="${shoppingList}">
 				<tr>
+					<td>
+					<input type="checkbox" name="merge" value="${ingredient.id}"></td>
 					<td>${ingredient.text}</td>
 					<td><a href="/shoppingcart/${ingredient.id}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
 					</td>
@@ -31,6 +35,8 @@
 				</c:forEach>
 			</tbody>
 	</table>
+	<button type="submit">Submit</button>
+	</form>
 </div>	
 
 <a href="/calendar">Back to Calendar!</a>		

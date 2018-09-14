@@ -18,8 +18,24 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private Set<Favorite> favorite;
 	
+	public Set<Favorite> getFavorite() {
+		return favorite;
+	}
+
+	public void setFavorite(Set<Favorite> favorite) {
+		this.favorite = favorite;
+	}
+
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	private String first_name;
 	private String last_name;
 	private String email;

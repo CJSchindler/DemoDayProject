@@ -348,23 +348,21 @@ public class RecipeController {
 		favorite.setLabel(label);
 		favorite.setMealDate(date);
 		favorite.setTotalTime(totalTime);
-		
-		String[] imageArray = image.split(",");
-		favorite.setImage(imageArray[0]);
-		
-		String[] urlArray = url.split(",");
-		favorite.setUrl(urlArray[0]);
+		favorite.setImage(image);
+		favorite.setUrl(url);
 		
 		String ingr = Arrays.toString(ingredientLines);
 		favorite.setIngredientLines(ingr);
-
-//		String ingredients = ingredientLines[0];
-//		String [] splitIngr = ingredients.split(",(?=.{1}\\d)");
+		String [] splitIngr = ingr.split(",(?=.{1}\\d)");
 		
 		menuItemDao.create(favorite);
-
-		for (String line : ingredientLines) {
-				ingredientDao.create(new Ingredient(line, favorite));
+		
+		String test;
+		for (String line : splitIngr) {
+				test = line.replace('[', ' ');
+				test = line.replace(']', ' ');
+				ingredientDao.create(new Ingredient(test, favorite));
+				System.out.println(test);
 		}
 		
 		ModelAndView mav = new ModelAndView("redirect:/calendar");
@@ -411,7 +409,15 @@ public class RecipeController {
 
 		return mav;
 	}
-
+	
+	@RequestMapping("/merge")
+	public ModelAndView mergeIngredients(@SessionAttribute("user") User user,
+			@RequestParam("merge") List <Long> id) {
+			ModelAndView mav = new ModelAndView("redirect:/");
+			System.out.println(id);
+				return mav;
+	}
+	
 	@RequestMapping("/login")
 	public ModelAndView showLoginForm() {
 		return new ModelAndView("login-form");
@@ -452,7 +458,7 @@ public class RecipeController {
 
 	@RequestMapping("/shoppingcart")
 	public ModelAndView showCart(@SessionAttribute("user") User user) {
-		List<Ingredient> shoppingList = ingredientDao.findAll();
+		List<Ingredient> shoppingList = ingredientDao.findAllByUser(user);
 		ModelAndView mav = new ModelAndView("shoppingcart", "shoppingList", shoppingList);
 		return mav;
 	}
