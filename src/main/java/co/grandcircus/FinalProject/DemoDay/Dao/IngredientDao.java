@@ -30,4 +30,9 @@ public class IngredientDao {
 		em.remove(ingredient);
 		
 	}
+	
+//	public void deleteAll(Long id) {
+//		em.createQuery("FROM Ingredient WHERE favorite_id = :favorite_id");
+//		
+//	}
 }

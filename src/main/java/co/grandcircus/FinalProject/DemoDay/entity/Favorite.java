@@ -2,6 +2,7 @@ package co.grandcircus.FinalProject.DemoDay.entity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,7 +28,7 @@ public class Favorite {
 	private String mealDate;
 	private String image; 
 	private String ingredientLines;
-	@OneToMany(mappedBy="favorite")
+	@OneToMany(mappedBy="favorite", cascade=CascadeType.REMOVE)
 	private Set <Ingredient> ingredient;
 	
 	
