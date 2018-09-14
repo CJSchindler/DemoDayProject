@@ -469,4 +469,9 @@ public class RecipeController {
 		return new ModelAndView("redirect:/calendar");
 	}
 	
+	@RequestMapping("/myrecipe")
+	public ModelAndView addRecipe() {
+		return new ModelAndView("myrecipe");
+	}
+	
 }
