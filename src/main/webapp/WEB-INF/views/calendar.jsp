@@ -19,7 +19,7 @@
 	<br>
 	Meal planning progress for this week...
 	<div class="progress">
-  	<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: ${sundayMeal.totalTime }" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+  	<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width:${progressTime }%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 	</div>
 	<c:if test="${not empty message }">
 		<div class="test" style="color: pink;">${message }</div>

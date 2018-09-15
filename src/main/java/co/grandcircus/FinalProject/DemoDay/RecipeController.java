@@ -299,40 +299,48 @@ public class RecipeController {
 		int progressTime = 0;
 		
 		if (menuItemDao.findByUserByDate(user, sundayString) != null) {
+			progressTime += 100/7;
 			mav.addObject("sundayMeal",
 					menuItemDao.findByUserByDate(user, sundayString));
 		}
 
 		if (menuItemDao.findByUserByDate(user, mondayString) != null) {
+			progressTime += 100/7;
 			mav.addObject("mondayMeal",
 					menuItemDao.findByUserByDate(user, mondayString));
 		}
 
 		if (menuItemDao.findByUserByDate(user, tuesdayString) != null) {
+			progressTime += 100/7;
 			mav.addObject("tuesdayMeal",
 					menuItemDao.findByUserByDate(user, tuesdayString));
 		}
 
 		if (menuItemDao.findByUserByDate(user, wednesdayString) != null) {
+			progressTime += 100/7;
 			mav.addObject("wednesdayMeal",
 					menuItemDao.findByUserByDate(user, wednesdayString));
 		}
 
 		if (menuItemDao.findByUserByDate(user, thursdayString) != null) {
+			progressTime += 100/7;
 			mav.addObject("thursdayMeal",
 					menuItemDao.findByUserByDate(user, thursdayString));
 		}
 
 		if (menuItemDao.findByUserByDate(user, fridayString) != null) {
+			progressTime += 100/7;
 			mav.addObject("fridayMeal",
 					menuItemDao.findByUserByDate(user, fridayString));
 		}
 
 		if (menuItemDao.findByUserByDate(user, saturdayString) != null) {
+			progressTime += 100/7;
 			mav.addObject("saturdayMeal",
 					menuItemDao.findByUserByDate(user, saturdayString));
 		}
-
+		
+		mav.addObject("progressTime", progressTime);
 		
 		return mav;
 	}
