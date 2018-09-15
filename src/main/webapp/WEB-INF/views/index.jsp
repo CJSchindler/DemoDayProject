@@ -6,24 +6,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Log in</title>
 </head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css">
 
 <body>
 <main class="container">
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="#">Meal Prep</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarColor01">
-    <ul class="navbar-nav mr-auto">
-  </div>
-</nav>
+	<%@ include file="emptynavbar.jsp"%>
 <div class="jumbotron">
-  <h1 class="display-4">Let's get ready to PREP!</h1>
-  <p class="lead">We know you are busy. Let us help you prepare so you can eat healthy and and save money.</p>
+  <h1 class="display-4">Take control of your time!</h1>
+  <p class="lead">We know you are busy. </p><p class="lead">Let us help you plan your meals so you can eat healthy and and save money.</p>
   <hr class="my-4">
   <p>Already a member? Log in here:</p>
   <p class="lead">

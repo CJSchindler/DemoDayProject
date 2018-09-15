@@ -295,6 +295,8 @@ public class RecipeController {
 		mav.addObject("friday", fridayString);
 		mav.addObject("saturday", saturdayString);
 
+		int progressTime = 0;
+		
 		if (menuItemDao.findByUserByDate(user, sundayString) != null) {
 			mav.addObject("sundayMeal",
 					menuItemDao.findByUserByDate(user, sundayString));
@@ -330,6 +332,7 @@ public class RecipeController {
 					menuItemDao.findByUserByDate(user, saturdayString));
 		}
 
+		
 		return mav;
 	}
 

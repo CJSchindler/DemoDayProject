@@ -9,9 +9,6 @@
 <title>Weekly Calendar</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link
-	href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css"
-	rel="stylesheet">
 
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css">
@@ -20,8 +17,11 @@
 </head>
 <body>
 	<%@ include file="navbar.jsp"%>
-	
-
+	<br>
+	Meal planning progress for this week...
+	<div class="progress">
+  	<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: ${sundayMeal.totalTime }" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+	</div>
 	<c:if test="${not empty message }">
 		<div class="test" style="color: pink;">${message }</div>
 	</c:if>
@@ -73,8 +73,8 @@
 			<div class="text"><a href="/deleteFavorite/${sunday}" >Delete Item</a></div>
 			</div>
 			</div>
-			${sundayMeal.label }
-			<p>${sundayMeal.totalTime } </p>
+			<p><a href="${sundayMeal.url }">${sundayMeal.label }</a></p>
+			<p class="text-danger"><i>Prep time: <br><b>${sundayMeal.totalTime } minutes</b></i></p>
 			</c:if>
 			
 					</td>
@@ -103,7 +103,8 @@
 			<div class="text"><a href="/deleteFavorite/${monday}" >Delete Item</a></div>
 			</div>
 			</div>
-			${mondayMeal.label }
+			<p><a href="${mondayMeal.url }">${mondayMeal.label }</a></p>
+			<p class="text-danger"><i>Prep time: <br><b>${mondayMeal.totalTime } minutes</b></i></p>
 			</c:if>
 					</td>
 
@@ -131,7 +132,8 @@
 			<div class="text"><a href="/deleteFavorite/${tuesday}" >Delete Item</a></div>
 			</div>
 			</div>
-			${tuesdayMeal.label }
+			<p><a href="${tuesdayMeal.url }">${tuesdayMeal.label }</a></p>
+			<p class="text-danger"><i>Prep time: <br><b>${tuesdayMeal.totalTime } minutes</b></i></p>
 			</c:if>
 					</td>
 
@@ -158,7 +160,8 @@
 			<div class="text"><a href="/deleteFavorite/${wednesday}" >Delete Item</a></div>
 			</div>
 			</div>
-			${wednesdayMeal.label }
+			<p><a href="${wednesdayMeal.url }">${wednesdayMeal.label }</a></p>
+			<p class="text-danger"><i>Prep time: <br><b>${wednesdayMeal.totalTime } minutes</b></i></p>
 			</c:if>
 					</td>
 
@@ -185,7 +188,8 @@
 			<div class="text"><a href="/deleteFavorite/${thursday}" >Delete Item</a></div>
 			</div>
 			</div>
-			${thursdayMeal.label }
+			<p><a href="${thursdayMeal.url }">${thursdayMeal.label }</a></p>
+			<p class="text-danger"><i>Prep time: <br><b>${thursdayMeal.totalTime } minutes</b></i></p>
 			</c:if>
 					</td>
 
@@ -212,7 +216,8 @@
 			<div class="text"><a href="/deleteFavorite/${friday}" >Delete Item</a></div>
 			</div>
 			</div>
-			${fridayMeal.label }
+			<p><a href="${fridayMeal.url }">${fridayMeal.label }</a></p>
+			<p class="text-danger"><i>Prep time: <br><b>${fridayMeal.totalTime } minutes</b></i></p>
 			</c:if>
 					</td>
 
@@ -239,14 +244,15 @@
 			<div class="text"><a href="/deleteFavorite/${saturday}" >Delete Item</a></div>
 			</div>
 			</div>
-			${saturdayMeal.label }
+			<p><a href="${saturdayMeal.url }">${saturdayMeal.label }</a></p>
+			<p class="text-danger"><i>Prep time: <br><b>${saturdayMeal.totalTime } minutes</b></i></p>
 			</c:if>
 					</td>
 			
 		</tbody>
 	</table>
 
-<a href="/shoppingcart">What's in my cart?</a>
+<a href="/shoppingcart">What's on my shopping list?</a>
 
 </body>
 </html>

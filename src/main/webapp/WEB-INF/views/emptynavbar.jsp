@@ -14,20 +14,6 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarColor01">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/calendar">  Calendar <span class="sr-only">(current)</span></a>
-      </li>
-     <!--  <li class="nav-item">
-        <a class="nav-link" href="#">My Progress</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
-      </li> -->
-       <!-- <li class="nav-item">
-        <a class="nav-link" href="/shoppingcart">Shopping Cart</a>
-      </li> -->
-    </ul>
   </div>
 </nav>
 </body>
