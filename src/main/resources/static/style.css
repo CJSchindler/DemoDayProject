@@ -1,8 +1,5 @@
 <!-- not working still -->
 
-.body {
-	margin: 10px 20px 50px 20px;
-}
 
 .container {
     position: relative;
@@ -11,7 +8,6 @@
 
 .image {
   opacity: 1;
-  border-radius: 0%;
   display: block;
   width: 100%;
   height: auto;
