@@ -195,9 +195,10 @@ public class RecipeController {
 	}
 
 	// show calendar beginning on following Sunday, includes meals added
-	@RequestMapping("/calendar")
-	public ModelAndView showCalendar(@SessionAttribute("user") User user) {
+	@RequestMapping("/next-week")
+	public ModelAndView showCalendarFuture(@SessionAttribute("user") User user) {
 		ModelAndView mav = new ModelAndView("calendar");
+		mav.addObject("whichWeek", "future");
 
 		dateToday = LocalDate.now();
 
@@ -335,7 +336,145 @@ public class RecipeController {
 		
 		return mav;
 	}
+	
+	@RequestMapping("/calendar")
+	public ModelAndView showCalendarCurrent(@SessionAttribute("user") User user) {
+		
+		ModelAndView mav = new ModelAndView("calendar");
+		mav.addObject("whichWeek", "current");
+		dateToday = LocalDate.now();
 
+		DayOfWeek currentDay = dateToday.getDayOfWeek();
+
+		LocalDate sunday = null;
+		LocalDate monday = null;
+		LocalDate tuesday = null;
+		LocalDate wednesday = null;
+		LocalDate thursday = null;
+		LocalDate friday = null;
+		LocalDate saturday = null;
+
+		switch (currentDay) {
+		case SUNDAY:
+			sunday = dateToday;
+			monday = dateToday.plusDays(1);
+			tuesday = dateToday.plusDays(2);
+			wednesday = dateToday.plusDays(3);
+			thursday = dateToday.plusDays(4);
+			friday = dateToday.plusDays(5);
+			saturday = dateToday.plusDays(6);
+			break;
+		case MONDAY:
+			sunday = dateToday.minusDays(1);
+			monday = dateToday;
+			tuesday = dateToday.plusDays(1);
+			wednesday = dateToday.plusDays(2);
+			thursday = dateToday.plusDays(3);
+			friday = dateToday.plusDays(4);
+			saturday = dateToday.plusDays(5);
+			break;
+		case TUESDAY:
+			sunday = dateToday.minusDays(2);
+			monday = dateToday.minusDays(1);
+			tuesday = dateToday;
+			wednesday = dateToday.plusDays(1);
+			thursday = dateToday.plusDays(2);
+			friday = dateToday.plusDays(3);
+			saturday = dateToday.plusDays(4);
+			break;
+		case WEDNESDAY:
+			sunday = dateToday.minusDays(3);
+			monday = dateToday.minusDays(2);
+			tuesday = dateToday.minusDays(1);
+			wednesday = dateToday;
+			thursday = dateToday.plusDays(1);
+			friday = dateToday.plusDays(2);
+			saturday = dateToday.plusDays(3);
+			break;
+		case THURSDAY:
+			sunday = dateToday.minusDays(4);
+			monday = dateToday.minusDays(3);
+			tuesday = dateToday.minusDays(2);
+			wednesday = dateToday.minusDays(1);
+			thursday = dateToday;
+			friday = dateToday.plusDays(1);
+			saturday = dateToday.plusDays(2);
+			break;
+		case FRIDAY:
+			sunday = dateToday.minusDays(5);
+			monday = dateToday.minusDays(4);
+			tuesday = dateToday.minusDays(3);
+			wednesday = dateToday.minusDays(2);
+			thursday = dateToday.minusDays(1);
+			friday = dateToday;
+			saturday = dateToday.plusDays(1);
+			break;
+		case SATURDAY:
+			sunday = dateToday.minusDays(6);
+			monday = dateToday.minusDays(5);
+			tuesday = dateToday.minusDays(4);
+			wednesday = dateToday.minusDays(3);
+			thursday = dateToday.minusDays(2);
+			friday = dateToday.minusDays(1);
+			saturday = dateToday;
+			break;
+		default:
+			break;
+		}
+		
+		String sundayString = sunday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
+		String mondayString = monday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
+		String tuesdayString = tuesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
+		String wednesdayString = wednesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
+		String thursdayString = thursday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
+		String fridayString = friday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
+		String saturdayString = saturday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
+		
+		mav.addObject("sunday", sundayString);
+		mav.addObject("monday", mondayString);
+		mav.addObject("tuesday", tuesdayString);
+		mav.addObject("wednesday", wednesdayString);
+		mav.addObject("thursday", thursdayString);
+		mav.addObject("friday", fridayString);
+		mav.addObject("saturday", saturdayString);
+
+		if (menuItemDao.findByUserByDate(user, sundayString) != null) {
+			mav.addObject("sundayMeal",
+					menuItemDao.findByUserByDate(user, sundayString));
+		}
+
+		if (menuItemDao.findByUserByDate(user, mondayString) != null) {
+			mav.addObject("mondayMeal",
+					menuItemDao.findByUserByDate(user, mondayString));
+		}
+
+		if (menuItemDao.findByUserByDate(user, tuesdayString) != null) {
+			mav.addObject("tuesdayMeal",
+					menuItemDao.findByUserByDate(user, tuesdayString));
+		}
+
+		if (menuItemDao.findByUserByDate(user, wednesdayString) != null) {
+			mav.addObject("wednesdayMeal",
+					menuItemDao.findByUserByDate(user, wednesdayString));
+		}
+
+		if (menuItemDao.findByUserByDate(user, thursdayString) != null) {
+			mav.addObject("thursdayMeal",
+					menuItemDao.findByUserByDate(user, thursdayString));
+		}
+
+		if (menuItemDao.findByUserByDate(user, fridayString) != null) {
+			mav.addObject("fridayMeal",
+					menuItemDao.findByUserByDate(user, fridayString));
+		}
+
+		if (menuItemDao.findByUserByDate(user, saturdayString) != null) {
+			mav.addObject("saturdayMeal",
+					menuItemDao.findByUserByDate(user, saturdayString));
+		}
+
+		return mav;
+	}
 	// user adds recipe to database from API search
 	@PostMapping("/add-to-menu/{date}")
 	public ModelAndView addRecipeToMenu(@SessionAttribute("user") User user,

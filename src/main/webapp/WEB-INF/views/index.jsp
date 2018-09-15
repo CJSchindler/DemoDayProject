@@ -13,7 +13,7 @@
 	<%@ include file="emptynavbar.jsp"%>
 <div class="jumbotron">
   <h1 class="display-4">Take control of your time!</h1>
-  <p class="lead">We know you are busy. </p><p class="lead">Let us help you plan your meals so you can eat healthy and and save money.</p>
+  <p class="lead">We know you are busy. </p><p class="lead">Let us help you plan your meals so you can eat healthy and save money.</p>
   <hr class="my-4">
   <p>Already a member? Log in here:</p>
   <p class="lead">

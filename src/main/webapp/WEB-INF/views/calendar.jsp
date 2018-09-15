@@ -1,4 +1,3 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" pageEncoding="ISO-8859-1"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -27,7 +26,21 @@
 	</c:if>
 
 	<table class="table table-hover">
-		<thead>
+	<thead>
+	<tr>
+	<th scope="col"> 
+	<c:if test="${whichWeek eq 'future'}"> <a href="/calendar" class="btn btn-secondary" >Previous Week</a> </c:if>
+	</th>
+	<th scope="col"> </th>
+	<th scope="col"> </th>
+	<th scope="col"> </th>
+	<th scope="col"> </th>
+	<th scope="col"> </th>
+	<th scope="col">
+	<c:if test="${whichWeek eq 'current'}"> <a href="/next-week" class="btn btn-secondary">Next Week</a></c:if></th>
+	</tr>
+	</thead>
+	<thead>
 			<tr>
 				<th scope="col">Sunday <br /> ${sunday}
 				</th>
@@ -44,7 +57,7 @@
 				<th scope="col">Saturday<br /> ${saturday}
 				</th>
 
-			</tr>
+			</tr> 
 		</thead>
 
 		<tbody>
@@ -89,7 +102,7 @@
 							<label><input
 							type="radio" name="searchType" value="new">Search new
 						recipes</label>
-						<button type="submit" class="btn btn-primary btn-lg">
+						<button type="submit" class="btn btn-secondary btn-lg">
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
 					</form>
@@ -146,7 +159,7 @@
 							<label><input
 							type="radio" name="searchType" value="new">Search new
 						recipes</label>
-						<button type="submit" class="btn btn-primary btn-lg">
+						<button type="submit" class="btn btn-secondary btn-lg">
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
 					</form>
@@ -202,7 +215,7 @@
 							<label><input
 							type="radio" name="searchType" value="new">Search new
 						recipes</label>
-						<button type="submit" class="btn btn-primary btn-lg">
+						<button type="submit" class="btn btn-secondary btn-lg">
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
 					</form>
@@ -252,7 +265,6 @@
 		</tbody>
 	</table>
 
-<a href="/shoppingcart">What's on my shopping list?</a>
-
+<a href="/shoppingcart" class="btn btn-secondary">What's on my shopping list?</a>
 </body>
 </html>
