@@ -14,10 +14,30 @@ import javax.persistence.Table;
 @Table(name="user")
 public class User {
 
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
 	
 	@OneToMany(mappedBy="user")
 	private Set<Favorite> favorite;
 	
+	private String first_name;
+	private String last_name;
+	private String email;
+	private String password;
+	
+	@OneToMany(mappedBy="user")
+	private Set<MyMeal> myMeal;
+	
+	
+	
+	public Set<MyMeal> getMyMeal() {
+		return myMeal;
+	}
+
+	public void setMyMeal(Set<MyMeal> myMeal) {
+		this.myMeal = myMeal;
+	}
+
 	public Set<Favorite> getFavorite() {
 		return favorite;
 	}
@@ -26,8 +46,7 @@ public class User {
 		this.favorite = favorite;
 	}
 
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
+	
 	public Long getId() {
 		return id;
 	}
@@ -36,10 +55,7 @@ public class User {
 		this.id = id;
 	}
 
-	private String first_name;
-	private String last_name;
-	private String email;
-	private String password;
+	
 	
 	public User() {
 		// TODO Auto-generated constructor stub
@@ -83,6 +99,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Set<MyMeal> getMyMeals() {
+		return myMeal;
+	}
+
+	public void setMyMeals(Set<MyMeal> myMeals) {
+		this.myMeal = myMeals;
 	}
 	
 	
