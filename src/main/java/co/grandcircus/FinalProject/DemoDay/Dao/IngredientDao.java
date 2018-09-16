@@ -32,6 +32,16 @@ public class IngredientDao {
 				.setParameter("userId", user.getId())
 				.getResultList();
 	}
+	
+	//This may work to get the mymeal ingredients. Or might have to just do the above
+	//for my meal too then add both lists to shopping art jsp
+	
+	public List<Ingredient> findAllByUser_2(User user) {
+		return em.createQuery("FROM Ingredient as i WHERE i.favorite.user.id = :userId OR i.myMeal.user.id = :userId2", Ingredient.class)
+				.setParameter("userId", user.getId())
+				.setParameter("userId2", user.getId())
+				.getResultList();
+	}
 
 	public void delete(Long id) {
 		Ingredient ingredient = em.getReference(Ingredient.class, id); 

@@ -25,6 +25,8 @@ public class MyMeal {
 	@OneToMany(mappedBy="myMeal")
 	private Set<Ingredient> ingredient;
 	
+	private String ingredientLines;
+	
 	private String image;
 	private String mealDate;
 	
@@ -104,6 +106,16 @@ public class MyMeal {
 	}
 	public void setMealDate(String mealDate) {
 		this.mealDate = mealDate;
+	}
+
+
+	public String getIngredientLines() {
+		return ingredientLines;
+	}
+
+
+	public void setIngredientLines(String ingredientLines) {
+		this.ingredientLines = ingredientLines;
 	}
 	
 	

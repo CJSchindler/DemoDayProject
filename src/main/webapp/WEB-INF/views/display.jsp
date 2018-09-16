@@ -69,7 +69,7 @@
 		
 		</c:when>
 		
-		<c:otherwise>
+		<c:when test="${searchType eq 'favorites' }">
 		
 		
 		<form action="/add-to-menu/${date }" method="post">
@@ -109,7 +109,48 @@
 		<br><br><br>
 		</form>
 		
-		</c:otherwise>
+		</c:when>
+		
+		<c:when test="${searchType eq 'myMeals' }">
+		<form action="/add-to-menu/${date }" method="post">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>    </th><th>Image</th><th>Recipe</th><th>Ingredients</th><th>Total Time</th><th>Yield</th>
+				</tr>
+			</thead>
+
+				<tbody>
+				
+				
+					<c:forEach var="recipe" items="${ myMeals }">
+					<tr>
+						<td>
+							<form action="/add-to-menu/myMeals/${date }" method="post">
+							<input type="hidden" name="label" value="${recipe.label}">
+							<input type="hidden" name="image" value="${recipe.image}">
+							<input type="hidden" name="yield" value="${recipe.yield}">
+							<input type="hidden" name="totalTime" value="${recipe.totalTime}">
+							<input type="hidden" name="searchType" value="${searchType }">
+							<input type="hidden" name="ingredientLines" value="${recipe.ingredient}">
+						
+                    		<button  type="submit" class="btn btn-outline-success">Add</button>
+                		</form>
+						</td>
+						
+						<td><img src="${recipe.image}" width=60%></td>
+						<td>${recipe.label}</td>
+						<td> Total time: ${recipe.totalTime } minutes </td>
+						<td> Yield: ${recipe.yield } servings </td>
+					</tr>
+					</c:forEach>
+				</tbody>
+		</table>
+		<button type="submit">Add to menu</button>
+		<br><br><br>
+		</form>
+		</c:when>
+		
 		</c:choose>
 	</main>
 </body>

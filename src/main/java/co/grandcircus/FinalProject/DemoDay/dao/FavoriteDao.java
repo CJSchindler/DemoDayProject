@@ -15,7 +15,7 @@ import co.grandcircus.FinalProject.DemoDay.entity.User;
 
 @Repository
 @Transactional
-public class MenuItemDao {
+public class FavoriteDao {
 	
 	@PersistenceContext
 	private EntityManager em;
