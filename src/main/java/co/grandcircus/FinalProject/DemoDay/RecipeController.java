@@ -244,13 +244,13 @@ public class RecipeController {
 
 		switch (currentDay) {
 		case SUNDAY:
-			sunday = dateToday;
-			monday = dateToday.plusDays(1);
-			tuesday = dateToday.plusDays(2);
-			wednesday = dateToday.plusDays(3);
-			thursday = dateToday.plusDays(4);
-			friday = dateToday.plusDays(5);
-			saturday = dateToday.plusDays(6);
+			sunday = dateToday.plusDays(7);
+			monday = dateToday.plusDays(8);
+			tuesday = dateToday.plusDays(9);
+			wednesday = dateToday.plusDays(10);
+			thursday = dateToday.plusDays(11);
+			friday = dateToday.plusDays(12);
+			saturday = dateToday.plusDays(13);
 			break;
 		case MONDAY:
 			sunday = dateToday.plusDays(6);
