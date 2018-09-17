@@ -7,6 +7,7 @@
 <title>HERE ARE YOUR RECIPES!</title>
 </head>
 <body>
-	
+	<h1> YOUR RECIPES!</h1>
+	${my_meals.label}
 </body>
 </html>

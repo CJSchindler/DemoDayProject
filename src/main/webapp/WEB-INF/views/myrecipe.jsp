@@ -47,9 +47,6 @@ function add_fields() {
 }
 </script>
 
-  <%@ include file="navbar.jsp"%>
-<h1>Please fill in these items!</h1>
-
 
 </body>
 </html>

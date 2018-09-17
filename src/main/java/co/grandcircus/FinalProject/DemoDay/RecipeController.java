@@ -752,7 +752,7 @@ public class RecipeController {
 			@RequestParam("totalTime") int totalTime,
 			@RequestParam("yield") int yield, 
 			@RequestParam("ingredientLines") String [] ingredientLines){
-		ModelAndView mav = new ModelAndView("myrecipe");
+		ModelAndView mav = new ModelAndView("show-my-recipe");
 		
 		MyMeal mymeal = new MyMeal();
 		mymeal.setLabel(label);
@@ -778,5 +778,10 @@ public class RecipeController {
 		
 		
 		return mav;
+	}
+	@RequestMapping("show-my-recipe")
+	public ModelAndView showRecipe() {
+		ModelAndView mav = new ModelAndView("show-my-recipe");
+				return mav;
 	}
 }
