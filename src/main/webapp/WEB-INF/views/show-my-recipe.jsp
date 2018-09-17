@@ -10,10 +10,12 @@
 <body>
 <%@ include file="navbar.jsp"%>
 	<h1> YOUR RECIPES!</h1>
-	<tb> ${myMeal.label} ${myMeal.totalTime} ${myMeal.yield} ${myMeal.ingredientLines }   
+	<thead>
+				<tr>
+					    <th>Recipe</th> <th>Ingredients</th> <th>Total Time</th> <th>Yield</th>
+					<tr> ${myMeal.label} ${myMeal.ingredientLines } ${myMeal.totalTime} ${myMeal.yield} </tr>
+			
+			</thead>
 	
-	
-	
-	</tb>
 </body>
 </html>

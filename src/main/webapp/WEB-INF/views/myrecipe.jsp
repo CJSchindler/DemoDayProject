@@ -35,27 +35,20 @@
 		<div class='label'>Ingredients: <input type="text" name="ingredientLines" required><br><br></div>
 		<div class="content" id="ingredient">
 		</div>
-		<input type="button" id="more_fields" onclick="addElement();"
+		<input type="button" id="more_fields" onclick="add_fields();"
 		value="Add More Ingredients" /><br> <br>
-		<!-- "add_fields();" -->
+		
 	</div>
 	<button type="submit" class="btn-btn-primary mb-2">Add My
 		Recipe!</button>
 		
 <script>
-/* function add_fields() {
+ function add_fields() {
     document.getElementById('ingredient').innerHTML += 
     	'<span>Ingredient <input type="text" name="ingredientLines"></span>\r\n<br><br>';
-} */
+} 
 
-function addElement(parentID, elementTag, elementId, html){
-	var p = document.getElementById(ingredient);
-	var newElement = doument.createElement(elementTag);
-	newElement.setAttribute('ingredient', elementId);
-	newElement.innerHTML = html;
-	p.appendChild(newElement);
-	
-}
+
 </script>
 
 
