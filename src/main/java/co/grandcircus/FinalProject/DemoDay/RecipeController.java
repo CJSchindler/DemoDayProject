@@ -3,6 +3,7 @@ package co.grandcircus.FinalProject.DemoDay;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -68,7 +69,7 @@ public class RecipeController {
 		String duplicateEmail;
 
 		if (userDao.findByEmail(email) != null) {
-			duplicateEmail = "This email already exist, please enter a valid email.";
+			duplicateEmail = "This email already exists; please enter a valid email.";
 			ModelAndView mav = new ModelAndView("register");
 			mav.addObject("first_name", first_name);
 			mav.addObject("last_name", last_name);
@@ -147,8 +148,6 @@ public class RecipeController {
 		}
 		RestTemplate restTemplate = new RestTemplate();
 
-		
-
 			String url = "https://api.edamam.com/search?q=" + keyword + "&app_id=328dd333"
 					+ "&app_key=2925530f7873bcd09aa1376f5114f08d" + "&from=0&to=10" // optional: limits number of
 																					// results
@@ -169,6 +168,7 @@ public class RecipeController {
 
 	}
 	
+	// show a list of favorite recipes by user
 	@RequestMapping("/display/favorites/{time}/{date}")
 	public ModelAndView showFavorites(@SessionAttribute("user") User user, 
 			@PathVariable("time") int time, @RequestParam("searchType") String searchType,
@@ -194,7 +194,7 @@ public class RecipeController {
 
 	}
 
-	// show calendar beginning on following Sunday, includes meals added
+	// show calendar beginning on following Sunday, includes any meals added
 	@RequestMapping("/next-week")
 	public ModelAndView showCalendarFuture(@SessionAttribute("user") User user) {
 		ModelAndView mav = new ModelAndView("calendar");
@@ -345,6 +345,7 @@ public class RecipeController {
 		return mav;
 	}
 	
+	// show calendar for current week, includes any meals added
 	@RequestMapping("/calendar")
 	public ModelAndView showCalendarCurrent(@SessionAttribute("user") User user) {
 		
@@ -483,6 +484,7 @@ public class RecipeController {
 
 		return mav;
 	}
+	
 	// user adds recipe to database from API search
 	@PostMapping("/add-to-menu/{date}")
 	public ModelAndView addRecipeToMenu(@SessionAttribute("user") User user,
@@ -490,9 +492,10 @@ public class RecipeController {
 			@RequestParam("image") String image,
 			@RequestParam("url") String url,
 			@RequestParam("totalTime") String totalTime,
-			@RequestParam("ingredientLines") String [] ingredientLines,
+			@RequestParam("ingredient") String [] ingredientLines,
 			@PathVariable("date") String date, RedirectAttributes redir) {
 
+		// add user's chosen recipe to favorite table
 		Favorite favorite = new Favorite();
 		favorite.setUser(user);
 		favorite.setLabel(label);
@@ -500,19 +503,10 @@ public class RecipeController {
 		favorite.setTotalTime(totalTime);
 		favorite.setImage(image);
 		favorite.setUrl(url);
-		
-		String ingr = Arrays.toString(ingredientLines);
-		favorite.setIngredientLines(ingr);
-		String [] splitIngr = ingr.split(",(?=.{1}\\d)");
-		
 		menuItemDao.create(favorite);
 		
-		String test;
-		for (String line : splitIngr) {
-				test = line.replace('[', ' ');
-				test = line.replace(']', ' ');
-				ingredientDao.create(new Ingredient(test, favorite));
-				System.out.println(test);
+		for (String line : ingredientLines) {
+			ingredientDao.create(new Ingredient(line, favorite));
 		}
 		
 		ModelAndView mav = new ModelAndView("redirect:/calendar");
@@ -521,6 +515,7 @@ public class RecipeController {
 		return mav;
 	}
 	
+	// user adds recipe to calendar from favorites
 	@PostMapping("/add-to-menu/favorites/{date}")
 	public ModelAndView addFavoriteToMenu(@SessionAttribute("user") User user,
 			@RequestParam("label") String label, 
@@ -545,9 +540,6 @@ public class RecipeController {
 		String ingr = Arrays.toString(ingredientLines);
 		favorite.setIngredientLines(ingr);
 
-//		String ingredients = ingredientLines[0];
-//		String [] splitIngr = ingredients.split(",(?=.{1}\\d)");
-		
 		menuItemDao.create(favorite);
 
 		for (String line : ingredientLines) {
@@ -560,13 +552,41 @@ public class RecipeController {
 		return mav;
 	}
 	
+	// user chooses items on shopping list to merge
 	@RequestMapping("/merge")
 	public ModelAndView mergeIngredients(@SessionAttribute("user") User user,
 			@RequestParam("merge") List <Long> id) {
-			ModelAndView mav = new ModelAndView("redirect:/");
-			System.out.println(id);
-				return mav;
+		
+		// create a new list for items the user wants to merge
+		List<Ingredient> mergeList = new ArrayList<>();
+		// add every item in the user's list of checked items to the new list
+		for (int i = 0; i < id.size(); i++) {
+			mergeList.add(ingredientDao.findById(id.get(i)));
+		}
+		
+		ModelAndView mav = new ModelAndView("merge");
+		// add the new list to the ModelAndView
+		mav.addObject("mergeList", mergeList);
+		return mav;
 	}
+	
+	@RequestMapping("/complete-merge")
+	public ModelAndView completeMerge(@SessionAttribute("user") User user,
+			@RequestParam("mergeList") List <Long> mergeList,
+			@RequestParam("newIngredient") String newIngredient) {
+
+		for (Long id : mergeList) {
+			ingredientDao.delete(id);
+		}
+		
+		Ingredient ingredient = new Ingredient();
+		ingredient.setText(newIngredient);
+		ingredientDao.create(ingredient);
+		
+		ModelAndView mav = new ModelAndView("redirect:/shoppingcart");
+		return mav;
+	}
+	
 	
 	@RequestMapping("/login")
 	public ModelAndView showLoginForm() {

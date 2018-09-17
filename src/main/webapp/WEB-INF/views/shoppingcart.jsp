@@ -13,7 +13,8 @@
 <div class="container">
 <br>
 	<h2>Shopping List for this week</h2>
-	<p><h4>Delete any items you already have on hand...</h4></p>
+	<p><h4>Delete any items you already have on hand.</h4></p>
+	<p><h5>For items you want to combine, check the boxes and click "merge" at the bottom of the list.</h5></p>
 
 	<form action="/merge">
 	<table class="table">
@@ -35,10 +36,12 @@
 				</c:forEach>
 			</tbody>
 	</table>
-	<button type="submit">Submit</button>
+	<button type="submit" class="btn btn-warning">Merge</button>
+	<br><br>
 	</form>
 </div>	
 
-<a href="/calendar">Back to Calendar!</a>		
-</body>
+<!-- <a href="/calendar" type="button" class="btn btn-success" style="margin:5px">Back to Calendar!</a>		
+ -->
+ </body>
 </html>

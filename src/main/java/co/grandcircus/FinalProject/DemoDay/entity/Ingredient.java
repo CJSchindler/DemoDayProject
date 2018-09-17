@@ -14,7 +14,6 @@ public class Ingredient {
 	private String text;
 	@ManyToOne
 	private Favorite favorite;
-	
 	@ManyToOne
 	private MyMeal myMeal;
 
@@ -24,7 +23,6 @@ public class Ingredient {
 		this.text = text;
 		this.favorite = favorite;
 	}
-	
 	
 	public Favorite getFavorite() {
 		return favorite;
@@ -63,4 +61,11 @@ public class Ingredient {
 	public void setText(String text) {
 		this.text = text;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Ingredient [id=" + id + ", text=" + text + "]";
+	}
+	
 }

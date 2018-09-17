@@ -10,21 +10,21 @@
 <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css" rel="stylesheet">
 <body>
 	<main class="container">
-	
-		<h1> Meal for ${day } from ${searchType } recipes</h1>
-		<p>You said you have ${time } minutes to make your meal.</p>
-		
+
+		<h1> Meal for ${ day } from ${ searchType } recipes</h1>
+		<p>You said you have ${ time } minutes to make your meal.</p>
+
 		<c:choose>
 		<c:when test="${searchType eq 'new' }">
 		<p>What main ingredient would you like to have on this day?</p>
 		<p>Enter a keyword to begin your search: </p>
-		
+
 		<form class="search" action="/display/${searchType }/${time}/${date}">
 		  <input type="text" placeholder="Chicken, vegetarian..." name="keyword">
 		  <input type="hidden" name="searchType" value="${searchType }">
 		  <button type="submit">Submit</button>
 		</form>
-		
+
 		<c:if test="${not empty keyword}">
 		<table class="table">
 			<thead>
@@ -34,7 +34,7 @@
 			</thead>
 
 				<tbody>
-		
+
 		<c:forEach var="recipe" items="${ recipelist }">
 					<tr>
 						<td>
@@ -43,13 +43,14 @@
 						<input type="hidden" name="image" value="${recipe.recipe.image}">
 						<input type="hidden" name="url" value="${recipe.recipe.url}">
 						<input type="hidden" name="totalTime" value="${recipe.recipe.totalTime}">
-						<input type="hidden" name="ingredientLines" value="${recipe.recipe.ingredientLines}">
-						
-						
+						<c:forEach var="ingredient" items="${recipe.recipe.ingredientLines}">
+							<input type="hidden" name="ingredient" value="${ingredient}">
+						</c:forEach>
+
                     		<button  type="submit" class="btn btn-outline-success">Add</button>
                 		</form>
 						</td>
-						
+
 						<td><img src="${recipe.recipe.image}" width=60%></td>
 						<td><a href="${recipe.recipe.url}">${recipe.recipe.label}</a></td>
 						<td>
@@ -61,17 +62,17 @@
 						<td>${recipe.recipe.yield}</td>
 					</tr>
 					</c:forEach>
-		
+
 			</tbody>
 		</table>
 		<br><br><br>
 		</c:if>
-		
+
 		</c:when>
-		
+
 		<c:otherwise>
-		
-		
+
+
 		<form action="/add-to-menu/${date }" method="post">
 		<table class="table">
 			<thead>
@@ -81,8 +82,8 @@
 			</thead>
 
 				<tbody>
-				
-				
+
+
 					<c:forEach var="recipe" items="${ favorites }">
 					<tr>
 						<td>
@@ -93,11 +94,11 @@
 							<input type="hidden" name="totalTime" value="${recipe.totalTime}">
 							<input type="hidden" name="searchType" value="${searchType }">
 							<input type="hidden" name="ingredientLines" value="${recipe.ingredientLines}">
-						
+
                     		<button  type="submit" class="btn btn-outline-success">Add</button>
                 		</form>
 						</td>
-						
+
 						<td><img src="${recipe.image}" width=60%></td>
 						<td><a href="${recipe.url}">${recipe.label}</a></td>
 						<td>${recipe.url}</td>
@@ -108,7 +109,7 @@
 		<button type="submit">Add to menu</button>
 		<br><br><br>
 		</form>
-		
+
 		</c:otherwise>
 		</c:choose>
 	</main>

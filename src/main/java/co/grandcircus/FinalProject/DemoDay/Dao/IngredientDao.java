@@ -38,6 +38,17 @@ public class IngredientDao {
 		em.remove(ingredient);
 		
 	}
+
+	public Ingredient findById(Long id) {
+		return em.find(Ingredient.class, id);
+	}
+
+//	public List<Ingredient> findAllById(List<Long> id) {
+//		for (Long ingrId : id) {
+//			em.find(Ingredient.class, ingrId);
+//		}
+//		return null;
+//	}
 	
 //	public void deleteAll(Long id) {
 //		em.createQuery("FROM Ingredient WHERE favorite_id = :favorite_id");
