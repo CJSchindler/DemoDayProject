@@ -9,6 +9,7 @@
 </head>
 <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css" rel="stylesheet">
 <body>
+<%@ include file="navbar.jsp"%>
 	<main class="container">
 
 		<h1> Meal for ${ day } from ${ searchType } recipes</h1>
@@ -70,15 +71,15 @@
 
 		</c:when>
 
-		
-		<c:when test="${searchType eq 'favorites' }">
-		
-		
-		<form action="/add-to-menu/${date }" method="post">
+
+		<c:when test="${ searchType eq 'favorites' }">
+
+
+		<form action="/add-to-menu/${ date }" method="post">
 		<table class="table">
 			<thead>
 				<tr>
-					<th>    </th><th>Image</th><th>Recipe</th><th>Ingredients</th><th>Total Time</th><th>Yield</th>
+					<th>    </th><th>Image</th><th>Recipe</th><th>Ingredients</th><th>Total Time</th>
 				</tr>
 			</thead>
 
@@ -102,7 +103,11 @@
 
 						<td><img src="${recipe.image}" width=60%></td>
 						<td><a href="${recipe.url}">${recipe.label}</a></td>
-						<td>${recipe.url}</td>
+						<td>
+							<c:forEach var="ingredient" items="${recipe.ingredientLines}">
+							         <p>${ingredient}</p>
+							</c:forEach>
+						<td>${recipe.totalTime}</td>
 					</tr>
 					</c:forEach>
 				</tbody>
@@ -111,9 +116,9 @@
 		<br><br><br>
 		</form>
 
-		
+
 		</c:when>
-		
+
 		<c:when test="${searchType eq 'myMeals' }">
 		<form action="/add-to-menu/${date }" method="post">
 		<table class="table">
@@ -124,8 +129,8 @@
 			</thead>
 
 				<tbody>
-				
-				
+
+
 					<c:forEach var="recipe" items="${ myMeals }">
 					<tr>
 						<td>
@@ -136,11 +141,11 @@
 							<input type="hidden" name="totalTime" value="${recipe.totalTime}">
 							<input type="hidden" name="searchType" value="${searchType }">
 							<input type="hidden" name="ingredientLines" value="${recipe.ingredient}">
-						
+
                     		<button  type="submit" class="btn btn-outline-success">Add</button>
                 		</form>
 						</td>
-						
+
 						<td><img src="${recipe.image}" width=60%></td>
 						<td>${recipe.label}</td>
 						<td> Total time: ${recipe.totalTime } minutes </td>
@@ -153,8 +158,7 @@
 		<br><br><br>
 		</form>
 		</c:when>
-		
->>>>>>> b97df7a6f6889ee394d34ab7fbb33687bbfbd645
+
 		</c:choose>
 	</main>
 </body>

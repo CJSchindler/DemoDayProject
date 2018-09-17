@@ -24,7 +24,7 @@
 				</tr>
 			</thead>
 			<tbody>
-			
+
 				<c:forEach var="ingredient" items="${shoppingList}">
 				<tr>
 					<td>
@@ -32,16 +32,16 @@
 					<td>${ingredient.text}</td>
 					<td><a href="/shoppingcart/${ingredient.id}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
 					</td>
-				</tr>	
+				</tr>
 				</c:forEach>
 			</tbody>
 	</table>
 	<button type="submit" class="btn btn-warning">Merge</button>
 	<br><br>
 	</form>
-</div>	
+</div>
 
-<!-- <a href="/calendar" type="button" class="btn btn-success" style="margin:5px">Back to Calendar!</a>		
+<!-- <a href="/calendar" type="button" class="btn btn-success" style="margin:5px">Back to Calendar!</a>
  -->
  </body>
 </html>
