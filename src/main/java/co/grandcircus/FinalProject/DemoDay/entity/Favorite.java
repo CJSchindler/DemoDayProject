@@ -28,7 +28,8 @@ public class Favorite {
 	private String mealDate;
 	private String image; 
 	private String ingredientLines;
-	private String totalTime;
+	private int totalTime;
+	private int yield;
 	@OneToMany(mappedBy="favorite", cascade=CascadeType.REMOVE)
 	private Set <Ingredient> ingredient;
 	
@@ -138,12 +139,20 @@ public class Favorite {
 		return user;
 	}
 
-	public String getTotalTime() {
+	public int getTotalTime() {
 		return totalTime;
 	}
 
-	public void setTotalTime(String totalTime) {
+	public void setTotalTime(int totalTime) {
 		this.totalTime = totalTime;
+	}
+
+	public int getYield() {
+		return yield;
+	}
+
+	public void setYield(int yield) {
+		this.yield = yield;
 	}
 
 	

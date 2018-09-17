@@ -527,7 +527,8 @@ public class RecipeController {
 			@RequestParam("label") String label, 
 			@RequestParam("image") String image,
 			@RequestParam("url") String url,
-			@RequestParam("totalTime") String totalTime,
+			@RequestParam("totalTime") int totalTime,
+			@RequestParam("yield") int yield,
 			@RequestParam("ingredient") String [] ingredientLines,
 			@PathVariable("date") String date, RedirectAttributes redir) {
 
@@ -539,6 +540,7 @@ public class RecipeController {
 		favorite.setTotalTime(totalTime);
 		favorite.setImage(image);
 		favorite.setUrl(url);
+		favorite.setYield(yield);
 		
 		
 		
@@ -576,13 +578,15 @@ public class RecipeController {
 			@RequestParam("label") String label, 
 			@RequestParam("image") String image,
 			@RequestParam("url") String url,
-			@RequestParam("totalTime") String totalTime,
+			@RequestParam("totalTime") int totalTime,
+			@RequestParam("yield") int yield,
 			@RequestParam("ingredient") String [] ingredientLines,
 			@PathVariable("date") String date, RedirectAttributes redir) {
 
 		Favorite favorite = new Favorite();
 		favorite.setUser(user);
 		favorite.setLabel(label);
+		favorite.setYield(yield );
 		favorite.setMealDate(date);
 		favorite.setTotalTime(totalTime);
 		
@@ -634,9 +638,10 @@ public class RecipeController {
 		myMeal.setMealDate(date);
 		myMeal.setTotalTime(totalTime);
 		myMeal.setImage(image);
+		myMeal.setYield(yield);
 		
 		
-		String ingr = "";
+		String ingr = ""; 
 		
 
 		for (int i = 0; i < ingredientLines.length; i++) {
