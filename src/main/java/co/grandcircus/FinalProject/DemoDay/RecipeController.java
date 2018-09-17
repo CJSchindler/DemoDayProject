@@ -186,27 +186,20 @@ public class RecipeController {
 			@PathVariable("time") int time, @RequestParam("searchType") String searchType,
 			@PathVariable("date") String date) {
 		
-		
 		ModelAndView mav = new ModelAndView("display");
 		mav.addObject("searchType", searchType);
 
 			List<Favorite> favorites = favoriteDao.findByUser(user);
 			
-//			System.out.println("Let's hope that we get here at least!");
-			System.out.println(favorites);
-//			System.out.println("Is this thing on??");
-			
 			mav.addObject("favorites", favorites);
 			mav.addObject("date", date);
 			System.out.println(favorites);
-
-		
 
 		return mav;
 
 	}
 
-	// show calendar beginning on following Sunday, includes any meals added
+	// show user entered meals
 	@RequestMapping("/display/myMeals/{time}/{date}")
 	public ModelAndView showMyMeals(@SessionAttribute("user") User user, 
 			@PathVariable("time") int time, @RequestParam("searchType") String searchType,
@@ -225,6 +218,7 @@ public class RecipeController {
 		return mav;
 
 	}
+	
 	// show calendar beginning on following Sunday, includes meals added
 	@RequestMapping("/next-week")
 	public ModelAndView showCalendarFuture(@SessionAttribute("user") User user) {
@@ -478,41 +472,52 @@ public class RecipeController {
 		mav.addObject("friday", fridayString);
 		mav.addObject("saturday", saturdayString);
 
+		int progressTime = 0;
+		
 		if (favoriteDao.findByUserByDate(user, sundayString) != null) {
+			progressTime += 100/7;
 			mav.addObject("sundayMeal",
 					favoriteDao.findByUserByDate(user, sundayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, mondayString) != null) {
+			progressTime += 100/7;
 			mav.addObject("mondayMeal",
 					favoriteDao.findByUserByDate(user, mondayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, tuesdayString) != null) {
+			progressTime += 100/7;
 			mav.addObject("tuesdayMeal",
 					favoriteDao.findByUserByDate(user, tuesdayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, wednesdayString) != null) {
+			progressTime += 100/7;
 			mav.addObject("wednesdayMeal",
 					favoriteDao.findByUserByDate(user, wednesdayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, thursdayString) != null) {
+			progressTime += 100/7;
 			mav.addObject("thursdayMeal",
 					favoriteDao.findByUserByDate(user, thursdayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, fridayString) != null) {
+			progressTime += 100/7;
 			mav.addObject("fridayMeal",
 					favoriteDao.findByUserByDate(user, fridayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, saturdayString) != null) {
+			progressTime += 100/7;
 			mav.addObject("saturdayMeal",
 					favoriteDao.findByUserByDate(user, saturdayString));
 		}
 
+		mav.addObject("progressTime", progressTime);
+		
 		return mav;
 	}
 	

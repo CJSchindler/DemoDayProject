@@ -9,6 +9,7 @@
 </head>
 <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css" rel="stylesheet">
 <body>
+<%@ include file="navbar.jsp"%>
 	<main class="container">
 	<a href="/calendar" class="btn btn-secondary">Back to Calendar</a>
 	<br />
@@ -73,11 +74,11 @@
 
 		</c:when>
 
-		
-		<c:when test="${searchType eq 'favorites' }">
-		
-		
-		<form action="/add-to-menu/${date }" method="post">
+
+		<c:when test="${ searchType eq 'favorites' }">
+
+
+		<form action="/add-to-menu/${ date }" method="post">
 		<table class="table">
 			<thead>
 				<tr>
@@ -114,7 +115,7 @@
 							</c:forEach>
 						</td>
 						<td>${recipe.totalTime} minutes</td>
-						<td>${recipe.yield}</td>
+						<td>${recipe.yield} servings</td>
 					</tr>
 					</c:forEach>
 				</tbody>
@@ -123,9 +124,9 @@
 		<br><br><br>
 		</form>
 
-		
+
 		</c:when>
-		
+
 		<c:when test="${searchType eq 'myMeals' }">
 		<form action="/add-to-menu/${date }" method="post">
 		<table class="table">
@@ -136,8 +137,8 @@
 			</thead>
 
 				<tbody>
-				
-				
+
+
 					<c:forEach var="recipe" items="${ myMeals }">
 					<tr>
 						<td>
@@ -151,11 +152,10 @@
 							<c:forEach var="ingredient" items="${recipe.ingredient}">
 							<input type="hidden" name="ingredient" value="${ingredient}">
 						</c:forEach>
-						
                     		<button  type="submit" class="btn btn-outline-success">Add</button>
                 		</form>
 						</td>
-						
+
 						<td><img src="${recipe.image}" width=60%></td>
 						<td>${recipe.label}</td>
 						<td>
@@ -173,7 +173,6 @@
 		<br><br><br>
 		</form>
 		</c:when>
-		
 		</c:choose>
 	</main>
 </body>
