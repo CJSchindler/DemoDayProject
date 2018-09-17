@@ -748,6 +748,19 @@ public class RecipeController {
 		return mav;
 	}
 	
+	@RequestMapping("/new-item-to-list")
+	public ModelAndView addItemToList(@SessionAttribute("user") User user, 
+			@RequestParam("newIngredient") String newIngredient,
+			RedirectAttributes redir) {
+		
+		Ingredient ingredient = new Ingredient();
+		ingredient.setText(newIngredient);
+		ingredientDao.create(ingredient);
+		
+		redir.addFlashAttribute("message", "Item added to list");
+		return new ModelAndView("redirect:/shoppingcart");
+	}
+	
 	@RequestMapping("/shoppingcart/{id}/delete")
 	public ModelAndView delete(@PathVariable("id") Long id) {
 		ingredientDao.delete(id);
