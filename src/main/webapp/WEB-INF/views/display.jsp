@@ -154,7 +154,7 @@
 		</form>
 		</c:when>
 		
->>>>>>> b97df7a6f6889ee394d34ab7fbb33687bbfbd645
+
 		</c:choose>
 	</main>
 </body>
