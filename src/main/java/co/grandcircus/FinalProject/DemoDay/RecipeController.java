@@ -513,9 +513,13 @@ public class RecipeController {
 
 	// user adds recipe to database from API search
 	@PostMapping("/add-to-menu/{date}")
-	public ModelAndView addRecipeToMenu(@SessionAttribute("user") User user, @RequestParam("label") String label,
-			@RequestParam("image") String image, @RequestParam("url") String url,
-			@RequestParam("totalTime") String totalTime, @RequestParam("ingredient") String[] ingredientLines,
+	public ModelAndView addRecipeToMenu(@SessionAttribute("user") User user,
+			@RequestParam("label") String label, 
+			@RequestParam("image") String image,
+			@RequestParam("url") String url,
+			@RequestParam("totalTime") int totalTime,
+			@RequestParam("yield") int yield,
+			@RequestParam("ingredient") String [] ingredientLines,
 			@PathVariable("date") String date, RedirectAttributes redir) {
 
 		// add user's chosen recipe to favorite table
@@ -526,6 +530,7 @@ public class RecipeController {
 		favorite.setTotalTime(totalTime);
 		favorite.setImage(image);
 		favorite.setUrl(url);
+		favorite.setYield(yield);
 		
 		String ingr = "";
 		
@@ -562,13 +567,15 @@ public class RecipeController {
 			@RequestParam("label") String label, 
 			@RequestParam("image") String image,
 			@RequestParam("url") String url,
-			@RequestParam("totalTime") String totalTime,
+			@RequestParam("totalTime") int totalTime,
+			@RequestParam("yield") int yield,
 			@RequestParam("ingredient") String [] ingredientLines,
 			@PathVariable("date") String date, RedirectAttributes redir) {
 
 		Favorite favorite = new Favorite();
 		favorite.setUser(user);
 		favorite.setLabel(label);
+		favorite.setYield(yield );
 		favorite.setMealDate(date);
 		favorite.setTotalTime(totalTime);
 
@@ -622,8 +629,9 @@ public class RecipeController {
 		myMeal.setMealDate(date);
 		myMeal.setTotalTime(totalTime);
 		myMeal.setImage(image);
+		myMeal.setYield(yield);
 		
-		String ingr = "";
+		String ingr = ""; 
 		
 
 		for (int i = 0; i < ingredientLines.length; i++) {
@@ -768,7 +776,7 @@ public class RecipeController {
 			@RequestParam("totalTime") int totalTime,
 			@RequestParam("yield") int yield, 
 			@RequestParam("ingredientLines") String [] ingredientLines){
-		ModelAndView mav = new ModelAndView("myrecipe");
+		ModelAndView mav = new ModelAndView("show-my-recipe");
 		
 		MyMeal mymeal = new MyMeal();
 		mymeal.setLabel(label);
@@ -794,5 +802,10 @@ public class RecipeController {
 		
 		
 		return mav;
+	}
+	@RequestMapping("show-my-recipe")
+	public ModelAndView showRecipe() {
+		ModelAndView mav = new ModelAndView("show-my-recipe");
+				return mav;
 	}
 }

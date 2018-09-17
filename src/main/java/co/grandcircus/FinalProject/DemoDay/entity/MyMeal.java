@@ -2,6 +2,7 @@ package co.grandcircus.FinalProject.DemoDay.entity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +23,7 @@ public class MyMeal {
 	@ManyToOne
 	private User user;
 	
-	@OneToMany(mappedBy="myMeal")
+	@OneToMany(mappedBy="myMeal", cascade=CascadeType.REMOVE)
 	private Set<Ingredient> ingredient;
 	
 	private String ingredientLines;
