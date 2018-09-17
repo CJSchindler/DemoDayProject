@@ -10,6 +10,8 @@
 <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css" rel="stylesheet">
 <body>
 	<main class="container">
+	<a href="/calendar" class="btn btn-secondary">Back to Calendar</a>
+	<br />
 
 		<h1> Meal for ${ day } from ${ searchType } recipes</h1>
 		<p>You said you have ${ time } minutes to make your meal.</p>
@@ -46,6 +48,7 @@
 						<c:forEach var="ingredient" items="${recipe.recipe.ingredientLines}">
 							<input type="hidden" name="ingredient" value="${ingredient}">
 						</c:forEach>
+						<input type="hidden" name="yield" value="${recipe.recipe.yield}">
 
                     		<button  type="submit" class="btn btn-outline-success">Add</button>
                 		</form>
@@ -94,7 +97,10 @@
 							<input type="hidden" name="url" value="${recipe.url}">
 							<input type="hidden" name="totalTime" value="${recipe.totalTime}">
 							<input type="hidden" name="searchType" value="${searchType }">
-							<input type="hidden" name="ingredientLines" value="${recipe.ingredientLines}">
+							<c:forEach var="ingredient" items="${recipe.ingredientLines}">
+							<input type="hidden" name="ingredient" value="${ingredient}">
+						</c:forEach>
+						<input type="hidden" name="yield" value="${recipe.yield}">
 
                     		<button  type="submit" class="btn btn-outline-success">Add</button>
                 		</form>
@@ -102,7 +108,13 @@
 
 						<td><img src="${recipe.image}" width=60%></td>
 						<td><a href="${recipe.url}">${recipe.label}</a></td>
-						<td>${recipe.url}</td>
+						<td>
+							<c:forEach var="ingredient" items="${recipe.ingredientLines}">
+							<p>${ingredient}</p>
+							</c:forEach>
+						</td>
+						<td>${recipe.totalTime} minutes</td>
+						<td>${recipe.yield}</td>
 					</tr>
 					</c:forEach>
 				</tbody>
@@ -136,6 +148,9 @@
 							<input type="hidden" name="totalTime" value="${recipe.totalTime}">
 							<input type="hidden" name="searchType" value="${searchType }">
 							<input type="hidden" name="ingredientLines" value="${recipe.ingredient}">
+							<c:forEach var="ingredient" items="${recipe.ingredient}">
+							<input type="hidden" name="ingredient" value="${ingredient}">
+						</c:forEach>
 						
                     		<button  type="submit" class="btn btn-outline-success">Add</button>
                 		</form>
@@ -143,6 +158,11 @@
 						
 						<td><img src="${recipe.image}" width=60%></td>
 						<td>${recipe.label}</td>
+						<td>
+							<c:forEach var="ingredient" items="${recipe.ingredient}">
+							<p>${ingredient}</p>
+							</c:forEach>
+						</td>
 						<td> Total time: ${recipe.totalTime } minutes </td>
 						<td> Yield: ${recipe.yield } servings </td>
 					</tr>
@@ -154,7 +174,6 @@
 		</form>
 		</c:when>
 		
->>>>>>> b97df7a6f6889ee394d34ab7fbb33687bbfbd645
 		</c:choose>
 	</main>
 </body>

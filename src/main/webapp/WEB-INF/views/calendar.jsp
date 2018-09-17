@@ -72,6 +72,8 @@
 							<label><input
 							type="radio" name="searchType" value="new">Search new
 						recipes</label>
+						<label><input type="radio" name="searchType"
+							value="myMeals"> Search My Meals</label>
 						<button type="submit" class="btn btn-primary btn-lg">
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
@@ -102,6 +104,8 @@
 							<label><input
 							type="radio" name="searchType" value="new">Search new
 						recipes</label>
+						<label><input type="radio" name="searchType"
+							value="myMeals"> Search My Meals</label>
 						<button type="submit" class="btn btn-secondary btn-lg">
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
@@ -130,6 +134,8 @@
 							<label><input
 							type="radio" name="searchType" value="new">Search new
 						recipes</label>
+						<label><input type="radio" name="searchType"
+							value="myMeals"> Search My Meals</label>
 						<button type="submit" class="btn btn-primary btn-lg">
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
@@ -159,6 +165,8 @@
 							<label><input
 							type="radio" name="searchType" value="new">Search new
 						recipes</label>
+						<label><input type="radio" name="searchType"
+							value="myMeals"> Search My Meals</label>
 						<button type="submit" class="btn btn-secondary btn-lg">
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
@@ -187,6 +195,8 @@
 							<label><input
 							type="radio" name="searchType" value="new">Search new
 						recipes</label>
+						<label><input type="radio" name="searchType"
+							value="myMeals"> Search My Meals</label>
 						<button type="submit" class="btn btn-primary btn-lg">
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
@@ -215,6 +225,8 @@
 							<label><input
 							type="radio" name="searchType" value="new">Search new
 						recipes</label>
+						<label><input type="radio" name="searchType"
+							value="myMeals"> Search My Meals</label>
 						<button type="submit" class="btn btn-secondary btn-lg">
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
@@ -243,6 +255,8 @@
 							<label><input
 							type="radio" name="searchType" value="new">Search new
 						recipes</label>
+						<label><input type="radio" name="searchType"
+							value="myMeals"> Search My Meals</label>
 						<button type="submit" class="btn btn-primary btn-lg">
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>

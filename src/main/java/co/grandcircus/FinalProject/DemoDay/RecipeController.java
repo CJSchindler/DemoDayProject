@@ -535,11 +535,23 @@ public class RecipeController {
 		favorite.setImage(image);
 		favorite.setUrl(url);
 		
-		favoriteDao.create(favorite);
 		
-		String ingr = Arrays.toString(ingredientLines);
+		
+		String ingr = "";
+		
+
+		for (int i = 0; i < ingredientLines.length; i++) {
+			
+			if (i != ingredientLines.length - 1) {
+			ingr += ingredientLines[i] + "++";
+			}
+			
+			else {
+				ingr += ingredientLines[i];
+			}
+		}
+		
 		favorite.setIngredientLines(ingr);
-		String [] splitIngr = ingr.split(",(?=.{1}\\d)");
 		
 		favoriteDao.create(favorite);
 		
@@ -560,7 +572,7 @@ public class RecipeController {
 			@RequestParam("image") String image,
 			@RequestParam("url") String url,
 			@RequestParam("totalTime") String totalTime,
-			@RequestParam("ingredientLines") String [] ingredientLines,
+			@RequestParam("ingredient") String [] ingredientLines,
 			@PathVariable("date") String date, RedirectAttributes redir) {
 
 		Favorite favorite = new Favorite();
@@ -573,13 +585,22 @@ public class RecipeController {
 		
 		favorite.setUrl(url);
 		
-		String ingr = Arrays.toString(ingredientLines);
+		String ingr = "";
+		
+
+		for (int i = 0; i < ingredientLines.length; i++) {
+			
+			if (i != ingredientLines.length - 1) {
+			ingr += ingredientLines[i] + "++";
+			}
+			
+			else {
+				ingr += ingredientLines[i];
+			}
+		}
+		
 		favorite.setIngredientLines(ingr);
 
-		favoriteDao.create(favorite);
-//		String ingredients = ingredientLines[0];
-//		String [] splitIngr = ingredients.split(",(?=.{1}\\d)");
-		
 		favoriteDao.create(favorite);
 
 		for (String line : ingredientLines) {
@@ -599,7 +620,7 @@ public class RecipeController {
 			@RequestParam("image") String image,
 			@RequestParam("yield") int yield,
 			@RequestParam("totalTime") int totalTime,
-			@RequestParam("ingredientLines") String [] ingredientLines,
+			@RequestParam("ingredient") String [] ingredientLines,
 			@PathVariable("date") String date, RedirectAttributes redir) {
 
 		MyMeal myMeal = new MyMeal();
@@ -610,17 +631,31 @@ public class RecipeController {
 		myMeal.setImage(image);
 		
 		
-		String ingr = Arrays.toString(ingredientLines);
-		myMeal.setIngredientLines(ingr);
+		String ingr = "";
+		
 
-//		String ingredients = ingredientLines[0];
-//		String [] splitIngr = ingredients.split(",(?=.{1}\\d)");
+		for (int i = 0; i < ingredientLines.length; i++) {
+			
+			if (i != ingredientLines.length - 1) {
+			ingr += ingredientLines[i] + "++";
+			}
+			
+			else {
+				ingr += ingredientLines[i];
+			}
+		}
+		
+		myMeal.setIngredientLines(ingr);
 		
 		myMealDao.create(myMeal);
 
 		for (String line : ingredientLines) {
 				ingredientDao.create(new Ingredient(line, myMeal));
+				
 		}
+		
+
+		
 		
 		ModelAndView mav = new ModelAndView("redirect:/calendar");
 		redir.addFlashAttribute("message", "Item added to myMeals!");
