@@ -4,7 +4,6 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -731,9 +730,23 @@ public class RecipeController {
 		return new ModelAndView("redirect:/");
 	}
 
-	@RequestMapping("/shoppingcart")
-	public ModelAndView showCart(@SessionAttribute("user") User user) {
-		List<Ingredient> shoppingList = ingredientDao.findAllByUser(user);
+	@RequestMapping("/shoppingcart/{start}/{end}")
+	public ModelAndView showCart(@SessionAttribute("user") User user, @PathVariable("start") String start, 
+			@PathVariable("end") String end) {
+		List<Ingredient> allList = ingredientDao.findAllByUser(user);
+		List<Ingredient> shoppingList = new ArrayList<>();
+		LocalDate startDate = LocalDate.parse(start, DateTimeFormatter.ofPattern("MM-dd-uuuu"));
+		LocalDate endDate = LocalDate.parse(end, DateTimeFormatter.ofPattern("MM-dd-uuuu"));
+		LocalDate mealDate;
+		
+		for (Ingredient ingr : allList) {
+			mealDate = LocalDate.parse(ingr.getFavorite().getMealDate(), DateTimeFormatter.ofPattern("MM-dd-uuuu"));
+			
+			if ((mealDate.isEqual(startDate) || mealDate.isAfter(startDate)) 
+					&& (mealDate.isEqual(endDate) || mealDate.isBefore(endDate))) {
+				shoppingList.add(ingr);
+			}
+		}
 		ModelAndView mav = new ModelAndView("shoppingcart", "shoppingList", shoppingList);
 		return mav;
 	}

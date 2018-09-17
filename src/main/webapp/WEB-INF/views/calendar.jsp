@@ -279,6 +279,6 @@
 		</tbody>
 	</table>
 
-<a href="/shoppingcart" class="btn btn-secondary">What's on my shopping list?</a>
+<a href="/shoppingcart/${sunday }/${saturday}" class="btn btn-secondary">What's on my shopping list?</a>
 </body>
 </html>
