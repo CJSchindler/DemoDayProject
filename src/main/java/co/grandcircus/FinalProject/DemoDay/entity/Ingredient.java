@@ -19,6 +19,15 @@ public class Ingredient {
 
 	public Ingredient () { }
 	
+	
+	
+	public Ingredient(String text, MyMeal myMeal) {
+		this.text = text;
+		this.myMeal = myMeal;
+	}
+
+
+
 	public Ingredient (String text, Favorite favorite) {
 		this.text = text;
 		this.favorite = favorite;
