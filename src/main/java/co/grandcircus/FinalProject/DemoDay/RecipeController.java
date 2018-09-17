@@ -4,7 +4,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -35,7 +35,7 @@ import co.grandcircus.FinalProject.DemoDay.entity.User;
 
 @Controller
 public class RecipeController {
-	
+
 	@Autowired
 	private MyMealDao myMealDao;
 
@@ -44,11 +44,12 @@ public class RecipeController {
 
 	@Autowired
 	private UserDao userDao;
-	
+
 	@Autowired
 	private IngredientDao ingredientDao;
 
 	private LocalDate dateToday;
+	
 
 	// shows login page
 	@RequestMapping("/")
@@ -68,7 +69,8 @@ public class RecipeController {
 	@PostMapping("/register")
 	public ModelAndView showRegistration(@RequestParam("first_name") String first_name,
 			@RequestParam("last_name") String last_name, @RequestParam("password") String password,
-			@RequestParam("email") String email, @RequestParam("password2") String password2, RedirectAttributes redir) {
+			@RequestParam("email") String email, @RequestParam("password2") String password2,
+			RedirectAttributes redir) {
 
 		String passwordTest;
 		String duplicateEmail;
@@ -111,48 +113,46 @@ public class RecipeController {
 
 	// shows empty search box with day and time availability
 	@RequestMapping("/display/{date}")
-	public ModelAndView showSearch(@SessionAttribute("user") User user, 
-			@PathVariable("date") String date, @RequestParam("time") int time,
-			@RequestParam("searchType") String searchType, RedirectAttributes redir) {
+	public ModelAndView showSearch(@SessionAttribute("user") User user, @PathVariable("date") String date,
+			@RequestParam("time") int time, @RequestParam("searchType") String searchType, RedirectAttributes redir) {
 
 		LocalDate searchDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("MM-dd-uuuu"));
 		DayOfWeek day = searchDate.getDayOfWeek();
-		
+
 		ModelAndView mav;
-		
+
 		if (searchType.equals("favorites")) {
 			mav = new ModelAndView("redirect:/display/favorites/" + time + "/" + date + "");
 			redir.addAttribute("time", time);
 			redir.addAttribute("day", day);
 			redir.addAttribute("searchType", searchType);
 		}
-		
+
 		else if (searchType.equals("myMeals")) {
 			mav = new ModelAndView("redirect:/display/myMeals/" + time + "/" + date + "");
 			redir.addAttribute("time", time);
 			redir.addAttribute("day", day);
 			redir.addAttribute("searchType", searchType);
 		}
-		
+
 		else {
 			mav = new ModelAndView("display");
 			mav.addObject("time", time);
 			mav.addObject("day", day);
 			mav.addObject("searchType", searchType);
 		}
-		
+
 		return mav;
 	}
 
 	// calls API to search using user's keyword and time availability
 	// ("/display/{searchType}/{time}/{date}")
 	@RequestMapping("/display/new/{time}/{date}")
-	public ModelAndView showList(@SessionAttribute("user") User user, 
+	public ModelAndView showList(@SessionAttribute("user") User user,
 			@RequestParam(value = "keyword", required = false) String keyword,
 			@RequestParam("searchType") String searchType, @PathVariable("time") int time,
 			@PathVariable("date") String date) {
-		
-		
+
 		ModelAndView mav = new ModelAndView("display");
 		mav.addObject("searchType", searchType);
 		if (keyword != null) {
@@ -160,26 +160,26 @@ public class RecipeController {
 		}
 		RestTemplate restTemplate = new RestTemplate();
 
-			String url = "https://api.edamam.com/search?q=" + keyword + "&app_id=328dd333"
-					+ "&app_key=2925530f7873bcd09aa1376f5114f08d" + "&from=0&to=10" // optional: limits number of
-																					// results
-					+ "&time=1-" + time; // total time is between 1 and maxTotalTime
+		String url = "https://api.edamam.com/search?q=" + keyword + "&app_id=328dd333"
+				+ "&app_key=2925530f7873bcd09aa1376f5114f08d" + "&from=0&to=10" // optional: limits number of
+																				// results
+				+ "&time=1-" + time; // total time is between 1 and maxTotalTime
 
-			// call to API
-			ResponseEntity<Result> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(null),
-					Result.class);
+		// call to API
+		ResponseEntity<Result> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(null),
+				Result.class);
 
-			// extract results from API response
-			Result result = response.getBody();
+		// extract results from API response
+		Result result = response.getBody();
 
-			// extract recipes from results, label as "recipelist" for use in jsp
-			mav.addObject("recipelist", result.getHits());
-			mav.addObject("date", date);
+		// extract recipes from results, label as "recipelist" for use in jsp
+		mav.addObject("recipelist", result.getHits());
+		mav.addObject("date", date);
 
 		return mav;
 
 	}
-	
+
 	// show a list of favorite recipes by user
 	@RequestMapping("/display/favorites/{time}/{date}")
 	public ModelAndView showFavorites(@SessionAttribute("user") User user, 
@@ -201,24 +201,21 @@ public class RecipeController {
 
 	// show user entered meals
 	@RequestMapping("/display/myMeals/{time}/{date}")
-	public ModelAndView showMyMeals(@SessionAttribute("user") User user, 
-			@PathVariable("time") int time, @RequestParam("searchType") String searchType,
-			@PathVariable("date") String date) {
-		
-		
+	public ModelAndView showMyMeals(@SessionAttribute("user") User user, @PathVariable("time") int time,
+			@RequestParam("searchType") String searchType, @PathVariable("date") String date) {
+
 		ModelAndView mav = new ModelAndView("display");
 		mav.addObject("searchType", searchType);
 
-			List<MyMeal> myMeals = myMealDao.findByUser(user);
-			
-			
-			mav.addObject("myMeals", myMeals);
-			mav.addObject("date", date);
+		List<MyMeal> myMeals = myMealDao.findByUser(user);
+
+		mav.addObject("myMeals", myMeals);
+		mav.addObject("date", date);
 
 		return mav;
 
 	}
-	
+
 	// show calendar beginning on following Sunday, includes meals added
 	@RequestMapping("/next-week")
 	public ModelAndView showCalendarFuture(@SessionAttribute("user") User user) {
@@ -304,7 +301,7 @@ public class RecipeController {
 		default:
 			break;
 		}
-		
+
 		String sundayString = sunday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
 		String mondayString = monday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
 		String tuesdayString = tuesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
@@ -312,7 +309,7 @@ public class RecipeController {
 		String thursdayString = thursday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
 		String fridayString = friday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
 		String saturdayString = saturday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
-		
+
 		mav.addObject("sunday", sundayString);
 		mav.addObject("monday", mondayString);
 		mav.addObject("tuesday", tuesdayString);
@@ -322,58 +319,51 @@ public class RecipeController {
 		mav.addObject("saturday", saturdayString);
 
 		int progressTime = 0;
-		
+
 		if (favoriteDao.findByUserByDate(user, sundayString) != null) {
-			progressTime += 100/7;
-			mav.addObject("sundayMeal",
-					favoriteDao.findByUserByDate(user, sundayString));
+			progressTime += 100 / 7;
+			mav.addObject("sundayMeal", favoriteDao.findByUserByDate(user, sundayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, mondayString) != null) {
-			progressTime += 100/7;
-			mav.addObject("mondayMeal",
-					favoriteDao.findByUserByDate(user, mondayString));
+			progressTime += 100 / 7;
+			mav.addObject("mondayMeal", favoriteDao.findByUserByDate(user, mondayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, tuesdayString) != null) {
-			progressTime += 100/7;
-			mav.addObject("tuesdayMeal",
-					favoriteDao.findByUserByDate(user, tuesdayString));
+			progressTime += 100 / 7;
+			mav.addObject("tuesdayMeal", favoriteDao.findByUserByDate(user, tuesdayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, wednesdayString) != null) {
-			progressTime += 100/7;
-			mav.addObject("wednesdayMeal",
-					favoriteDao.findByUserByDate(user, wednesdayString));
+			progressTime += 100 / 7;
+			mav.addObject("wednesdayMeal", favoriteDao.findByUserByDate(user, wednesdayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, thursdayString) != null) {
-			progressTime += 100/7;
-			mav.addObject("thursdayMeal",
-					favoriteDao.findByUserByDate(user, thursdayString));
+			progressTime += 100 / 7;
+			mav.addObject("thursdayMeal", favoriteDao.findByUserByDate(user, thursdayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, fridayString) != null) {
-			progressTime += 100/7;
-			mav.addObject("fridayMeal",
-					favoriteDao.findByUserByDate(user, fridayString));
+			progressTime += 100 / 7;
+			mav.addObject("fridayMeal", favoriteDao.findByUserByDate(user, fridayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, saturdayString) != null) {
-			progressTime += 100/7;
-			mav.addObject("saturdayMeal",
-					favoriteDao.findByUserByDate(user, saturdayString));
+			progressTime += 100 / 7;
+			mav.addObject("saturdayMeal", favoriteDao.findByUserByDate(user, saturdayString));
 		}
-		
+
 		mav.addObject("progressTime", progressTime);
-		
+
 		return mav;
 	}
-	
+
 	// show calendar for current week, includes any meals added
 	@RequestMapping("/calendar")
 	public ModelAndView showCalendarCurrent(@SessionAttribute("user") User user) {
-		
+
 		ModelAndView mav = new ModelAndView("calendar");
 		mav.addObject("whichWeek", "current");
 		dateToday = LocalDate.now();
@@ -455,7 +445,7 @@ public class RecipeController {
 		default:
 			break;
 		}
-		
+
 		String sundayString = sunday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
 		String mondayString = monday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
 		String tuesdayString = tuesday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
@@ -463,7 +453,7 @@ public class RecipeController {
 		String thursdayString = thursday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
 		String fridayString = friday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
 		String saturdayString = saturday.format(DateTimeFormatter.ofPattern("MM-dd-uuuu"));
-		
+
 		mav.addObject("sunday", sundayString);
 		mav.addObject("monday", mondayString);
 		mav.addObject("tuesday", tuesdayString);
@@ -520,15 +510,12 @@ public class RecipeController {
 		
 		return mav;
 	}
-	
+
 	// user adds recipe to database from API search
 	@PostMapping("/add-to-menu/{date}")
-	public ModelAndView addRecipeToMenu(@SessionAttribute("user") User user,
-			@RequestParam("label") String label, 
-			@RequestParam("image") String image,
-			@RequestParam("url") String url,
-			@RequestParam("totalTime") String totalTime,
-			@RequestParam("ingredient") String [] ingredientLines,
+	public ModelAndView addRecipeToMenu(@SessionAttribute("user") User user, @RequestParam("label") String label,
+			@RequestParam("image") String image, @RequestParam("url") String url,
+			@RequestParam("totalTime") String totalTime, @RequestParam("ingredient") String[] ingredientLines,
 			@PathVariable("date") String date, RedirectAttributes redir) {
 
 		// add user's chosen recipe to favorite table
@@ -539,8 +526,6 @@ public class RecipeController {
 		favorite.setTotalTime(totalTime);
 		favorite.setImage(image);
 		favorite.setUrl(url);
-		
-		
 		
 		String ingr = "";
 		
@@ -559,19 +544,20 @@ public class RecipeController {
 		favorite.setIngredientLines(ingr);
 		
 		favoriteDao.create(favorite);
-		
+
 		for (String line : ingredientLines) {
 			ingredientDao.create(new Ingredient(line, favorite));
 		}
-		
+
 		ModelAndView mav = new ModelAndView("redirect:/calendar");
 		redir.addFlashAttribute("message", "Item added to favorites!");
 
 		return mav;
 	}
-	
+
 	// user adds recipe to calendar from favorites
 	@PostMapping("/add-to-menu/favorites/{date}")
+
 	public ModelAndView addFavoriteToMenu(@SessionAttribute("user") User user,
 			@RequestParam("label") String label, 
 			@RequestParam("image") String image,
@@ -585,9 +571,9 @@ public class RecipeController {
 		favorite.setLabel(label);
 		favorite.setMealDate(date);
 		favorite.setTotalTime(totalTime);
-		
+
 		favorite.setImage(image);
-		
+
 		favorite.setUrl(url);
 		
 		String ingr = "";
@@ -609,23 +595,25 @@ public class RecipeController {
 		favoriteDao.create(favorite);
 
 		for (String line : ingredientLines) {
-				ingredientDao.create(new Ingredient(line, favorite));
+			ingredientDao.create(new Ingredient(line, favorite));
 		}
-		
+
 		ModelAndView mav = new ModelAndView("redirect:/calendar");
 		redir.addFlashAttribute("message", "Item added to favorites!");
 
 		return mav;
 	}
-	
+
 	// user chooses items on shopping list to merge
 	@PostMapping("/add-to-menu/myMeals/{date}")
+
 	public ModelAndView addMyMealToMenu(@SessionAttribute("user") User user,
 			@RequestParam("label") String label, 
 			@RequestParam("image") String image,
 			@RequestParam("yield") int yield,
 			@RequestParam("totalTime") int totalTime,
 			@RequestParam("ingredient") String [] ingredientLines,
+
 			@PathVariable("date") String date, RedirectAttributes redir) {
 
 		MyMeal myMeal = new MyMeal();
@@ -634,7 +622,6 @@ public class RecipeController {
 		myMeal.setMealDate(date);
 		myMeal.setTotalTime(totalTime);
 		myMeal.setImage(image);
-		
 		
 		String ingr = "";
 		
@@ -660,49 +647,44 @@ public class RecipeController {
 		}
 		
 
-		
-		
 		ModelAndView mav = new ModelAndView("redirect:/calendar");
 		redir.addFlashAttribute("message", "Item added to myMeals!");
 
 		return mav;
 	}
-	
+
 	@RequestMapping("/merge")
-	public ModelAndView mergeIngredients(@SessionAttribute("user") User user,
-			@RequestParam("merge") List <Long> id) {
-		
+	public ModelAndView mergeIngredients(@SessionAttribute("user") User user, @RequestParam("merge") List<Long> id) {
+
 		// create a new list for items the user wants to merge
 		List<Ingredient> mergeList = new ArrayList<>();
 		// add every item in the user's list of checked items to the new list
 		for (int i = 0; i < id.size(); i++) {
 			mergeList.add(ingredientDao.findById(id.get(i)));
 		}
-		
+
 		ModelAndView mav = new ModelAndView("merge");
 		// add the new list to the ModelAndView
 		mav.addObject("mergeList", mergeList);
 		return mav;
 	}
-	
+
 	@RequestMapping("/complete-merge")
 	public ModelAndView completeMerge(@SessionAttribute("user") User user,
-			@RequestParam("mergeList") List <Long> mergeList,
-			@RequestParam("newIngredient") String newIngredient) {
+			@RequestParam("mergeList") List<Long> mergeList, @RequestParam("newIngredient") String newIngredient) {
 
 		for (Long id : mergeList) {
 			ingredientDao.delete(id);
 		}
-		
+
 		Ingredient ingredient = new Ingredient();
 		ingredient.setText(newIngredient);
 		ingredientDao.create(ingredient);
-		
+
 		ModelAndView mav = new ModelAndView("redirect:/shoppingcart");
 		return mav;
 	}
-	
-	
+
 	@RequestMapping("/login")
 	public ModelAndView showLoginForm() {
 		return new ModelAndView("login-form");
@@ -761,21 +743,54 @@ public class RecipeController {
 		return new ModelAndView("redirect:/shoppingcart");
 	}
 	
+
 	@RequestMapping("/shoppingcart/{id}/delete")
 	public ModelAndView delete(@PathVariable("id") Long id) {
 		ingredientDao.delete(id);
 		return new ModelAndView("redirect:/shoppingcart");
 	}
-	
+
 	@RequestMapping("/deleteFavorite/{date}")
 	public ModelAndView deleteFavorite(@SessionAttribute("user") User user, @PathVariable("date") String date) {
 		favoriteDao.delete(favoriteDao.findByUserByDate(user, date).getId());
 		return new ModelAndView("redirect:/calendar");
 	}
-	
+
 	@RequestMapping("/myrecipe")
 	public ModelAndView addRecipe() {
 		return new ModelAndView("myrecipe");
 	}
-	
+
+	@PostMapping("/myrecipe")
+	public ModelAndView submitRecipe(@SessionAttribute("user") User user, @RequestParam("label") String label,
+			@RequestParam("totalTime") int totalTime,
+			@RequestParam("yield") int yield, 
+			@RequestParam("ingredientLines") String [] ingredientLines){
+		ModelAndView mav = new ModelAndView("myrecipe");
+		
+		MyMeal mymeal = new MyMeal();
+		mymeal.setLabel(label);
+		mymeal.setTotalTime(totalTime);
+		mymeal.setYield(yield);
+		mymeal.setUser(user);
+		
+		
+		String ingr = "";
+		for(int i = 0; i<ingredientLines.length; i++) {
+			if (i != ingredientLines.length -1 ) {
+				ingr += ingredientLines[i] + "++";
+			} else {
+				ingr += ingredientLines[i];
+			}
+		}
+		mymeal.setIngredientLines(ingr);
+		myMealDao.create(mymeal);
+		mav.addObject("label", label);
+		mav.addObject("totlTime", totalTime);
+		mav.addObject("yield", yield);
+		mav.addObject("ingredientLines", ingredientLines);
+		
+		
+		return mav;
+	}
 }

@@ -173,6 +173,7 @@
 		<br><br><br>
 		</form>
 		</c:when>
+
 		</c:choose>
 	</main>
 </body>
