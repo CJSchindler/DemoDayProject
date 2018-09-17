@@ -4,7 +4,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -182,27 +182,24 @@ public class RecipeController {
 
 	// show a list of favorite recipes by user
 	@RequestMapping("/display/favorites/{time}/{date}")
-	public ModelAndView showFavorites(@SessionAttribute("user") User user, @PathVariable("time") int time,
-			@RequestParam("searchType") String searchType, @PathVariable("date") String date) {
-
+	public ModelAndView showFavorites(@SessionAttribute("user") User user, 
+			@PathVariable("time") int time, @RequestParam("searchType") String searchType,
+			@PathVariable("date") String date) {
+		
 		ModelAndView mav = new ModelAndView("display");
 		mav.addObject("searchType", searchType);
 
-		List<Favorite> favorites = favoriteDao.findByUser(user);
-
-//			System.out.println("Let's hope that we get here at least!");
-		System.out.println(favorites);
-//			System.out.println("Is this thing on??");
-
-		mav.addObject("favorites", favorites);
-		mav.addObject("date", date);
-		System.out.println(favorites);
+			List<Favorite> favorites = favoriteDao.findByUser(user);
+			
+			mav.addObject("favorites", favorites);
+			mav.addObject("date", date);
+			System.out.println(favorites);
 
 		return mav;
 
 	}
 
-	// show calendar beginning on following Sunday, includes any meals added
+	// show user entered meals
 	@RequestMapping("/display/myMeals/{time}/{date}")
 	public ModelAndView showMyMeals(@SessionAttribute("user") User user, @PathVariable("time") int time,
 			@RequestParam("searchType") String searchType, @PathVariable("date") String date) {
@@ -465,34 +462,52 @@ public class RecipeController {
 		mav.addObject("friday", fridayString);
 		mav.addObject("saturday", saturdayString);
 
+		int progressTime = 0;
+		
 		if (favoriteDao.findByUserByDate(user, sundayString) != null) {
-			mav.addObject("sundayMeal", favoriteDao.findByUserByDate(user, sundayString));
+			progressTime += 100/7;
+			mav.addObject("sundayMeal",
+					favoriteDao.findByUserByDate(user, sundayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, mondayString) != null) {
-			mav.addObject("mondayMeal", favoriteDao.findByUserByDate(user, mondayString));
+			progressTime += 100/7;
+			mav.addObject("mondayMeal",
+					favoriteDao.findByUserByDate(user, mondayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, tuesdayString) != null) {
-			mav.addObject("tuesdayMeal", favoriteDao.findByUserByDate(user, tuesdayString));
+			progressTime += 100/7;
+			mav.addObject("tuesdayMeal",
+					favoriteDao.findByUserByDate(user, tuesdayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, wednesdayString) != null) {
-			mav.addObject("wednesdayMeal", favoriteDao.findByUserByDate(user, wednesdayString));
+			progressTime += 100/7;
+			mav.addObject("wednesdayMeal",
+					favoriteDao.findByUserByDate(user, wednesdayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, thursdayString) != null) {
-			mav.addObject("thursdayMeal", favoriteDao.findByUserByDate(user, thursdayString));
+			progressTime += 100/7;
+			mav.addObject("thursdayMeal",
+					favoriteDao.findByUserByDate(user, thursdayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, fridayString) != null) {
-			mav.addObject("fridayMeal", favoriteDao.findByUserByDate(user, fridayString));
+			progressTime += 100/7;
+			mav.addObject("fridayMeal",
+					favoriteDao.findByUserByDate(user, fridayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, saturdayString) != null) {
-			mav.addObject("saturdayMeal", favoriteDao.findByUserByDate(user, saturdayString));
+			progressTime += 100/7;
+			mav.addObject("saturdayMeal",
+					favoriteDao.findByUserByDate(user, saturdayString));
 		}
 
+		mav.addObject("progressTime", progressTime);
+		
 		return mav;
 	}
 
@@ -511,13 +526,23 @@ public class RecipeController {
 		favorite.setTotalTime(totalTime);
 		favorite.setImage(image);
 		favorite.setUrl(url);
+		
+		String ingr = "";
+		
 
-		favoriteDao.create(favorite);
-
-		String ingr = Arrays.toString(ingredientLines);
+		for (int i = 0; i < ingredientLines.length; i++) {
+			
+			if (i != ingredientLines.length - 1) {
+			ingr += ingredientLines[i] + "++";
+			}
+			
+			else {
+				ingr += ingredientLines[i];
+			}
+		}
+		
 		favorite.setIngredientLines(ingr);
-		String[] splitIngr = ingr.split(",(?=.{1}\\d)");
-
+		
 		favoriteDao.create(favorite);
 
 		for (String line : ingredientLines) {
@@ -532,9 +557,13 @@ public class RecipeController {
 
 	// user adds recipe to calendar from favorites
 	@PostMapping("/add-to-menu/favorites/{date}")
-	public ModelAndView addFavoriteToMenu(@SessionAttribute("user") User user, @RequestParam("label") String label,
-			@RequestParam("image") String image, @RequestParam("url") String url,
-			@RequestParam("totalTime") String totalTime, @RequestParam("ingredientLines") String[] ingredientLines,
+
+	public ModelAndView addFavoriteToMenu(@SessionAttribute("user") User user,
+			@RequestParam("label") String label, 
+			@RequestParam("image") String image,
+			@RequestParam("url") String url,
+			@RequestParam("totalTime") String totalTime,
+			@RequestParam("ingredient") String [] ingredientLines,
 			@PathVariable("date") String date, RedirectAttributes redir) {
 
 		Favorite favorite = new Favorite();
@@ -546,13 +575,22 @@ public class RecipeController {
 		favorite.setImage(image);
 
 		favorite.setUrl(url);
+		
+		String ingr = "";
+		
 
-		String ingr = Arrays.toString(ingredientLines);
+		for (int i = 0; i < ingredientLines.length; i++) {
+			
+			if (i != ingredientLines.length - 1) {
+			ingr += ingredientLines[i] + "++";
+			}
+			
+			else {
+				ingr += ingredientLines[i];
+			}
+		}
+		
 		favorite.setIngredientLines(ingr);
-
-		favoriteDao.create(favorite);
-//		String ingredients = ingredientLines[0];
-//		String [] splitIngr = ingredients.split(",(?=.{1}\\d)");
 
 		favoriteDao.create(favorite);
 
@@ -568,9 +606,14 @@ public class RecipeController {
 
 	// user chooses items on shopping list to merge
 	@PostMapping("/add-to-menu/myMeals/{date}")
-	public ModelAndView addMyMealToMenu(@SessionAttribute("user") User user, @RequestParam("label") String label,
-			@RequestParam("image") String image, @RequestParam("yield") int yield,
-			@RequestParam("totalTime") int totalTime, @RequestParam("ingredientLines") String[] ingredientLines,
+
+	public ModelAndView addMyMealToMenu(@SessionAttribute("user") User user,
+			@RequestParam("label") String label, 
+			@RequestParam("image") String image,
+			@RequestParam("yield") int yield,
+			@RequestParam("totalTime") int totalTime,
+			@RequestParam("ingredient") String [] ingredientLines,
+
 			@PathVariable("date") String date, RedirectAttributes redir) {
 
 		MyMeal myMeal = new MyMeal();
@@ -579,18 +622,30 @@ public class RecipeController {
 		myMeal.setMealDate(date);
 		myMeal.setTotalTime(totalTime);
 		myMeal.setImage(image);
+		
+		String ingr = "";
+		
 
-		String ingr = Arrays.toString(ingredientLines);
+		for (int i = 0; i < ingredientLines.length; i++) {
+			
+			if (i != ingredientLines.length - 1) {
+			ingr += ingredientLines[i] + "++";
+			}
+			
+			else {
+				ingr += ingredientLines[i];
+			}
+		}
+		
 		myMeal.setIngredientLines(ingr);
-
-//		String ingredients = ingredientLines[0];
-//		String [] splitIngr = ingredients.split(",(?=.{1}\\d)");
-
+		
 		myMealDao.create(myMeal);
 
 		for (String line : ingredientLines) {
-			ingredientDao.create(new Ingredient(line, myMeal));
+				ingredientDao.create(new Ingredient(line, myMeal));
+				
 		}
+		
 
 		ModelAndView mav = new ModelAndView("redirect:/calendar");
 		redir.addFlashAttribute("message", "Item added to myMeals!");

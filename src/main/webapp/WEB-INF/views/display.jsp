@@ -9,7 +9,10 @@
 </head>
 <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css" rel="stylesheet">
 <body>
+<%@ include file="navbar.jsp"%>
 	<main class="container">
+	<a href="/calendar" class="btn btn-secondary">Back to Calendar</a>
+	<br />
 
 		<h1> Meal for ${ day } from ${ searchType } recipes</h1>
 		<p>You said you have ${ time } minutes to make your meal.</p>
@@ -46,6 +49,7 @@
 						<c:forEach var="ingredient" items="${recipe.recipe.ingredientLines}">
 							<input type="hidden" name="ingredient" value="${ingredient}">
 						</c:forEach>
+						<input type="hidden" name="yield" value="${recipe.recipe.yield}">
 
                     		<button  type="submit" class="btn btn-outline-success">Add</button>
                 		</form>
@@ -70,11 +74,11 @@
 
 		</c:when>
 
-		
-		<c:when test="${searchType eq 'favorites' }">
-		
-		
-		<form action="/add-to-menu/${date }" method="post">
+
+		<c:when test="${ searchType eq 'favorites' }">
+
+
+		<form action="/add-to-menu/${ date }" method="post">
 		<table class="table">
 			<thead>
 				<tr>
@@ -94,7 +98,10 @@
 							<input type="hidden" name="url" value="${recipe.url}">
 							<input type="hidden" name="totalTime" value="${recipe.totalTime}">
 							<input type="hidden" name="searchType" value="${searchType }">
-							<input type="hidden" name="ingredientLines" value="${recipe.ingredientLines}">
+							<c:forEach var="ingredient" items="${recipe.ingredientLines}">
+							<input type="hidden" name="ingredient" value="${ingredient}">
+						</c:forEach>
+						<input type="hidden" name="yield" value="${recipe.yield}">
 
                     		<button  type="submit" class="btn btn-outline-success">Add</button>
                 		</form>
@@ -102,7 +109,13 @@
 
 						<td><img src="${recipe.image}" width=60%></td>
 						<td><a href="${recipe.url}">${recipe.label}</a></td>
-						<td>${recipe.url}</td>
+						<td>
+							<c:forEach var="ingredient" items="${recipe.ingredientLines}">
+							<p>${ingredient}</p>
+							</c:forEach>
+						</td>
+						<td>${recipe.totalTime} minutes</td>
+						<td>${recipe.yield} servings</td>
 					</tr>
 					</c:forEach>
 				</tbody>
@@ -111,9 +124,9 @@
 		<br><br><br>
 		</form>
 
-		
+
 		</c:when>
-		
+
 		<c:when test="${searchType eq 'myMeals' }">
 		<form action="/add-to-menu/${date }" method="post">
 		<table class="table">
@@ -124,8 +137,8 @@
 			</thead>
 
 				<tbody>
-				
-				
+
+
 					<c:forEach var="recipe" items="${ myMeals }">
 					<tr>
 						<td>
@@ -136,13 +149,20 @@
 							<input type="hidden" name="totalTime" value="${recipe.totalTime}">
 							<input type="hidden" name="searchType" value="${searchType }">
 							<input type="hidden" name="ingredientLines" value="${recipe.ingredient}">
-						
+							<c:forEach var="ingredient" items="${recipe.ingredient}">
+							<input type="hidden" name="ingredient" value="${ingredient}">
+						</c:forEach>
                     		<button  type="submit" class="btn btn-outline-success">Add</button>
                 		</form>
 						</td>
-						
+
 						<td><img src="${recipe.image}" width=60%></td>
 						<td>${recipe.label}</td>
+						<td>
+							<c:forEach var="ingredient" items="${recipe.ingredient}">
+							<p>${ingredient}</p>
+							</c:forEach>
+						</td>
 						<td> Total time: ${recipe.totalTime } minutes </td>
 						<td> Yield: ${recipe.yield } servings </td>
 					</tr>
@@ -153,7 +173,6 @@
 		<br><br><br>
 		</form>
 		</c:when>
-		
 
 		</c:choose>
 	</main>

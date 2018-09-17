@@ -8,7 +8,11 @@
 	href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css">
 <title>Add Your Recipe!</title>
 </head>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css">
+
 <body>
+
 <form action="/myrecipe" method= "post">
 	<%@ include file="navbar.jsp"%>
 	<div class="progress">
@@ -42,5 +46,10 @@ function add_fields() {
     document.getElementById('ingredient').innerHTML += '<span>Ingredient <input type="text" name="ingredientLines"></span>\r\n<br><br>';
 }
 </script>
+
+  <%@ include file="navbar.jsp"%>
+<h1>Please fill in these items!</h1>
+
+
 </body>
 </html>
