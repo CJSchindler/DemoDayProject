@@ -793,17 +793,15 @@ public class RecipeController {
 		}
 		mymeal.setIngredientLines(ingr);
 		myMealDao.create(mymeal);
-		mav.addObject("label", label);
-		mav.addObject("totlTime", totalTime);
-		mav.addObject("yield", yield);
-		mav.addObject("ingredientLines", ingredientLines);
+		mav.addObject("myMeal", mymeal);
+		
 		
 		
 		return mav;
 	}
-	@RequestMapping("show-my-recipe")
-	public ModelAndView showRecipe() {
-		ModelAndView mav = new ModelAndView("show-my-recipe");
-				return mav;
-	}
+//	@RequestMapping("show-my-recipe")
+//	public ModelAndView showRecipe() {
+//		ModelAndView mav = new ModelAndView("show-my-recipe");
+//				return mav;
+//	}
 }
