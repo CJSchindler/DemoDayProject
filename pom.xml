@@ -33,6 +33,7 @@
 			<artifactId>jstl</artifactId>
 		</dependency>
 
+		<!-- Added for AWS -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
