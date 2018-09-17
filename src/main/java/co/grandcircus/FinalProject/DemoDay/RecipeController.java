@@ -209,6 +209,7 @@ public class RecipeController {
 
 		mav.addObject("myMeals", myMeals);
 		mav.addObject("date", date);
+		
 
 		return mav;
 
@@ -617,7 +618,7 @@ public class RecipeController {
 			@RequestParam("image") String image,
 			@RequestParam("yield") int yield,
 			@RequestParam("totalTime") int totalTime,
-			@RequestParam("ingredient") String [] ingredientLines,
+			@RequestParam("ingredientLines") String ingredientLines,
 
 			@PathVariable("date") String date, RedirectAttributes redir) {
 
@@ -629,25 +630,14 @@ public class RecipeController {
 		myMeal.setImage(image);
 		myMeal.setYield(yield);
 		
-		String ingr = ""; 
 		
-
-		for (int i = 0; i < ingredientLines.length; i++) {
-			
-			if (i != ingredientLines.length - 1) {
-			ingr += ingredientLines[i] + "++";
-			}
-			
-			else {
-				ingr += ingredientLines[i];
-			}
-		}
-		
-		myMeal.setIngredientLines(ingr);
+		myMeal.setIngredientLines(ingredientLines);
 		
 		myMealDao.create(myMeal);
+		
+		String [] ingrArray = ingredientLines.split("--");
 
-		for (String line : ingredientLines) {
+		for (String line : ingrArray) {
 				ingredientDao.create(new Ingredient(line, myMeal));
 				
 		}
@@ -809,7 +799,7 @@ public class RecipeController {
 		String ingr = "";
 		for(int i = 0; i<ingredientLines.length; i++) {
 			if (i != ingredientLines.length -1 ) {
-				ingr += ingredientLines[i] + "++";
+				ingr += ingredientLines[i] + "--";
 			} else {
 				ingr += ingredientLines[i];
 			}
@@ -817,7 +807,7 @@ public class RecipeController {
 		mymeal.setIngredientLines(ingr);
 		myMealDao.create(mymeal);
 		mav.addObject("myMeal", mymeal);
-		
+		mav.addObject("ingredientList", ingredientLines);
 		
 		
 		return mav;

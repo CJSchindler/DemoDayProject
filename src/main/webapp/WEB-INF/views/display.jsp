@@ -128,11 +128,11 @@
 		</c:when>
 
 		<c:when test="${searchType eq 'myMeals' }">
-		<form action="/add-to-menu/${date }" method="post">
+		<form action="/add-to-menu/myMeals/${date }" method="post">
 		<table class="table">
 			<thead>
 				<tr>
-					<th>    </th><th>Image</th><th>Recipe</th><th>Ingredients</th><th>Total Time</th><th>Yield</th>
+					<th>    </th><th>Image</th><th>Recipe</th><th>Total Time</th><th>Yield</th>
 				</tr>
 			</thead>
 
@@ -148,21 +148,13 @@
 							<input type="hidden" name="yield" value="${recipe.yield}">
 							<input type="hidden" name="totalTime" value="${recipe.totalTime}">
 							<input type="hidden" name="searchType" value="${searchType }">
-							<input type="hidden" name="ingredientLines" value="${recipe.ingredient}">
-							<c:forEach var="ingredient" items="${recipe.ingredient}">
-							<input type="hidden" name="ingredient" value="${ingredient}">
-						</c:forEach>
+							<input type="hidden" name="ingredientLines" value="${recipe.ingredientLines}">
                     		<button  type="submit" class="btn btn-outline-success">Add</button>
                 		</form>
 						</td>
 
 						<td><img src="${recipe.image}" width=60%></td>
 						<td>${recipe.label}</td>
-						<td>
-							<c:forEach var="ingredient" items="${recipe.ingredient}">
-							<p>${ingredient}</p>
-							</c:forEach>
-						</td>
 						<td> Total time: ${recipe.totalTime } minutes </td>
 						<td> Yield: ${recipe.yield } servings </td>
 					</tr>
