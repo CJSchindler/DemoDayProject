@@ -14,7 +14,6 @@
 <br>
 	<h2>Merge list items</h2>
 
-	<form action="/complete-merge">
 	<table class="table">
 			<thead>
 				<tr>
@@ -25,20 +24,23 @@
 				<c:forEach var="ingredient" items="${mergeList}">
 				<tr>
 					<td>${ingredient.text}</td>
-				</tr>	
+				</tr>
 				</c:forEach>
 			</tbody>
 	</table>
 	<br>
 	<p><h5>We will delete these items and replace them with a new item.</h5></p>
-	What do you want to call your new item? 
+	What do you want to call your new item?
+	<form action="/complete-merge/${start}/${end}">
 	<c:forEach var="ingredient" items="${mergeList}">
 		<input type="hidden" name="mergeList" value="${ingredient.id}">
 	</c:forEach>
-	<input type="text" name="newIngredient" style="width: 400px"><br><br>
+	<input type="text" name="newIngredient" style="width: 400px">
+		<input type="hidden" name="start" value="${start}">
+		<input type="hidden" name="end" value="${end}"><br><br>
 	<button type="submit" class="btn btn-warning">Replace above items with my new item</button>
 	</form>
-</div>	
+</div>
 
  </body>
 </html>

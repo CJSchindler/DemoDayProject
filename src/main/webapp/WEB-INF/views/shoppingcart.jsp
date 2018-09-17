@@ -21,7 +21,7 @@
 	<li><h6>To combine items, check the boxes and click "merge" at the bottom of the list.</h6>
 	<li><h6>You can add new items to the list by clicking "add" at the bottom of the list.</h6>
 </ul>
-	<form action="/merge">
+	<form action="/merge/${start}/${end}">
 	<table class="table">
 			<thead>
 				<tr>
@@ -47,6 +47,8 @@
 	<form action="/new-item-to-list">
 		<c:forEach var="ingredient" items="${shoppingList}">
 		<input type="hidden" name="favorite" value="${ingredient.favorite.id}">
+		<input type="hidden" name="start" value="${start}">
+		<input type="hidden" name="end" value="${end}">
 		</c:forEach>
 		<input type="text" name="newIngredient" placeholder="e.g. paper towels" style="width: 400px"><br><br>
 	<button type="submit" class="btn btn-info">Add new item to list</button>

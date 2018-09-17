@@ -650,8 +650,10 @@ public class RecipeController {
 	}
 
 	// user chooses items on shopping list to merge
-	@RequestMapping("/merge")
+	@RequestMapping("/merge/{start}/{end}")
 	public ModelAndView mergeIngredients(@SessionAttribute("user") User user, 
+			@PathVariable("start") String start,
+			@PathVariable("end") String end,
 			@RequestParam("merge") List<Long> id) {
 
 		// create a new list for items the user wants to merge
@@ -664,19 +666,24 @@ public class RecipeController {
 		ModelAndView mav = new ModelAndView("merge");
 		// add the new list to the ModelAndView
 		mav.addObject("mergeList", mergeList);
+		mav.addObject("start", start);
+		mav.addObject("end", end);
 		return mav;
 	}
 	
 	// after user inputs new item from merge page, delete old ingredients & add new item
-	@RequestMapping("/complete-merge")
+	@RequestMapping("/complete-merge/{start}/{end}")
 	public ModelAndView completeMerge(@SessionAttribute("user") User user,
 			@RequestParam("mergeList") List<Long> mergeList, 
+			@PathVariable("start") String start,
+			@PathVariable("end") String end,
 			@RequestParam("newIngredient") String newIngredient) {
 		
 		// create new ingredient from user input
 		Ingredient userIngredient = new Ingredient();
 		userIngredient.setText(newIngredient);
-		
+
+		System.out.println();
 		userIngredient.setFavorite(ingredientDao.findById(mergeList.get(0)).getFavorite());
 		
 		ingredientDao.create(userIngredient);
@@ -686,7 +693,9 @@ public class RecipeController {
 			ingredientDao.delete(id);
 		}
 
-		ModelAndView mav = new ModelAndView("redirect:/shoppingcart");
+		ModelAndView mav = new ModelAndView("redirect:/shoppingcart/{start}/{end}");
+		mav.addObject("start", start);
+		mav.addObject("end", end);
 		return mav;
 	}
 
@@ -746,6 +755,8 @@ public class RecipeController {
 			}
 		}
 		ModelAndView mav = new ModelAndView("shoppingcart", "shoppingList", shoppingList);
+		mav.addObject("start", start);
+		mav.addObject("end", end);
 		return mav;
 	}
 	
