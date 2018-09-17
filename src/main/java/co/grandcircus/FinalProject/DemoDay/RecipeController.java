@@ -733,10 +733,12 @@ public class RecipeController {
 	@RequestMapping("/new-item-to-list")
 	public ModelAndView addItemToList(@SessionAttribute("user") User user, 
 			@RequestParam("newIngredient") String newIngredient,
+			@RequestParam("favorite") List<Long> favoriteIds,
 			RedirectAttributes redir) {
 		
 		Ingredient ingredient = new Ingredient();
 		ingredient.setText(newIngredient);
+		ingredient.setFavorite(favoriteDao.findById(favoriteIds.get(favoriteIds.size()-1)));
 		ingredientDao.create(ingredient);
 		
 		redir.addFlashAttribute("message", "Item added to list");

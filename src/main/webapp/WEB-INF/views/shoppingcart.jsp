@@ -45,6 +45,9 @@
 	<br><br>
 	</form>
 	<form action="/new-item-to-list">
+		<c:forEach var="ingredient" items="${shoppingList}">
+		<input type="hidden" name="favorite" value="${ingredient.favorite.id}">
+		</c:forEach>
 		<input type="text" name="newIngredient" placeholder="e.g. paper towels" style="width: 400px"><br><br>
 	<button type="submit" class="btn btn-info">Add new item to list</button>
 </form>
