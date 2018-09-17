@@ -192,7 +192,6 @@ public class RecipeController {
 			
 			mav.addObject("favorites", favorites);
 			mav.addObject("date", date);
-			System.out.println(favorites);
 
 		return mav;
 
@@ -660,8 +659,10 @@ public class RecipeController {
 		return mav;
 	}
 
+	// user chooses items on shopping list to merge
 	@RequestMapping("/merge")
-	public ModelAndView mergeIngredients(@SessionAttribute("user") User user, @RequestParam("merge") List<Long> id) {
+	public ModelAndView mergeIngredients(@SessionAttribute("user") User user, 
+			@RequestParam("merge") List<Long> id) {
 
 		// create a new list for items the user wants to merge
 		List<Ingredient> mergeList = new ArrayList<>();
@@ -675,18 +676,25 @@ public class RecipeController {
 		mav.addObject("mergeList", mergeList);
 		return mav;
 	}
-
+	
+	// after user inputs new item from merge page, delete old ingredients & add new item
 	@RequestMapping("/complete-merge")
 	public ModelAndView completeMerge(@SessionAttribute("user") User user,
-			@RequestParam("mergeList") List<Long> mergeList, @RequestParam("newIngredient") String newIngredient) {
-
+			@RequestParam("mergeList") List<Long> mergeList, 
+			@RequestParam("newIngredient") String newIngredient) {
+		
+		// create new ingredient from user input
+		Ingredient userIngredient = new Ingredient();
+		userIngredient.setText(newIngredient);
+		
+		userIngredient.setFavorite(ingredientDao.findById(mergeList.get(0)).getFavorite());
+		
+		ingredientDao.create(userIngredient);
+		
+		// deletes items from merge list
 		for (Long id : mergeList) {
 			ingredientDao.delete(id);
 		}
-
-		Ingredient ingredient = new Ingredient();
-		ingredient.setText(newIngredient);
-		ingredientDao.create(ingredient);
 
 		ModelAndView mav = new ModelAndView("redirect:/shoppingcart");
 		return mav;
@@ -754,10 +762,12 @@ public class RecipeController {
 	@RequestMapping("/new-item-to-list")
 	public ModelAndView addItemToList(@SessionAttribute("user") User user, 
 			@RequestParam("newIngredient") String newIngredient,
+			@RequestParam("favorite") List<Long> favoriteIds,
 			RedirectAttributes redir) {
 		
 		Ingredient ingredient = new Ingredient();
 		ingredient.setText(newIngredient);
+		ingredient.setFavorite(favoriteDao.findById(favoriteIds.get(favoriteIds.size()-1)));
 		ingredientDao.create(ingredient);
 		
 		redir.addFlashAttribute("message", "Item added to list");
@@ -787,7 +797,7 @@ public class RecipeController {
 			@RequestParam("totalTime") int totalTime,
 			@RequestParam("yield") int yield, 
 			@RequestParam("ingredientLines") String [] ingredientLines){
-		ModelAndView mav = new ModelAndView("myrecipe");
+		ModelAndView mav = new ModelAndView("show-my-recipe");
 		
 		MyMeal mymeal = new MyMeal();
 		mymeal.setLabel(label);
@@ -806,12 +816,15 @@ public class RecipeController {
 		}
 		mymeal.setIngredientLines(ingr);
 		myMealDao.create(mymeal);
-		mav.addObject("label", label);
-		mav.addObject("totlTime", totalTime);
-		mav.addObject("yield", yield);
-		mav.addObject("ingredientLines", ingredientLines);
+		mav.addObject("myMeal", mymeal);
+		
 		
 		
 		return mav;
 	}
+//	@RequestMapping("show-my-recipe")
+//	public ModelAndView showRecipe() {
+//		ModelAndView mav = new ModelAndView("show-my-recipe");
+//				return mav;
+//	}
 }

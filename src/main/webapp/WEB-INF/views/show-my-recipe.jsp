@@ -4,9 +4,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HERE ARE YOUR RECIPES!</title>
+<title>Your Recipe's</title>
 </head>
+<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css" rel="stylesheet">	
 <body>
+<%@ include file="navbar.jsp"%>
+	<h1> YOUR RECIPES!</h1>
+	<tb> ${myMeal.label} ${myMeal.totalTime} ${myMeal.yield} ${myMeal.ingredientLines }   
 	
+	
+	
+	</tb>
 </body>
 </html>

@@ -68,6 +68,12 @@ public class FavoriteDao {
 		}
 	
 	}
+
+	public Favorite findById(Long id) {
+		return em.createQuery("FROM Favorite WHERE id = :id", Favorite.class)
+				.setParameter("id", id)
+				.getSingleResult();
+	}
 	
 	
 }
