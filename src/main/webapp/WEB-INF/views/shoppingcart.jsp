@@ -12,10 +12,15 @@
 <%@ include file="navbar.jsp"%>
 <div class="container">
 <br>
-	<h2>Shopping List for this week</h2>
-	<p><h4>Delete any items you already have on hand.</h4></p>
-	<p><h5>For items you want to combine, check the boxes and click "merge" at the bottom of the list.</h5></p>
-
+	<c:if test="${ not empty message }">
+		<div class="test" style="color: pink;">${ message }</div>
+	</c:if>
+	<h2 align="center">Shopping List for this week</h2><br>
+	<ul>
+	<li><h6>Delete any items you already have on hand.</h6>
+	<li><h6>To combine items, check the boxes and click "merge" at the bottom of the list.</h6>
+	<li><h6>You can add new items to the list by clicking "add" at the bottom of the list.</h6>
+</ul>
 	<form action="/merge">
 	<table class="table">
 			<thead>
@@ -39,6 +44,10 @@
 	<button type="submit" class="btn btn-warning">Merge</button>
 	<br><br>
 	</form>
+	<form action="/new-item-to-list">
+		<input type="text" name="newIngredient" placeholder="e.g. paper towels" style="width: 400px"><br><br>
+	<button type="submit" class="btn btn-info">Add new item to list</button>
+</form>
 </div>
 
 <!-- <a href="/calendar" type="button" class="btn btn-success" style="margin:5px">Back to Calendar!</a>
