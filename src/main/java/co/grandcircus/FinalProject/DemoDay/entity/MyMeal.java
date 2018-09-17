@@ -1,5 +1,6 @@
 package co.grandcircus.FinalProject.DemoDay.entity;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,7 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class MyMeal {
+public class MyMeal implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;

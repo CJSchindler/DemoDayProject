@@ -1,5 +1,6 @@
 package co.grandcircus.FinalProject.DemoDay.entity;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,9 +15,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="favorite")
-public class Favorite {
+public class Favorite implements Serializable {
 
-	
+	private static final long serialVersionUID = 1L;
+
 	@ManyToOne
 	private User user;
 	

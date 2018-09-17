@@ -21,14 +21,14 @@
 	<div class="progress">
   	<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width:${progressTime }%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 	</div>
-	<c:if test="${not empty message }">
-		<div class="test" style="color: pink;">${message }</div>
+	<c:if test="${ not empty message }">
+		<div class="test" style="color: pink;">${ message }</div>
 	</c:if>
 
 	<table class="table table-hover">
 	<thead>
 	<tr>
-	<th scope="col"> 
+	<th scope="col">
 	<c:if test="${whichWeek eq 'future'}"> <a href="/calendar" class="btn btn-secondary" >Previous Week</a> </c:if>
 	</th>
 	<th scope="col"> </th>
@@ -57,30 +57,28 @@
 				<th scope="col">Saturday<br /> ${saturday}
 				</th>
 
-			</tr> 
+			</tr>
 		</thead>
 
 		<tbody>
-			
+
 			<tr class="table-primary">
 				<td rowspan="3">
 				<c:if test="${empty sundayMeal }">
 				<form action="/display/${sunday }" method="post">
 				<%@ include file="dropdown.jsp"%>
 						<label><input type="radio" name="searchType"
-							value="favorites"> Search Favorites</label> 
+							value="favorites"> Search Favorites</label>
 							<label><input
 							type="radio" name="searchType" value="new">Search new
 						recipes</label>
-						<label><input type="radio" name="searchType"
-							value="myMeals"> Search My Meals</label>
 						<button type="submit" class="btn btn-primary btn-lg">
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
 					</form>
 					<br />
 					</c:if>
-					
+
 			<c:if test="${not empty sundayMeal }">
 			<div class="container">
 			<img src="${sundayMeal.image }" alt="${sundayMeal.label}" class="image" style="width:100%">
@@ -91,28 +89,26 @@
 			<p><a href="${sundayMeal.url }">${sundayMeal.label }</a></p>
 			<p class="text-danger"><i>Prep time: <br><b>${sundayMeal.totalTime } minutes</b></i></p>
 			</c:if>
-			
+
 					</td>
-				
+
 
 				<td rowspan="3">
 				<c:if test="${empty mondayMeal }">
 				<form action="/display/${monday }" method="post">
 				<%@ include file="dropdown.jsp"%>
 						<label><input type="radio" name="searchType"
-							value="favorites"> Search Favorites</label> 
+							value="favorites"> Search Favorites</label>
 							<label><input
 							type="radio" name="searchType" value="new">Search new
 						recipes</label>
-						<label><input type="radio" name="searchType"
-							value="myMeals"> Search My Meals</label>
 						<button type="submit" class="btn btn-secondary btn-lg">
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
 					</form>
 					<br />
 					</c:if>
-					
+
 			<c:if test="${not empty mondayMeal }">
 			<div class="container">
 			<img src="${mondayMeal.image }" alt="${mondayMeal.label}" class="image" style="width:100%;">
@@ -130,20 +126,18 @@
 				<form action="/display/${tuesday }" method="post">
 				<%@ include file="dropdown.jsp"%>
 						<label><input type="radio" name="searchType"
-							value="favorites"> Search Favorites</label> 
+							value="favorites"> Search Favorites</label>
 							<label><input
 							type="radio" name="searchType" value="new">Search new
 						recipes</label>
-						<label><input type="radio" name="searchType"
-							value="myMeals"> Search My Meals</label>
 						<button type="submit" class="btn btn-primary btn-lg">
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
 					</form>
 						<br />
 						</c:if>
-					
-					
+
+
 			<c:if test="${not empty tuesdayMeal }">
 			<div class="container">
 			<img src="${tuesdayMeal.image }" alt="${tuesdayMeal.label}" class="image" style="width:100%; ">
@@ -161,19 +155,17 @@
 				<form action="/display/${wednesday }" method="post">
 				<%@ include file="dropdown.jsp"%>
 						<label><input type="radio" name="searchType"
-							value="favorites"> Search Favorites</label> 
+							value="favorites"> Search Favorites</label>
 							<label><input
 							type="radio" name="searchType" value="new">Search new
 						recipes</label>
-						<label><input type="radio" name="searchType"
-							value="myMeals"> Search My Meals</label>
 						<button type="submit" class="btn btn-secondary btn-lg">
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
 					</form>
 						<br />
 						</c:if>
-					
+
 			<c:if test="${not empty wednesdayMeal }">
 			<div class="container">
 			<img src="${wednesdayMeal.image }" alt="${wednesdayMeal.label}" class="image" style="width:100%; ">
@@ -191,19 +183,17 @@
 				<form action="/display/${thursday }" method="post">
 				<%@ include file="dropdown.jsp"%>
 						<label><input type="radio" name="searchType"
-							value="favorites"> Search Favorites</label> 
+							value="favorites"> Search Favorites</label>
 							<label><input
 							type="radio" name="searchType" value="new">Search new
 						recipes</label>
-						<label><input type="radio" name="searchType"
-							value="myMeals"> Search My Meals</label>
 						<button type="submit" class="btn btn-primary btn-lg">
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
 					</form>
 							<br />
 							</c:if>
-					
+
 			<c:if test="${not empty thursdayMeal }">
 			<div class="container">
 			<img src="${thursdayMeal.image }" alt="${thursdayMeal.label}" class="image" style="width:100%; ">
@@ -221,19 +211,17 @@
 				<form action="/display/${friday }" method="post">
 				<%@ include file="dropdown.jsp"%>
 						<label><input type="radio" name="searchType"
-							value="favorites"> Search Favorites</label> 
+							value="favorites"> Search Favorites</label>
 							<label><input
 							type="radio" name="searchType" value="new">Search new
 						recipes</label>
-						<label><input type="radio" name="searchType"
-							value="myMeals"> Search My Meals</label>
 						<button type="submit" class="btn btn-secondary btn-lg">
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
 					</form>
 							<br />
 							</c:if>
-					
+
 			<c:if test="${not empty fridayMeal }">
 			<div class="container">
 			<img src="${fridayMeal.image }" alt="${fridayMeal.label}" class="image" style="width:100%; ">
@@ -251,19 +239,17 @@
 				<form action="/display/${saturday }" method="post">
 				<%@ include file="dropdown.jsp"%>
 						<label><input type="radio" name="searchType"
-							value="favorites"> Search Favorites</label> 
+							value="favorites"> Search Favorites</label>
 							<label><input
 							type="radio" name="searchType" value="new">Search new
 						recipes</label>
-						<label><input type="radio" name="searchType"
-							value="myMeals"> Search My Meals</label>
 						<button type="submit" class="btn btn-primary btn-lg">
 							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
 					</form>
 					<br />
 					</c:if>
-					
+
 			<c:if test="${not empty saturdayMeal }">
 			<div class="container">
 			<img src="${saturdayMeal.image }" alt="${saturdayMeal.label}" class="image" style="width:100%; ">
@@ -275,10 +261,10 @@
 			<p class="text-danger"><i>Prep time: <br><b>${saturdayMeal.totalTime } minutes</b></i></p>
 			</c:if>
 					</td>
-			
+
 		</tbody>
 	</table>
 
-<a href="/shoppingcart" class="btn btn-secondary">What's on my shopping list?</a>
+<a href="/shoppingcart" class="btn btn-secondary mb-3">What's on my shopping list?</a>
 </body>
 </html>

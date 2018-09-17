@@ -19,9 +19,6 @@
         <a class="nav-link" href="/calendar">  Calendar <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/shoppingcart">My Shopping List</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="/myrecipe">Add My Own Recipe</a>
       </li>
        <!-- <li class="nav-item">
