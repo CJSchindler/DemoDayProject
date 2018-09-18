@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -112,9 +113,14 @@
 						<td><img src="${recipe.image}" width=60%></td>
 						<td><a href="${recipe.url}">${recipe.label}</a></td>
 						<td>
-							<c:forEach var="ingredient" items="${recipe.ingredientLines}">
+							<!--<c:forEach var="ingredient" items="${recipe.ingredientLines}">
 							<p>${ingredient}</p>
 							</c:forEach>
+						-->
+						<c:set var="ingredients" value="${fn:split(recipe.ingredientLines, '--') }"/>
+						<c:forEach var="ingredient" items="${ingredients }">
+						<p>${ingredient }</p>
+						</c:forEach>
 						</td>
 						<td>${recipe.totalTime} minutes</td>
 						<td>${recipe.yield} servings</td>

@@ -671,7 +671,7 @@ public class RecipeController {
 		for (int i = 0; i < ingredientLines.length; i++) {
 			
 			if (i != ingredientLines.length - 1) {
-			ingr += ingredientLines[i] + "++";
+			ingr += ingredientLines[i] + "--";
 			}
 			
 			else {
@@ -722,7 +722,7 @@ public class RecipeController {
 		for (int i = 0; i < ingredientLines.length; i++) {
 			
 			if (i != ingredientLines.length - 1) {
-			ingr += ingredientLines[i] + "++";
+			ingr += ingredientLines[i] + "--";
 			}
 			
 			else {
@@ -965,9 +965,9 @@ public class RecipeController {
 	}
 
 	@RequestMapping("/delete/myMeal/{date}")
-	public ModelAndView deleteMyMeal(@SessionAttribute("user") User user, @PathVariable("meal_date") String meal_date) {
+	public ModelAndView deleteMyMeal(@SessionAttribute("user") User user, @PathVariable("date") String meal_date) {
 		myMealDao.delete(myMealDao.findByUserByDate(user, meal_date).getId());
-		return new ModelAndView("redirect: /calendar");
+		return new ModelAndView("redirect:/calendar");
 	}
 	
 	@RequestMapping("/all-new-recipes")

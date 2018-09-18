@@ -97,7 +97,7 @@
 			<div class="container">
 			<img src="${sundayMeal.image }" alt="${sundayMeal.label}" class="image" style="width:100%">
 			<div class="middle">
-			<div class="text"><a href="/deleteFavorite/${sunday}" >Delete Item</a></div>
+			<div class="text"><a href="/delete/myMeal/${sunday}" >Delete Item</a></div>
 			</div>
 			</div>
 			<p>${sundayMeal.label }</p>
@@ -143,7 +143,7 @@
 			<div class="container">
 			<img src="${mondayMeal.image }" alt="${mondayMeal.label}" class="image" style="width:100%;">
 			<div class="middle">
-			<div class="text"><a href="/deleteFavorite/${monday}" >Delete Item</a></div>
+			<div class="text"><a href="/delete/myMeal/${monday}" >Delete Item</a></div>
 			</div>
 			</div>
 			<p>${mondayMeal.label }</p>
@@ -190,7 +190,7 @@
 			<div class="container">
 			<img src="${tuesdayMeal.image }" alt="${tuesdayMeal.label}" class="image" style="width:100%; ">
 			<div class="middle">
-			<div class="text"><a href="/deleteFavorite/${tuesday}" >Delete Item</a></div>
+			<div class="text"><a href="/delete/myMeal/${tuesday}" >Delete Item</a></div>
 			</div>
 			</div>
 			<p>${tuesdayMeal.label }</p>
@@ -236,7 +236,7 @@
 			<div class="container">
 			<img src="${wednesdayMeal.image }" alt="${wednesdayMeal.label}" class="image" style="width:100%; ">
 			<div class="middle">
-			<div class="text"><a href="/deleteFavorite/${wednesday}" >Delete Item</a></div>
+			<div class="text"><a href="/delete/myMeal/${wednesday}" >Delete Item</a></div>
 			</div>
 			</div>
 			<p>${wednesdayMeal.label }</p>
@@ -280,7 +280,7 @@
 			<div class="container">
 			<img src="${thursdayMeal.image }" alt="${thursdayMeal.label}" class="image" style="width:100%; ">
 			<div class="middle">
-			<div class="text"><a href="/deleteFavorite/${thursday}" >Delete Item</a></div>
+			<div class="text"><a href="/delete/myMeal/${thursday}" >Delete Item</a></div>
 			</div>
 			</div>
 			<p>${thursdayMeal.label }</p>
@@ -324,7 +324,7 @@
 			<div class="container">
 			<img src="${fridayMeal.image }" alt="${fridayMeal.label}" class="image" style="width:100%; ">
 			<div class="middle">
-			<div class="text"><a href="/deleteFavorite/${friday}" >Delete Item</a></div>
+			<div class="text"><a href="/delete/myMeal/${friday}" >Delete Item</a></div>
 			</div>
 			</div>
 			<p>${fridayMeal.label }</p>
@@ -369,7 +369,7 @@
 			<div class="container">
 			<img src="${saturdayMeal.image }" alt="${saturdayMeal.label}" class="image" style="width:100%; ">
 			<div class="middle">
-			<div class="text"><a href="/deleteFavorite/${saturday}" >Delete Item</a></div>
+			<div class="text"><a href="/delete/myMeal/${saturday}" >Delete Item</a></div>
 			</div>
 			</div>
 			<p><a href="${saturdayMeal.url }">${saturdayMeal.label }</a></p>
