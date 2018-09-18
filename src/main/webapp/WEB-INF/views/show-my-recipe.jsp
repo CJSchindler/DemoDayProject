@@ -12,26 +12,33 @@
 	rel="stylesheet">
 <body>
 	<%@ include file="navbar.jsp"%>
-	<h1>YOUR RECIPES!</h1>
-	<table class="table-hover">
+
+	<main class="container">
+	<table class="table">
 		<thead>
 			<tr>
 				<th>Recipe</th>
 				<th>Total Time</th>
 				<th>Yield</th>
 				<th>Ingredients</th>
+
 			</tr>
 		</thead>
-		<tr>
-			<td>${myMeal.label}</td>
-			<td>${myMeal.totalTime}</td>
-			<td>${myMeal.yield}</td>
+		<tbody>
+			<tr>
 
-			<td><c:forEach var="ingredient" items="${ingredientList}"> 
-				<p>${ingredient }</p>
-				</c:forEach></td>
+				<td>${myMeal.label}</td>
+				<td>${myMeal.totalTime}</td>
+				<td>${myMeal.yield}</td>
 
-		</tr>
+				<td><c:forEach var="ingredient" items="${ingredientList}">
+						<p>${ingredient }</p>
+					</c:forEach></td>
+
+			</tr>
+		</tbody>
 	</table>
+	</main>
+
 </body>
 </html>
