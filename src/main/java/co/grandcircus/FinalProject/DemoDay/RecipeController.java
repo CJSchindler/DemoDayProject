@@ -353,6 +353,41 @@ public class RecipeController {
 			progressTime += 100 / 7;
 			mav.addObject("saturdayMeal", favoriteDao.findByUserByDate(user, saturdayString));
 		}
+		
+		if (myMealDao.findByUserByDate(user, sundayString) != null) {
+			progressTime += 100 / 7;
+			mav.addObject("sundayMeal", myMealDao.findByUserByDate(user, sundayString));
+		}
+
+		if (myMealDao.findByUserByDate(user, mondayString) != null) {
+			progressTime += 100 / 7;
+			mav.addObject("mondayMeal", myMealDao.findByUserByDate(user, mondayString));
+		}
+
+		if (myMealDao.findByUserByDate(user, tuesdayString) != null) {
+			progressTime += 100 / 7;
+			mav.addObject("tuesdayMeal", myMealDao.findByUserByDate(user, tuesdayString));
+		}
+
+		if (myMealDao.findByUserByDate(user, wednesdayString) != null) {
+			progressTime += 100 / 7;
+			mav.addObject("wednesdayMeal", myMealDao.findByUserByDate(user, wednesdayString));
+		}
+
+		if (myMealDao.findByUserByDate(user, thursdayString) != null) {
+			progressTime += 100 / 7;
+			mav.addObject("thursdayMeal", myMealDao.findByUserByDate(user, thursdayString));
+		}
+
+		if (myMealDao.findByUserByDate(user, fridayString) != null) {
+			progressTime += 100 / 7;
+			mav.addObject("fridayMeal", myMealDao.findByUserByDate(user, fridayString));
+		}
+
+		if (myMealDao.findByUserByDate(user, saturdayString) != null) {
+			progressTime += 100 / 7;
+			mav.addObject("saturdayMeal", myMealDao.findByUserByDate(user, saturdayString));
+		}
 
 		mav.addObject("progressTime", progressTime);
 
@@ -503,6 +538,41 @@ public class RecipeController {
 			progressTime += 100/7;
 			mav.addObject("saturdayMeal",
 					favoriteDao.findByUserByDate(user, saturdayString));
+		}
+		
+		if (myMealDao.findByUserByDate(user, sundayString) != null) {
+			progressTime += 100 / 7;
+			mav.addObject("sundayMeal", myMealDao.findByUserByDate(user, sundayString));
+		}
+
+		if (myMealDao.findByUserByDate(user, mondayString) != null) {
+			progressTime += 100 / 7;
+			mav.addObject("mondayMeal", myMealDao.findByUserByDate(user, mondayString));
+		}
+
+		if (myMealDao.findByUserByDate(user, tuesdayString) != null) {
+			progressTime += 100 / 7;
+			mav.addObject("tuesdayMeal", myMealDao.findByUserByDate(user, tuesdayString));
+		}
+
+		if (myMealDao.findByUserByDate(user, wednesdayString) != null) {
+			progressTime += 100 / 7;
+			mav.addObject("wednesdayMeal", myMealDao.findByUserByDate(user, wednesdayString));
+		}
+
+		if (myMealDao.findByUserByDate(user, thursdayString) != null) {
+			progressTime += 100 / 7;
+			mav.addObject("thursdayMeal", myMealDao.findByUserByDate(user, thursdayString));
+		}
+
+		if (myMealDao.findByUserByDate(user, fridayString) != null) {
+			progressTime += 100 / 7;
+			mav.addObject("fridayMeal", myMealDao.findByUserByDate(user, fridayString));
+		}
+
+		if (myMealDao.findByUserByDate(user, saturdayString) != null) {
+			progressTime += 100 / 7;
+			mav.addObject("saturdayMeal", myMealDao.findByUserByDate(user, saturdayString));
 		}
 
 		mav.addObject("progressTime", progressTime);

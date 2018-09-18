@@ -4,34 +4,95 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css">
 <title>Add Your Recipe!</title>
 </head>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css">
+
 
 <body>
+<%@ include file="navbar.jsp"%>
+<div class ="container">
 
-<form action="/myrecipe" method= "post">
-	<%@ include file="navbar.jsp"%>
+	
 	<div class="progress">
 		<div class="progress-bar progress-bar-striped bg-warning"
 			role="progressbar" style="width:${progressTime }%"
 			aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 	</div>
+	
+	<form action="/myrecipe" method= "post">
 	<h1>Please fill in these items!</h1>
-	<p>
-		Name of Recipe: <input name="label" required />
-	</p>
-	<p>
-		Yields: <input name="yield" required />
-	</p>
-	<p>
-		Time: <input name="totalTime" required />
-	</p>
+	
+	<div class="row"><label>
+		Name of Recipe: <input type="text" name="label" required />
+	</label></div>
+	<div class="row"><label>
+		Yields (number of servings): <input type="number" name="yield" required />
+	</label></div>
+	<div class="row"><label>
+		Time (in minutes): <input type="number" name="totalTime" required />
+	</label></div>
+	
+	<div class="row">
+		<input type="hidden" name="count" value="1" />
+        <div class="control-group" id="fields">
+            <label class="control-label" for="field1">Ingredients (include quantity, measure, and type)</label>
+            <div class="controls" id="profs"> 
+                <div class="input-append">
+                    <div id="field"><input autocomplete="off" class="input" id="field1" name="ingredientLines" type="text" placeholder="Add ingredient" data-items="8"/>
+                    <button id="b1" class="btn add-more" type="button">+</button></div>
+                </div>
+            <br>
+            <small>Press + to add another ingredient:)</small>
+            </div>
+        </div>
+	</div>
+	
+	<button type="submit" class="btn-btn-primary mb-2">Add My
+		Recipe!</button>
+		</form>
 		
-	<div id="room_fileds">
+		
+		</div>
+	
+		
+		<script>
+		$(document).ready(function(){
+		    var next = 1;
+		    $(".add-more").click(function(e){
+		        e.preventDefault();
+		        var addto = "#field" + next;
+		        var addRemove = "#field" + (next);
+		        next = next + 1;
+		        var newIn = '<input autocomplete="off" class="input form-control" id="field' + next + '" name="ingredientLines" type="text">';
+		        var newInput = $(newIn);
+		        var removeBtn = '<button id="remove' + (next - 1) + '" class="btn btn-danger remove-me" >-</button></div><div id="field">';
+		        var removeButton = $(removeBtn);
+		        $(addto).after(newInput);
+		        $(addRemove).after(removeButton);
+		        $("#field" + next).attr('data-source',$(addto).attr('data-source'));
+		        $("#count").val(next);  
+		        
+		            $('.remove-me').click(function(e){
+		                e.preventDefault();
+		                var fieldNum = this.id.charAt(this.id.length-1);
+		                var fieldID = "#field" + fieldNum;
+		                $(this).remove();
+		                $(fieldID).remove();
+		            });
+		    });
+		    
+
+		    
+		});
+		</script>
+		
+		<!-- 
+		
+			  <div id="room_fileds">
 		<div class='label'>Ingredients: <input type="text" name="ingredientLines" required><br><br></div>
 		<div class="content" id="ingredient">
 		</div>
@@ -39,9 +100,7 @@
 		value="Add More Ingredients" /><br> <br>
 		
 	</div>
-	<button type="submit" class="btn-btn-primary mb-2">Add My
-		Recipe!</button>
-		
+	
 <script>
  function add_fields() {
     document.getElementById('ingredient').innerHTML += 
@@ -50,6 +109,8 @@
 
 
 </script>
+
+-->
 
 
 </body>
