@@ -845,7 +845,6 @@ public class RecipeController {
 		return new ModelAndView("redirect:/shoppingcart");
 	}
 	
-
 	@RequestMapping("/shoppingcart/{id}/delete")
 	public ModelAndView delete(@PathVariable("id") Long id) {
 		ingredientDao.delete(id);
@@ -893,9 +892,25 @@ public class RecipeController {
 		
 		return mav;
 	}
-//	@RequestMapping("show-my-recipe")
-//	public ModelAndView showRecipe() {
-//		ModelAndView mav = new ModelAndView("show-my-recipe");
-//				return mav;
-//	}
+
+	@RequestMapping("/delete/myMeal/{date}")
+	public ModelAndView deleteMyMeal(@SessionAttribute("user") User user, @PathVariable("meal_date") String meal_date) {
+		myMealDao.delete(myMealDao.findByUserByDate(user, meal_date).getId());
+		return new ModelAndView("redirect: /calendar");
+	}
+	
+	@RequestMapping("/all-new-recipes")
+	public ModelAndView showAllNewRecipes(@SessionAttribute("user") User user) {
+	ModelAndView mav = new ModelAndView ("all-new-recipes");
+	List<MyMeal>myMeals = myMealDao.findByUser(user);
+	
+	mav.addObject("myMeals", myMeals);
+		return mav;
+	}
+	
+	@RequestMapping("/all-new-recipes/{id}/delete")
+	public ModelAndView deleteNewRecipe(@PathVariable("id") Long id) {
+		myMealDao.delete(id);
+		return new ModelAndView("redirect:/all-new-recipes");
+	}
 }

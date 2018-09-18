@@ -121,6 +121,12 @@ public class MyMeal implements Serializable {
 	public void setIngredientLines(String ingredientLines) {
 		this.ingredientLines = ingredientLines;
 	}
+
+
+	@Override
+	public String toString() {
+		return label + "    " + totalTime + "    " +  yield + "    " + ingredientLines + "    " + image;
+	}
 	
 	
 }

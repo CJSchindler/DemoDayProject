@@ -21,6 +21,9 @@
       <li class="nav-item">
         <a class="nav-link" href="/myrecipe">Add My Own Recipe</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/all-new-recipes">Your Recipes</a>
+      </li>
        <!-- <li class="nav-item">
         <a class="nav-link" href="/shoppingcart">Shopping Cart</a>
       </li> -->

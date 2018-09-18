@@ -23,7 +23,7 @@ public class MyMealDao {
 	}
 	
 	public List<MyMeal> findByUser(User user) {
-		return em.createQuery("FROM MyMeal WHERE user = :user", MyMeal.class)
+		return em.createQuery("FROM MyMeal WHERE user = :user AND meal_date = null", MyMeal.class)
 				.setParameter("user", user)
 				.getResultList();
 	}
