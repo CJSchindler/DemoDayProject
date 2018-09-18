@@ -82,6 +82,8 @@
 					</c:if>
 
 			<c:if test="${not empty sundayMeal }">
+			<c:choose>
+			<c:when test="${mealType eq 'favorite'}">
 			<div class="container">
 			<img src="${sundayMeal.image }" alt="${sundayMeal.label}" class="image" style="width:100%">
 			<div class="middle">
@@ -90,6 +92,18 @@
 			</div>
 			<p><a href="${sundayMeal.url }">${sundayMeal.label }</a></p>
 			<p class="text-danger"><i>Prep time: <br><b>${sundayMeal.totalTime } minutes</b></i></p>
+			</c:when>
+			<c:when test="${mealType eq 'myMeal'}">
+			<div class="container">
+			<img src="${sundayMeal.image }" alt="${sundayMeal.label}" class="image" style="width:100%">
+			<div class="middle">
+			<div class="text"><a href="/deleteFavorite/${sunday}" >Delete Item</a></div>
+			</div>
+			</div>
+			<p>${sundayMeal.label }</p>
+			<p class="text-danger"><i>Prep time: <br><b>${sundayMeal.totalTime } minutes</b></i></p>
+			</c:when>
+			</c:choose>
 			</c:if>
 
 					</td>
@@ -114,6 +128,8 @@
 					</c:if>
 
 			<c:if test="${not empty mondayMeal }">
+			<c:choose>
+			<c:when test="${mealType eq 'favorite'}">
 			<div class="container">
 			<img src="${mondayMeal.image }" alt="${mondayMeal.label}" class="image" style="width:100%;">
 			<div class="middle">
@@ -122,6 +138,19 @@
 			</div>
 			<p><a href="${mondayMeal.url }">${mondayMeal.label }</a></p>
 			<p class="text-danger"><i>Prep time: <br><b>${mondayMeal.totalTime } minutes</b></i></p>
+			</c:when>
+			<c:when test="${mealType eq 'myMeal' }">
+			<div class="container">
+			<img src="${mondayMeal.image }" alt="${mondayMeal.label}" class="image" style="width:100%;">
+			<div class="middle">
+			<div class="text"><a href="/deleteFavorite/${monday}" >Delete Item</a></div>
+			</div>
+			</div>
+			<p>${mondayMeal.label }</p>
+			<p class="text-danger"><i>Prep time: <br><b>${mondayMeal.totalTime } minutes</b></i></p>
+			</c:when>
+			
+			</c:choose>
 			</c:if>
 					</td>
 
@@ -145,6 +174,8 @@
 
 
 			<c:if test="${not empty tuesdayMeal }">
+			<c:choose>
+			<c:when test="${mealType eq 'favorite'}">
 			<div class="container">
 			<img src="${tuesdayMeal.image }" alt="${tuesdayMeal.label}" class="image" style="width:100%; ">
 			<div class="middle">
@@ -153,6 +184,20 @@
 			</div>
 			<p><a href="${tuesdayMeal.url }">${tuesdayMeal.label }</a></p>
 			<p class="text-danger"><i>Prep time: <br><b>${tuesdayMeal.totalTime } minutes</b></i></p>
+			</c:when>
+			
+			<c:when test="${mealType eq 'myMeal' }">
+			<div class="container">
+			<img src="${tuesdayMeal.image }" alt="${tuesdayMeal.label}" class="image" style="width:100%; ">
+			<div class="middle">
+			<div class="text"><a href="/deleteFavorite/${tuesday}" >Delete Item</a></div>
+			</div>
+			</div>
+			<p>${tuesdayMeal.label }</p>
+			<p class="text-danger"><i>Prep time: <br><b>${tuesdayMeal.totalTime } minutes</b></i></p>
+			
+			</c:when>
+			</c:choose>
 			</c:if>
 					</td>
 
@@ -175,6 +220,8 @@
 						</c:if>
 
 			<c:if test="${not empty wednesdayMeal }">
+			<c:choose>
+			<c:when test="${mealType eq 'favorite'}">
 			<div class="container">
 			<img src="${wednesdayMeal.image }" alt="${wednesdayMeal.label}" class="image" style="width:100%; ">
 			<div class="middle">
@@ -183,6 +230,19 @@
 			</div>
 			<p><a href="${wednesdayMeal.url }">${wednesdayMeal.label }</a></p>
 			<p class="text-danger"><i>Prep time: <br><b>${wednesdayMeal.totalTime } minutes</b></i></p>
+			</c:when>
+			
+			<c:when test="${mealType eq 'myMeal' }">
+			<div class="container">
+			<img src="${wednesdayMeal.image }" alt="${wednesdayMeal.label}" class="image" style="width:100%; ">
+			<div class="middle">
+			<div class="text"><a href="/deleteFavorite/${wednesday}" >Delete Item</a></div>
+			</div>
+			</div>
+			<p>${wednesdayMeal.label }</p>
+			<p class="text-danger"><i>Prep time: <br><b>${wednesdayMeal.totalTime } minutes</b></i></p>
+			</c:when>
+			</c:choose>
 			</c:if>
 					</td>
 
@@ -205,6 +265,8 @@
 							</c:if>
 
 			<c:if test="${not empty thursdayMeal }">
+			<c:choose>
+			<c:when test="${mealType eq 'favorite'}">
 			<div class="container">
 			<img src="${thursdayMeal.image }" alt="${thursdayMeal.label}" class="image" style="width:100%; ">
 			<div class="middle">
@@ -213,6 +275,18 @@
 			</div>
 			<p><a href="${thursdayMeal.url }">${thursdayMeal.label }</a></p>
 			<p class="text-danger"><i>Prep time: <br><b>${thursdayMeal.totalTime } minutes</b></i></p>
+			</c:when>
+			<c:when test="${mealType eq 'myMeal' }">
+			<div class="container">
+			<img src="${thursdayMeal.image }" alt="${thursdayMeal.label}" class="image" style="width:100%; ">
+			<div class="middle">
+			<div class="text"><a href="/deleteFavorite/${thursday}" >Delete Item</a></div>
+			</div>
+			</div>
+			<p>${thursdayMeal.label }</p>
+			<p class="text-danger"><i>Prep time: <br><b>${thursdayMeal.totalTime } minutes</b></i></p>
+			</c:when>
+			</c:choose>
 			</c:if>
 					</td>
 
@@ -235,6 +309,8 @@
 							</c:if>
 
 			<c:if test="${not empty fridayMeal }">
+			<c:choose>
+			<c:when test="${mealType eq 'favorite'}">
 			<div class="container">
 			<img src="${fridayMeal.image }" alt="${fridayMeal.label}" class="image" style="width:100%; ">
 			<div class="middle">
@@ -243,6 +319,19 @@
 			</div>
 			<p><a href="${fridayMeal.url }">${fridayMeal.label }</a></p>
 			<p class="text-danger"><i>Prep time: <br><b>${fridayMeal.totalTime } minutes</b></i></p>
+			</c:when>
+			<c:when test="${mealType eq 'myMeal' }">
+			<div class="container">
+			<img src="${fridayMeal.image }" alt="${fridayMeal.label}" class="image" style="width:100%; ">
+			<div class="middle">
+			<div class="text"><a href="/deleteFavorite/${friday}" >Delete Item</a></div>
+			</div>
+			</div>
+			<p>${fridayMeal.label }</p>
+			<p class="text-danger"><i>Prep time: <br><b>${fridayMeal.totalTime } minutes</b></i></p>
+			
+			</c:when>
+			</c:choose>
 			</c:if>
 					</td>
 
@@ -265,6 +354,8 @@
 					</c:if>
 
 			<c:if test="${not empty saturdayMeal }">
+			<c:choose>
+			<c:when test="${mealType eq 'favorite'}">
 			<div class="container">
 			<img src="${saturdayMeal.image }" alt="${saturdayMeal.label}" class="image" style="width:100%; ">
 			<div class="middle">
@@ -273,6 +364,18 @@
 			</div>
 			<p><a href="${saturdayMeal.url }">${saturdayMeal.label }</a></p>
 			<p class="text-danger"><i>Prep time: <br><b>${saturdayMeal.totalTime } minutes</b></i></p>
+			</c:when>
+			<c:when test="${mealType eq 'myMeal' }">
+			<div class="container">
+			<img src="${saturdayMeal.image }" alt="${saturdayMeal.label}" class="image" style="width:100%; ">
+			<div class="middle">
+			<div class="text"><a href="/deleteFavorite/${saturday}" >Delete Item</a></div>
+			</div>
+			</div>
+			<p><a href="${saturdayMeal.url }">${saturdayMeal.label }</a></p>
+			<p class="text-danger"><i>Prep time: <br><b>${saturdayMeal.totalTime } minutes</b></i></p>
+			</c:when>
+			</c:choose>
 			</c:if>
 					</td>
 
