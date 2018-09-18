@@ -318,79 +318,52 @@ public class RecipeController {
 		mav.addObject("saturday", saturdayString);
 
 		int progressTime = 0;
+		int timePerWeek = 0;
 
 		if (favoriteDao.findByUserByDate(user, sundayString) != null) {
 			progressTime += 100 / 7;
+			timePerWeek = timePerWeek + favoriteDao.findByUserByDate(user, sundayString).getTotalTime();
 			mav.addObject("sundayMeal", favoriteDao.findByUserByDate(user, sundayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, mondayString) != null) {
 			progressTime += 100 / 7;
+			timePerWeek = timePerWeek + favoriteDao.findByUserByDate(user, mondayString).getTotalTime();
 			mav.addObject("mondayMeal", favoriteDao.findByUserByDate(user, mondayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, tuesdayString) != null) {
 			progressTime += 100 / 7;
+			timePerWeek = timePerWeek + favoriteDao.findByUserByDate(user, tuesdayString).getTotalTime();
 			mav.addObject("tuesdayMeal", favoriteDao.findByUserByDate(user, tuesdayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, wednesdayString) != null) {
 			progressTime += 100 / 7;
+			timePerWeek = timePerWeek + favoriteDao.findByUserByDate(user, wednesdayString).getTotalTime();
 			mav.addObject("wednesdayMeal", favoriteDao.findByUserByDate(user, wednesdayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, thursdayString) != null) {
 			progressTime += 100 / 7;
+			timePerWeek = timePerWeek + favoriteDao.findByUserByDate(user, thursdayString).getTotalTime();
 			mav.addObject("thursdayMeal", favoriteDao.findByUserByDate(user, thursdayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, fridayString) != null) {
 			progressTime += 100 / 7;
+			timePerWeek = timePerWeek + favoriteDao.findByUserByDate(user, fridayString).getTotalTime();
 			mav.addObject("fridayMeal", favoriteDao.findByUserByDate(user, fridayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, saturdayString) != null) {
 			progressTime += 100 / 7;
+			timePerWeek = timePerWeek + favoriteDao.findByUserByDate(user, saturdayString).getTotalTime();
 			mav.addObject("saturdayMeal", favoriteDao.findByUserByDate(user, saturdayString));
 		}
 		
-		if (myMealDao.findByUserByDate(user, sundayString) != null) {
-			progressTime += 100 / 7;
-			mav.addObject("sundayMeal", myMealDao.findByUserByDate(user, sundayString));
-		}
-
-		if (myMealDao.findByUserByDate(user, mondayString) != null) {
-			progressTime += 100 / 7;
-			mav.addObject("mondayMeal", myMealDao.findByUserByDate(user, mondayString));
-		}
-
-		if (myMealDao.findByUserByDate(user, tuesdayString) != null) {
-			progressTime += 100 / 7;
-			mav.addObject("tuesdayMeal", myMealDao.findByUserByDate(user, tuesdayString));
-		}
-
-		if (myMealDao.findByUserByDate(user, wednesdayString) != null) {
-			progressTime += 100 / 7;
-			mav.addObject("wednesdayMeal", myMealDao.findByUserByDate(user, wednesdayString));
-		}
-
-		if (myMealDao.findByUserByDate(user, thursdayString) != null) {
-			progressTime += 100 / 7;
-			mav.addObject("thursdayMeal", myMealDao.findByUserByDate(user, thursdayString));
-		}
-
-		if (myMealDao.findByUserByDate(user, fridayString) != null) {
-			progressTime += 100 / 7;
-			mav.addObject("fridayMeal", myMealDao.findByUserByDate(user, fridayString));
-		}
-
-		if (myMealDao.findByUserByDate(user, saturdayString) != null) {
-			progressTime += 100 / 7;
-			mav.addObject("saturdayMeal", myMealDao.findByUserByDate(user, saturdayString));
-		}
-
 		mav.addObject("progressTime", progressTime);
-
+		mav.addObject("timePerWeek", timePerWeek);
 		return mav;
 	}
 
@@ -497,85 +470,101 @@ public class RecipeController {
 		mav.addObject("saturday", saturdayString);
 
 		int progressTime = 0;
+		int timePerWeek = 0;
 		
 		if (favoriteDao.findByUserByDate(user, sundayString) != null) {
 			progressTime += 100/7;
+			timePerWeek = timePerWeek + favoriteDao.findByUserByDate(user, sundayString).getTotalTime();
 			mav.addObject("sundayMeal",
 					favoriteDao.findByUserByDate(user, sundayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, mondayString) != null) {
 			progressTime += 100/7;
+			timePerWeek = timePerWeek + favoriteDao.findByUserByDate(user, mondayString).getTotalTime();
 			mav.addObject("mondayMeal",
 					favoriteDao.findByUserByDate(user, mondayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, tuesdayString) != null) {
 			progressTime += 100/7;
+			timePerWeek = timePerWeek + favoriteDao.findByUserByDate(user, tuesdayString).getTotalTime();
 			mav.addObject("tuesdayMeal",
 					favoriteDao.findByUserByDate(user, tuesdayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, wednesdayString) != null) {
 			progressTime += 100/7;
+			timePerWeek = timePerWeek + favoriteDao.findByUserByDate(user, wednesdayString).getTotalTime();
 			mav.addObject("wednesdayMeal",
 					favoriteDao.findByUserByDate(user, wednesdayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, thursdayString) != null) {
 			progressTime += 100/7;
+			timePerWeek = timePerWeek + favoriteDao.findByUserByDate(user, thursdayString).getTotalTime();
 			mav.addObject("thursdayMeal",
 					favoriteDao.findByUserByDate(user, thursdayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, fridayString) != null) {
 			progressTime += 100/7;
+			timePerWeek = timePerWeek + favoriteDao.findByUserByDate(user, fridayString).getTotalTime();
 			mav.addObject("fridayMeal",
 					favoriteDao.findByUserByDate(user, fridayString));
 		}
 
 		if (favoriteDao.findByUserByDate(user, saturdayString) != null) {
 			progressTime += 100/7;
+			timePerWeek = timePerWeek + favoriteDao.findByUserByDate(user, saturdayString).getTotalTime();
 			mav.addObject("saturdayMeal",
 					favoriteDao.findByUserByDate(user, saturdayString));
 		}
 		
 		if (myMealDao.findByUserByDate(user, sundayString) != null) {
 			progressTime += 100 / 7;
+			timePerWeek = timePerWeek + myMealDao.findByUserByDate(user, sundayString).getTotalTime();
 			mav.addObject("sundayMeal", myMealDao.findByUserByDate(user, sundayString));
 		}
 
 		if (myMealDao.findByUserByDate(user, mondayString) != null) {
 			progressTime += 100 / 7;
+			timePerWeek = timePerWeek + myMealDao.findByUserByDate(user, mondayString).getTotalTime();
 			mav.addObject("mondayMeal", myMealDao.findByUserByDate(user, mondayString));
 		}
 
 		if (myMealDao.findByUserByDate(user, tuesdayString) != null) {
 			progressTime += 100 / 7;
+			timePerWeek = timePerWeek + myMealDao.findByUserByDate(user, tuesdayString).getTotalTime();
 			mav.addObject("tuesdayMeal", myMealDao.findByUserByDate(user, tuesdayString));
 		}
 
 		if (myMealDao.findByUserByDate(user, wednesdayString) != null) {
 			progressTime += 100 / 7;
+			timePerWeek = timePerWeek + myMealDao.findByUserByDate(user, wednesdayString).getTotalTime();
 			mav.addObject("wednesdayMeal", myMealDao.findByUserByDate(user, wednesdayString));
 		}
 
 		if (myMealDao.findByUserByDate(user, thursdayString) != null) {
 			progressTime += 100 / 7;
+			timePerWeek = timePerWeek + myMealDao.findByUserByDate(user, thursdayString).getTotalTime();
 			mav.addObject("thursdayMeal", myMealDao.findByUserByDate(user, thursdayString));
 		}
 
 		if (myMealDao.findByUserByDate(user, fridayString) != null) {
 			progressTime += 100 / 7;
+			timePerWeek = timePerWeek + myMealDao.findByUserByDate(user, fridayString).getTotalTime();
 			mav.addObject("fridayMeal", myMealDao.findByUserByDate(user, fridayString));
 		}
 
 		if (myMealDao.findByUserByDate(user, saturdayString) != null) {
 			progressTime += 100 / 7;
+			timePerWeek = timePerWeek + myMealDao.findByUserByDate(user, saturdayString).getTotalTime();
 			mav.addObject("saturdayMeal", myMealDao.findByUserByDate(user, saturdayString));
 		}
 
 		mav.addObject("progressTime", progressTime);
+		mav.addObject("timePerWeek", timePerWeek);
 		
 		return mav;
 	}

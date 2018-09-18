@@ -16,8 +16,8 @@
 </head>
 <body>
 	<%@ include file="navbar.jsp"%>
-	<br>
-	Meal planning progress for this week...
+	<h3><span class="badge badge-warning float-right m-4" align="right">Cook time this week: ${ timePerWeek } minutes</span></h3>
+	<h4>Meal planning progress for this week...</h4>
 	<div class="progress">
   	<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width:${progressTime }%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 	</div>
@@ -280,5 +280,6 @@
 	</table>
 
 <a href="/shoppingcart/${sunday }/${saturday}" class="btn btn-secondary mb-3">What's on my shopping list?</a>
+
 </body>
 </html>
