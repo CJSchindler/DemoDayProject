@@ -122,7 +122,7 @@
 					</c:forEach>
 				</tbody>
 		</table>
-		<button type="submit">Add to menu</button>
+		<button type="submit" class="btn btn-secondary">Add to menu</button>
 		<br><br><br>
 		</form>
 
@@ -163,7 +163,7 @@
 					</c:forEach>
 				</tbody>
 		</table>
-		<button type="submit">Add to menu</button>
+		<button type="submit" class="btn btn-secondary">Add to menu</button>
 		<br><br><br>
 		</form>
 		</c:when>

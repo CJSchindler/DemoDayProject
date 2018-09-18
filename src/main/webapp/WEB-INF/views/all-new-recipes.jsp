@@ -13,7 +13,7 @@
 <body>
 	<%@ include file="navbar.jsp"%>
 
-
+<main class="container">
 	<table class="table">
             <thead>
                 <tr>
@@ -28,22 +28,19 @@
 
                     <td>${meals.label}</td> <td> ${meals.totalTime}</td> <td> ${meals.yield}</td> <td>${meals.ingredientLines}</td>
                     <td>
-						<a href="/delete?id=${meals.id }" class="btn btn-seconary" onclick= "return confirm('are you sure?')">Delete</a>
+						<a href="/delete?id=${meals.id }" class="btn btn-seconary" onclick= "return confirm('are you sure?')">Delete</a></td>
 
                     <td>${meals.label}</td> <td> ${meals.totalTime}</td>
-                   <td>
-						<%-- <a href="/update-item?id=${ items.id }" class="btn btn-light btn-sm">Edit</a> --%>
-						<a href="/delete?id=${meals.id }" type="button" class="btn btn-light btn-sm" onclick= "return confirm('are you sure?')">Delete</a>
+										<td><a href="/all-new-recipes/${meals.id}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
 
-					</td>
                 </tr>
 
                 </c:forEach>
             </tbody>
         </table>
 
-       	
-     
 
+
+</main>
 </body>
 </html>
