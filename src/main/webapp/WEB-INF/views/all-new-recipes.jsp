@@ -11,39 +11,36 @@
 	href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css"
 	rel="stylesheet">
 <body>
-<form action="/all-new-recipes" method= "post">
 	<%@ include file="navbar.jsp"%>
-	<%-- <h1>HERE ARE ALL OF YOUR RECIPES</h1>
-	<th>Name</th>
-	<th>Time</th>
-	<th>Yeild</th>
-	<th>Ingredients</th>
-	<table class="table-hover"> 
-	<c:forEach var="meals" items="${myMeals}">
-		<p>${meals}</p>
-	</c:forEach>
-	</table> --%>
-	
+
+<main class="container">
 	<table class="table">
             <thead>
                 <tr>
-                  <th>Name</th><th>Time</th> <th>Yeild</th><th>Ingredients</th>
+                  <th>Name</th><th>Time</th> <th>Yield</th><th>Ingredients</th>
+
                 </tr>
             </thead>
             <tbody>
                 <c:forEach var="meals" items="${myMeals}">
-                
+
                 <tr>
+
+                    <td>${meals.label}</td> <td> ${meals.totalTime}</td> <td> ${meals.yield}</td> <td>${meals.ingredientLines}</td>
+                    <td>
+						<a href="/delete?id=${meals.id }" class="btn btn-seconary" onclick= "return confirm('are you sure?')">Delete</a></td>
+
                     <td>${meals.label}</td> <td> ${meals.totalTime}</td>
-                   <%--  <td>
-						<a href="/update-item?id=${ items.id }" class="btn btn-light btn-sm">Edit</a>
-						<a href="/delete?id=${meals.id }" class="btn btn-light btn-sm" onclick= "return confirm('are you sure?')">Delete</a>
-						
-					</td>  --%>
+										<td><a href="/all-new-recipes/${meals.id}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+
                 </tr>
-               
+
                 </c:forEach>
             </tbody>
-        </table>	
+        </table>
+
+
+
+</main>
 </body>
 </html>

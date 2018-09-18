@@ -35,8 +35,8 @@
 					<td>
 					<input type="checkbox" name="merge" value="${ingredient.id}"></td>
 					<td>${ingredient.text}</td>
-					<td><input type="hidden" name="start" value="${start}"></td>
-					<td><input type="hidden" name="end" value="${end}"</td>
+					<td><input type="hidden" name="start" value="${start}" /></td>
+					<td><input type="hidden" name="end" value="${end}" /></td>
 					<td><a href="/shoppingcart/${ingredient.id}/delete/${start}/${end}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
 
 					</td>
