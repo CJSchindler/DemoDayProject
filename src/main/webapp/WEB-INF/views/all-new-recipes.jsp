@@ -12,28 +12,38 @@
 	rel="stylesheet">
 <body>
 	<%@ include file="navbar.jsp"%>
-	<main class="container">
-	>
+
+
 	<table class="table">
             <thead>
                 <tr>
-                  <th>Name</th><th>Time</th> <th>Yeild</th><th>Ingredients</th><th>Delete?</th>
+                  <th>Name</th><th>Time</th> <th>Yield</th><th>Ingredients</th>
+
                 </tr>
             </thead>
             <tbody>
                 <c:forEach var="meals" items="${myMeals}">
-                
+
                 <tr>
+
                     <td>${meals.label}</td> <td> ${meals.totalTime}</td> <td> ${meals.yield}</td> <td>${meals.ingredientLines}</td>
                     <td>
 						<a href="/delete?id=${meals.id }" class="btn btn-seconary" onclick= "return confirm('are you sure?')">Delete</a>
-					</td> 
+
+                    <td>${meals.label}</td> <td> ${meals.totalTime}</td>
+                   <td>
+						<%-- <a href="/update-item?id=${ items.id }" class="btn btn-light btn-sm">Edit</a> --%>
+						<a href="/delete?id=${meals.id }" type="button" class="btn btn-light btn-sm" onclick= "return confirm('are you sure?')">Delete</a>
+
+					</td>
                 </tr>
-               
+
                 </c:forEach>
             </tbody>
         </table>
+
        	
-        </main>
+     
+
 </body>
 </html>
