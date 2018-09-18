@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -49,6 +50,10 @@ public class RecipeController {
 
 	private LocalDate dateToday;
 	
+	@Value("${appKey}")
+	private String appKey;
+	@Value("${appId}")
+	private String appId;
 
 	// shows login page
 	@RequestMapping("/")
@@ -64,7 +69,7 @@ public class RecipeController {
 		return mav;
 	}
 
-	// Adds user information to database
+	// Adds new user information to database, checks for email address in DB, password verification
 	@PostMapping("/register")
 	public ModelAndView showRegistration(@RequestParam("first_name") String first_name,
 			@RequestParam("last_name") String last_name, @RequestParam("password") String password,
@@ -110,7 +115,7 @@ public class RecipeController {
 		}
 	}
 
-	// shows empty search box with day and time availability
+	// display: redirects to correct display for search type
 	@RequestMapping("/display/{date}")
 	public ModelAndView showSearch(@SessionAttribute("user") User user, @PathVariable("date") String date,
 			@RequestParam("time") int time, @RequestParam("searchType") String searchType, RedirectAttributes redir) {
@@ -144,12 +149,13 @@ public class RecipeController {
 		return mav;
 	}
 
-	// calls API to search using user's keyword and time availability
+	// NEW search calls API to search using user's keyword and time availability
 	// ("/display/{searchType}/{time}/{date}")
 	@RequestMapping("/display/new/{time}/{date}")
 	public ModelAndView showList(@SessionAttribute("user") User user,
 			@RequestParam(value = "keyword", required = false) String keyword,
-			@RequestParam("searchType") String searchType, @PathVariable("time") int time,
+			@RequestParam("searchType") String searchType, 
+			@PathVariable("time") int time,
 			@PathVariable("date") String date) {
 
 		ModelAndView mav = new ModelAndView("display");
@@ -159,9 +165,9 @@ public class RecipeController {
 		}
 		RestTemplate restTemplate = new RestTemplate();
 
-		String url = "https://api.edamam.com/search?q=" + keyword + "&app_id=328dd333"
-				+ "&app_key=2925530f7873bcd09aa1376f5114f08d" + "&from=0&to=10" // optional: limits number of
-																				// results
+		String url = "https://api.edamam.com/search?q=" + keyword + "&app_id=" + appId
+				+ "&app_key=" + appKey 
+				+ "&from=0&to=10" // optional: limits number of results
 				+ "&time=1-" + time; // total time is between 1 and maxTotalTime
 
 		// call to API
@@ -197,7 +203,7 @@ public class RecipeController {
 
 	}
 
-	// show user entered meals
+	// show list of user entered meals
 	@RequestMapping("/display/myMeals/{time}/{date}")
 	public ModelAndView showMyMeals(@SessionAttribute("user") User user, @PathVariable("time") int time,
 			@RequestParam("searchType") String searchType, @PathVariable("date") String date) {
@@ -215,7 +221,7 @@ public class RecipeController {
 
 	}
 
-	// show calendar beginning on following Sunday, includes meals added
+	// show calendar beginning on FOLLOWING Sunday, includes meals added
 	@RequestMapping("/next-week")
 	public ModelAndView showCalendarFuture(@SessionAttribute("user") User user) {
 		ModelAndView mav = new ModelAndView("calendar");
@@ -419,7 +425,7 @@ public class RecipeController {
 		return mav;
 	}
 
-	// show calendar for current week, includes any meals added
+	// show calendar for CURRENT week, includes any meals added
 	@RequestMapping("/calendar")
 	public ModelAndView showCalendarCurrent(@SessionAttribute("user") User user) {
 
@@ -866,7 +872,8 @@ public class RecipeController {
 	}
 
 	@RequestMapping("/shoppingcart/{start}/{end}")
-	public ModelAndView showCart(@SessionAttribute("user") User user, @PathVariable("start") String start, 
+	public ModelAndView showCart(@SessionAttribute("user") User user, 
+			@PathVariable("start") String start, 
 			@PathVariable("end") String end) {
 		List<Ingredient> allList = ingredientDao.findAllByUser(user);
 		List<Ingredient> shoppingList = new ArrayList<>();
@@ -904,10 +911,15 @@ public class RecipeController {
 	}
 	
 
-	@RequestMapping("/shoppingcart/{id}/delete")
-	public ModelAndView delete(@PathVariable("id") Long id) {
+	@RequestMapping("/shoppingcart/{id}/delete/{start}/{end}")
+	public ModelAndView delete(@PathVariable("id") Long id,
+			@PathVariable("start") String start, 
+			@PathVariable("end") String end,
+			RedirectAttributes redir) {
 		ingredientDao.delete(id);
-		return new ModelAndView("redirect:/shoppingcart");
+		System.out.println(start);
+		ModelAndView mav = new ModelAndView("redirect:/shoppingcart/" + start + "/" + end + "");
+		return mav;
 	}
 
 	@RequestMapping("/deleteFavorite/{date}")

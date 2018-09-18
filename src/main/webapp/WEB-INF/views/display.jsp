@@ -11,6 +11,7 @@
 <body>
 <%@ include file="navbar.jsp"%>
 	<main class="container">
+    <br>
 	<a href="/calendar" class="btn btn-secondary">Back to Calendar</a>
 	<br />
 
@@ -69,6 +70,7 @@
 
 			</tbody>
 		</table>
+    <button id="load-more" type="button" class="btn btn-outline-secondary">Load More</button>
 		<br><br><br>
 		</c:if>
 
