@@ -54,7 +54,7 @@
             <div class="controls" id="profs">
                 <div class="input-append">
                     <div id="field"><input autocomplete="off" class="input" id="field1" name="ingredientLines" type="text" placeholder="Add ingredient" data-items="8"/>
-                    <button id="b1" class="btn add-more" type="button">+</button></div>
+                    <button id="b1" class="btn add-more" type="button" style="background-color: #F7E08C;">+</button></div>
                 </div>
             <br>
             <small>Press + to add another ingredient:)</small>
