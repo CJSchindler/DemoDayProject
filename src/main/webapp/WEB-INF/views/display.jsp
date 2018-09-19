@@ -16,7 +16,7 @@
 	<a href="/calendar" class="btn btn-secondary">Back to Calendar</a>
 	<br />
 
-		<h1> Meal for ${ day } from ${ searchType } recipes</h1>
+		<h1> Searching ${ searchType }</h1>
 		<p>You said you have ${ time } minutes to make your meal.</p>
 
 		<c:choose>
