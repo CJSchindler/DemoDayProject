@@ -14,39 +14,45 @@
 <body>
 	<%@ include file="navbar.jsp"%>
 
-<main class="container">
+	<main class="container">
 	<table class="table">
-            <thead>
-                <tr>
-                  <th>Name</th><th>Time</th> <th>Yield</th><th>Ingredients</th>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Time</th>
+				<th>Yield</th>
+				<th>Ingredients</th>
 
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach var="meals" items="${myMeals}">
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="meals" items="${myMeals}">
 
-                <tr>
+				<tr>
 
-                    <td>${meals.label}</td> <td> ${meals.totalTime}</td> <td> ${meals.yield}</td> 
-                    <td><c:set var="ingredients" value="${fn:split(meals.ingredientLines, '--') }"/>
+					<td>${meals.label}</td>
+					<td>${meals.totalTime} minutes</td>
+					<td>${meals.yield} servings</td>
+					<td><c:set var="ingredients" value="${fn:split(meals.ingredientLines, '--') }"/>
 						<c:forEach var="ingredient" items="${ingredients }">
 						<p>${ingredient }</p>
 						</c:forEach>
                    </td>
-                    <td>
-						<a href="/delete?id=${meals.id }" class="btn btn-seconary" onclick= "return confirm('are you sure?')">Delete</a></td>
-
-                    <td>${meals.label}</td> <td> ${meals.totalTime}</td>
-										<td><a href="/all-new-recipes/${meals.id}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
-
-                </tr>
-
-                </c:forEach>
-            </tbody>
-        </table>
 
 
 
-</main>
+					<td><a href="/all-new-recipes/${meals.id}/delete"
+						class="btn btn-danger btn-sm"
+						onclick="return confirm('Are you sure?')">Delete</a>
+						</td>
+				</tr>
+
+			</c:forEach>
+		</tbody>
+	</table>
+
+
+
+	</main>
 </body>
 </html>
