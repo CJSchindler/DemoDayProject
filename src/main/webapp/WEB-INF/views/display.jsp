@@ -113,10 +113,6 @@
 						<td><img src="${recipe.image}" width=60%></td>
 						<td><a href="${recipe.url}">${recipe.label}</a></td>
 						<td>
-							<!--<c:forEach var="ingredient" items="${recipe.ingredientLines}">
-							<p>${ingredient}</p>
-							</c:forEach>
-						-->
 						<c:set var="ingredients" value="${fn:split(recipe.ingredientLines, '--') }"/>
 						<c:forEach var="ingredient" items="${ingredients }">
 						<p>${ingredient }</p>
@@ -162,8 +158,14 @@
 
 						<td><img src="${recipe.image}" width=60%></td>
 						<td>${recipe.label}</td>
-						<td> Total time: ${recipe.totalTime } minutes </td>
-						<td> Yield: ${recipe.yield } servings </td>
+						<td>
+						<c:set var="ingredients" value="${fn:split(recipe.ingredientLines, '--') }"/>
+						<c:forEach var="ingredient" items="${ingredients }">
+						<p>${ingredient }</p>
+						</c:forEach>
+						</td>
+						<td>${recipe.totalTime } minutes </td>
+						<td>Yield: ${recipe.yield } servings </td>
 					</tr>
 					</c:forEach>
 				</tbody>
