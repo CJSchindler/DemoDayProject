@@ -51,9 +51,7 @@
         <!--  Gives option to register if not a member -->
         </form >
         <br>
-        <form action="/register">
-        <a href="/register" type="button" class="btn btn-secondary btn-sm" href="/register">Not a member? Register</a>
-		</form>
+        <a href="/register" class="btn btn-secondary btn-sm" href="/register">Not a member? Register</a>
 </main>
 </body>
 </html>
