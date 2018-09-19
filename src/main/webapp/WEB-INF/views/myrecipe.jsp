@@ -16,31 +16,42 @@
 <%@ include file="navbar.jsp"%>
 <div class ="container">
 
-	
-	<div class="progress">
-		<div class="progress-bar progress-bar-striped bg-warning"
-			role="progressbar" style="width:${progressTime }%"
-			aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-	</div>
-	
+
 	<form action="/myrecipe" method= "post">
 	<h1>Please fill in these items!</h1>
-	
-	<div class="row"><label>
+
+  <div class="form-group">
+    <label class="col-form-label">Name of Recipe</label>
+    <input type="text" style="width: 400px" name="label" class="form-control" required>
+  </div>
+
+  <div class="form-group">
+    <label class="col-form-label">Yield (number of servings): </label>
+    <input type="number" style="width: 400px" name="yield" class="form-control" required>
+  </div>
+
+  <div class="form-group">
+    <label class="col-form-label">Time (in minutes): </label>
+    <input type="number" style="width: 200px" name="totalTime" class="form-control" required>
+  </div>
+
+	<%-- <div class="row"><label>
 		Name of Recipe: <input type="text" name="label" required />
-	</label></div>
-	<div class="row"><label>
-		Yields (number of servings): <input type="number" name="yield" required />
-	</label></div>
-	<div class="row"><label>
+	</label></div> --%>
+	<%-- <div class="row"><label>
+		Yield (number of servings):
+    <input type="number" name="yield" required />
+	</label></div> --%>
+
+  <%-- <div class="row"><label>
 		Time (in minutes): <input type="number" name="totalTime" required />
-	</label></div>
-	
+	</label></div> --%>
+
 	<div class="row">
 		<input type="hidden" name="count" value="1" />
         <div class="control-group" id="fields">
             <label class="control-label" for="field1">Ingredients (include quantity, measure, and type)</label>
-            <div class="controls" id="profs"> 
+            <div class="controls" id="profs">
                 <div class="input-append">
                     <div id="field"><input autocomplete="off" class="input" id="field1" name="ingredientLines" type="text" placeholder="Add ingredient" data-items="8"/>
                     <button id="b1" class="btn add-more" type="button">+</button></div>
@@ -50,15 +61,14 @@
             </div>
         </div>
 	</div>
-	
-	<button type="submit" class="btn-btn-primary mb-2">Add My
-		Recipe!</button>
+  <button type="submit" class="btn btn-primary">Add My Recipe</button>
+
 		</form>
-		
-		
+
+
 		</div>
-	
-		
+
+
 		<script>
 		$(document).ready(function(){
 		    var next = 1;
@@ -74,8 +84,8 @@
 		        $(addto).after(newInput);
 		        $(addRemove).after(removeButton);
 		        $("#field" + next).attr('data-source',$(addto).attr('data-source'));
-		        $("#count").val(next);  
-		        
+		        $("#count").val(next);
+
 		            $('.remove-me').click(function(e){
 		                e.preventDefault();
 		                var fieldNum = this.id.charAt(this.id.length-1);
@@ -84,28 +94,28 @@
 		                $(fieldID).remove();
 		            });
 		    });
-		    
 
-		    
+
+
 		});
 		</script>
-		
-		<!-- 
-		
+
+		<!--
+
 			  <div id="room_fileds">
 		<div class='label'>Ingredients: <input type="text" name="ingredientLines" required><br><br></div>
 		<div class="content" id="ingredient">
 		</div>
 		<input type="button" id="more_fields" onclick="add_fields();"
 		value="Add More Ingredients" /><br> <br>
-		
+
 	</div>
-	
+
 <script>
  function add_fields() {
-    document.getElementById('ingredient').innerHTML += 
+    document.getElementById('ingredient').innerHTML +=
     	'<span>Ingredient <input type="text" name="ingredientLines"></span>\r\n<br><br>';
-} 
+}
 
 
 </script>
