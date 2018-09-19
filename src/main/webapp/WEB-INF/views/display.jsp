@@ -17,17 +17,35 @@
 	<br />
 
 		<h1> Searching ${ searchType }</h1>
-		<p>You said you have ${ time } minutes to make your meal.</p>
+		<p>You said you have ${ time } minutes to make your meal.</p><br>
 
 		<c:choose>
 		<c:when test="${searchType eq 'new' }">
-		<p>What main ingredient would you like to have on this day?</p>
-		<p>Enter a keyword to begin your search: </p>
+  <form class="search" action="/display/${searchType }/${time}/${date}">
+    <p>Would you like to set a maximum number of ingredients?</p>
 
-		<form class="search" action="/display/${searchType }/${time}/${date}">
+    <div class="input-group" style="width: 130px">
+      <select name="maxIngr" class="custom-select" id="inputGroupSelect04">
+        <option value="" disabled selected>No thanks</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+
+      </select>
+      <div class="input-group-append">
+      </div>
+    </div>
+<br>
+	<p>What main ingredient would you like to have on this day?</p>
+
 		  <input type="text" placeholder="Chicken, vegetarian..." name="keyword">
 		  <input type="hidden" name="searchType" value="${searchType }">
-		  <button type="submit">Submit</button>
+		  <button type="submit" class="btn btn-secondary">Submit</button>
 		</form>
 
 		<c:if test="${not empty keyword}">
