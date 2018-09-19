@@ -155,6 +155,7 @@ public class RecipeController {
 	public ModelAndView showList(@SessionAttribute("user") User user,
 			@RequestParam(value = "keyword", required = false) String keyword,
 			@RequestParam("searchType") String searchType, 
+			@RequestParam(value = "maxIngr", required = false) Integer maxIngr,
 			@PathVariable("time") int time,
 			@PathVariable("date") String date) {
 
@@ -163,6 +164,7 @@ public class RecipeController {
 		if (keyword != null) {
 			mav.addObject("keyword", keyword);
 		}
+			
 		RestTemplate restTemplate = new RestTemplate();
 
 		String url = "https://api.edamam.com/search?q=" + keyword + "&app_id=" + appId
@@ -170,6 +172,10 @@ public class RecipeController {
 				+ "&from=0&to=10" // optional: limits number of results
 				+ "&time=1-" + time; // total time is between 1 and maxTotalTime
 
+		if (maxIngr != null) {
+			url += "&ingr=" + maxIngr;
+		}
+		
 		// call to API
 		ResponseEntity<Result> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(null),
 				Result.class);
@@ -182,7 +188,6 @@ public class RecipeController {
 		mav.addObject("date", date);
 
 		return mav;
-
 	}
 
 	// show a list of favorite recipes by user
