@@ -929,7 +929,9 @@ public class RecipeController {
 
 	@RequestMapping("/deleteFavorite/{date}")
 	public ModelAndView deleteFavorite(@SessionAttribute("user") User user, @PathVariable("date") String date) {
-		favoriteDao.delete(favoriteDao.findByUserByDate(user, date).getId());
+					Favorite favorite = favoriteDao.findByUserByDate(user, date);
+					favorite.setMealDate(null);
+					favoriteDao.update(favorite);
 		return new ModelAndView("redirect:/calendar");
 	}
 

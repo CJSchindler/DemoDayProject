@@ -75,5 +75,8 @@ public class FavoriteDao {
 				.getSingleResult();
 	}
 	
+	public void update(Favorite favorite) {
+		em.merge(favorite);
+	}
 	
 }
